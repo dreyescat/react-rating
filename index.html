@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Hello</title>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <!-- React -->
+    <script src="node_modules/react/dist/react.js"></script>
+    <!-- React Rating component -->
+    <script src="dist/react-rating.js"></script>
+  </head>
+  <body>
+    <h3>Default rating</h3>
+    <div class="rating" id="rating-default"></div>
+    <h3>Fontawesome Five Star rating</h3>
+    <div class="rating" id="rating-fontawesome-star"></div>
+    <h3>Bootstrap Five Heart rating</h3>
+    <div class="rating" id="rating-bootstrap-heart"></div>
+    <h3>Alert when rate changes</h3>
+    <div class="rating" id="rating-default-change"></div>
+    <h3>1 to 10 rating</h3>
+    <div class="rating" id="rating-default-1-to-10"></div>
+    <h3>5 to 10 rating</h3>
+    <div class="rating" id="rating-default-5-to-10"></div>
+    <h3>1 to 10 with step 2 (odd numbers)</h3>
+    <div class="rating" id="rating-default-1-to-10-step-2"></div>
+    <h3>10 to 1 with step -2 (odd numbers between [1..10] inverted order)</h3>
+    <div class="rating" id="rating-default-10-to-1-step--2"></div>
+
+    <script type="text/javascript">
+      React.render(React.createElement(Rating),
+        document.getElementById('rating-default'));
+      React.render(React.createElement(Rating, {
+        onChange: function (rate) {
+          alert(rate);
+        }
+      }), document.getElementById('rating-default-change'));
+      React.render(React.createElement(Rating, {
+        start: 1,
+        stop: 10
+      }), document.getElementById('rating-default-1-to-10'));
+      React.render(React.createElement(Rating, {
+        start: 5,
+        stop: 10
+      }), document.getElementById('rating-default-5-to-10'));
+      React.render(React.createElement(Rating, {
+        start: 1,
+        stop: 10,
+        step: 2
+      }), document.getElementById('rating-default-1-to-10-step-2'));
+      React.render(React.createElement(Rating, {
+        start: 10,
+        stop: 1,
+        step: -2
+      }), document.getElementById('rating-default-10-to-1-step--2'));
+      // Fontawesome.
+      React.render(React.createElement(Rating, {
+        empty: 'fa fa-star-o fa-2x',
+        full: 'fa fa-star fa-2x'
+      }), document.getElementById('rating-fontawesome-star'));
+      // Bootstrap.
+      React.render(React.createElement(Rating, {
+        empty: 'glyphicon glyphicon-heart-empty',
+        full: 'glyphicon glyphicon-heart'
+      }), document.getElementById('rating-bootstrap-heart'));
+    </script>
+  </body>
+</html>

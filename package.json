@@ -1,0 +1,24 @@
+{
+  "name": "react-rating",
+  "version": "0.0.1",
+  "description": "A rating react component with custom symbols",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --progress --colors --port 8080",
+    "build": "webpack --progress --profile --colors"
+  },
+  "author": "dreyescat",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "bootstrap": "^3.3.5",
+    "font-awesome": "^4.3.0",
+    "jsx-loader": "^0.13.2",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.10.1",
+    "webpack-dev-server": "^1.10.1"
+  }
+}

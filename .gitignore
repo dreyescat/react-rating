@@ -1,0 +1,8 @@
+# Ignore npm modules
+node_modules
+
+# Ignore distribution files
+dist
+
+# Ignore vim temporary files
+*.swp
