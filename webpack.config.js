@@ -22,8 +22,10 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx$/,
-        loader: 'jsx-loader?harmony'
+        // Test for js or jsx files.
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel'
       }
     ]
   },
