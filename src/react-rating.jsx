@@ -1,7 +1,6 @@
  'use strict'
  
 var React = require('react');
-var merge = require('./merge');
 var Style = require('./style');
 
 var Symbol = React.createClass({
