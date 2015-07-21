@@ -6,7 +6,9 @@ var Style = require('./style');
 var Symbol = React.createClass({
   render: function () {
     return (
-      <span onMouseDown={this.props.onMouseDown}>
+      <span onMouseDown={this.props.onMouseDown}
+          onMouseOver={this.props.onMouseOver}
+          onMouseLeave={this.props.onMouseLeave}>
         <span style={this.props.style} className={this.props.className}/>
       </span>
     );
@@ -38,7 +40,8 @@ var Rating = React.createClass({
   },
   getInitialState: function () {
     return {
-      index: undefined 
+      index: undefined,
+      indexOver: undefined
     };
   },
   handleMouseDown: function (i) {
@@ -51,6 +54,16 @@ var Rating = React.createClass({
     }
     console.log(this._indexToRate(i));
   },
+  handleMouseOver: function (i) {
+    this.setState({
+      indexOver: i
+    });
+  },
+  handleMouseLeave: function (i) {
+    this.setState({
+      indexOver: undefined
+    });
+  },
   // Calculate the rate of an index according the the start and step.
   _indexToRate: function (index) {
     return this.props.start + index * this.props.step;
@@ -62,14 +75,20 @@ var Rating = React.createClass({
   render: function () {
     var symbolNodes = [];
     for (var i = 0; i <= this._rateToIndex(this.props.stop); i++) {
+      // The symbol with the mouse over prevails over the selected one.
+      var index = this.state.indexOver !== undefined ?
+        this.state.indexOver : this.state.index;
       // The symbol can be defined as an style object or class names.
-      var symbol = i <= this.state.index ? this.props.full : this.props.empty;
+      var symbol = i <= index ? this.props.full : this.props.empty;
       var className = typeof symbol === 'string' ? symbol : '';
       var style = typeof symbol === 'object' ? symbol : {};
       symbolNodes.push(<Symbol key={i}
           className={className}
           style={style}
-          onMouseDown={this.handleMouseDown.bind(this, i)}/>);
+          onMouseDown={this.handleMouseDown.bind(this, i)}
+          onMouseOver={this.handleMouseOver.bind(this, i)}
+          onMouseLeave={this.handleMouseLeave.bind(this, i)}
+          />);
     }
     return (
       <div>
