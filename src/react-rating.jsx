@@ -1,4 +1,4 @@
- 'use strict'
+'use strict';
  
 var React = require('react');
 var Style = require('./style');
