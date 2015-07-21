@@ -20,6 +20,7 @@ var Rating = React.createClass({
     start: React.PropTypes.number,
     stop: React.PropTypes.number,
     step: React.PropTypes.number,
+    initialRate: React.PropTypes.number,
     empty: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object]),
@@ -41,7 +42,8 @@ var Rating = React.createClass({
   },
   getInitialState: function () {
     return {
-      index: undefined,
+      index: this._contains(this.props.initialRate) ?
+        this._rateToIndex(this.props.initialRate) : undefined,
       indexOver: undefined
     };
   },
@@ -72,6 +74,12 @@ var Rating = React.createClass({
   // Calculate the corresponding index for a rate.
   _rateToIndex: function (rate) {
     return (rate - this.props.start) / this.props.step;
+  },
+  // Check the rate is in the proper range [start..stop].
+  _contains: function (rate) {
+    var start = this.props.step > 0 ? this.props.start : this.props.stop;
+    var stop = this.props.step > 0 ? this.props.stop : this.props.start;
+    return start <= rate && rate <= stop;
   },
   render: function () {
     var symbolNodes = [];

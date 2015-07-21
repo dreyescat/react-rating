@@ -37,6 +37,7 @@
       React.render(React.createElement(Rating),
         document.getElementById('rating-default'));
       React.render(React.createElement(Rating, {
+        initialRate: 3,
         readonly: true
       }), document.getElementById('rating-default-readonly'));
       React.render(React.createElement(Rating, {
