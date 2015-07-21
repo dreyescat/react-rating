@@ -26,6 +26,7 @@ var Rating = React.createClass({
     full: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object]),
+    readonly: React.PropTypes.bool,
     onChange: React.PropTypes.func
   },
   getDefaultProps: function () {
@@ -85,9 +86,9 @@ var Rating = React.createClass({
       symbolNodes.push(<Symbol key={i}
           className={className}
           style={style}
-          onMouseDown={this.handleMouseDown.bind(this, i)}
-          onMouseOver={this.handleMouseOver.bind(this, i)}
-          onMouseLeave={this.handleMouseLeave.bind(this, i)}
+          onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
+          onMouseOver={!this.props.readonly && this.handleMouseOver.bind(this, i)}
+          onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
           />);
     }
     return (
