@@ -2,14 +2,30 @@
   "name": "react-rating",
   "version": "0.0.1",
   "description": "A rating react component with custom symbols",
-  "main": "index.js",
+  "main": "src/react-rating.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --colors --port 8080",
     "build": "webpack -p -d --progress --profile --colors"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dreyescat/react-rating.git"
+  },
+  "keywords": [
+    "rating",
+    "react",
+    "component",
+    "react-component",
+    "bootstrap",
+    "fontawesome"
+  ],
   "author": "dreyescat",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dreyescat/react-rating/issues"
+  },
+  "homepage": "https://github.com/dreyescat/react-rating",
   "dependencies": {
     "react": "^0.13.3"
   },
