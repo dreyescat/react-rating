@@ -9,15 +9,18 @@ module.exports = {
     'react-rating': './src/react-rating.jsx'
   },
   output: {
-    // Output the bundled file in './dist'.
-    path: './dist',
+    // Output the bundled file.
+    path: './lib',
     // Use the name specified in the entry key as name for the bundle file.
     filename: '[name].js',
+    // Export as a Universal Module Definition library.
+    library: 'ReactRating',
+    libraryTarget: 'umd',
     // The modified bundle is served from memory at the relative path
     // specified in publicPath.
     // I use the same as the output path to use the same index.html either
     // served by webpack-dev-server or as a static file loaded in the browser.
-    publicPath: '/dist'
+    publicPath: '/lib'
   },
   module: {
     loaders: [
@@ -30,9 +33,13 @@ module.exports = {
     ]
   },
   externals: {
-    // Don't bundle the 'react' npm package with our bundle but get it from
-    // a global 'React' variable.
-    'react': 'React'
+    // Don't bundle the 'react' npm package with the component.
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    }
   },
   resolve: {
     // Include empty string '' to resolve files by their explicit extension

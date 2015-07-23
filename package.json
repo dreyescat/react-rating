@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --colors --port 8080",
-    "build": "webpack -p -d --progress --profile --colors"
+    "build": "webpack --progress"
   },
   "repository": {
     "type": "git",

@@ -11,7 +11,7 @@
     <!-- React -->
     <script src="node_modules/react/dist/react.js"></script>
     <!-- React Rating component -->
-    <script src="dist/react-rating.js"></script>
+    <script src="lib/react-rating.js"></script>
   </head>
   <body>
     <h3>Default rating</h3>
@@ -34,6 +34,7 @@
     <div class="rating" id="rating-default-10-to-1-step--2"></div>
 
     <script type="text/javascript">
+      var Rating = ReactRating;
       React.render(React.createElement(Rating),
         document.getElementById('rating-default'));
       React.render(React.createElement(Rating, {
