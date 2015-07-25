@@ -1,3 +1,10 @@
+var webpack = require('webpack');
+var PACKAGE = require('./package.json');
+var banner = PACKAGE.name + ' - ' + PACKAGE.version + ' | ' +
+  '(c) 2015, ' + new Date().getFullYear() + '  ' + PACKAGE.author + ' | ' +
+  PACKAGE.license + ' | ' +
+  PACKAGE.homepage;
+
 module.exports = {
   entry: {
     // NOTE: In case we need another entry that depends on another entry point.
@@ -47,5 +54,8 @@ module.exports = {
     // Include '.js', '.jsx' to resolve files by these implicit extensions
     // (e.g. require('underscore')).
     extensions: ['', '.js', '.jsx']
-  }
+  },
+  plugins: [
+    new webpack.BannerPlugin(banner)
+  ]
 };
