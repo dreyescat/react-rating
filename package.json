@@ -3,6 +3,11 @@
   "version": "0.0.2",
   "description": "A rating react component with custom symbols",
   "main": "lib/react-rating.js",
+  "files": [
+    "README.md",
+    "LICENSE.md",
+    "lib/"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --colors --port 8080",
