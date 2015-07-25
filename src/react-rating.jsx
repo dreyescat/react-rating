@@ -107,4 +107,4 @@ var Rating = React.createClass({
   }
 });
 
-module.exports = window.Rating = Rating; 
+module.exports = Rating;
