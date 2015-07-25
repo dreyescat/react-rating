@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --colors --port 8080",
-    "build": "webpack --progress",
+    "build": "webpack --progress && webpack -p --output-filename react-rating.min.js --progress",
     "version": "npm run build && git add -A lib",
     "postversion": "git push && git push --tags"
   },
