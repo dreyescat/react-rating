@@ -48,13 +48,12 @@ var Rating = React.createClass({
     };
   },
   handleMouseDown: function (i) {
-    var index = this.state.index;
+    if (this.state.index !== i) {
+      this.props.onChange(this._indexToRate(i));
+    }
     this.setState({
       index: i 
     });
-    if (index !== i) {
-      this.props.onChange(this._indexToRate(i));
-    }
     console.log(this._indexToRate(i));
   },
   handleMouseOver: function (i) {
