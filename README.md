@@ -52,13 +52,14 @@ npm install --save react
 
 Property      | Type                    | Default              | Description
 ---           | ---                     | ---                  | ---
-`start`       | *number*                | 1                    | Range starting value (inclusive).
+`start`       | *number*                | 0                    | Range starting value (exclusive).
 `stop`        | *number*                | 5                    | Range stop value (inclusive).
 `step`        | *number*                | 1                    | Step increment (negative) or decrement (positive).
 `initialValue`| *number*                | undefined            | Initial rate value.
 `empty`       | *string* or *object*    | Style.empty          | Inline style object or classes applied to the rating symbols when empty.
 `filled`      | *string*                | Style.full           | Inline style object or classes applied to the rating symbols when filled.
 `readonly`    | *bool*                  | false                | Whether the rating can be modified or not.
+`fractions`   | *number*                | 1                    | Number of equal parts that make up a whole symbol.
 
 ## Callbacks
 
