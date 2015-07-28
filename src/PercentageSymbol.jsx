@@ -1,7 +1,5 @@
 'use strict';
 
-var Style = require('./style');
-
 var PercentualSymbol = React.createClass({
   propTypes: {
     icon: React.PropTypes.oneOfType([
