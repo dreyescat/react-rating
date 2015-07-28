@@ -22,6 +22,8 @@
     <div class="rating" id="rating-fontawesome-star"></div>
     <h3>Bootstrap Five Heart rating</h3>
     <div class="rating" id="rating-bootstrap-heart"></div>
+    <h3>Fractional rating</h3>
+    <div class="rating" id="rating-fractional"></div>
     <h3>Alert when rate changes</h3>
     <div class="rating" id="rating-default-change"></div>
     <h3>1 to 10 rating</h3>
@@ -47,20 +49,18 @@
         }
       }), document.getElementById('rating-default-change'));
       React.render(React.createElement(Rating, {
-        start: 1,
         stop: 10
       }), document.getElementById('rating-default-1-to-10'));
       React.render(React.createElement(Rating, {
-        start: 5,
+        start: 4,
         stop: 10
       }), document.getElementById('rating-default-5-to-10'));
       React.render(React.createElement(Rating, {
-        start: 1,
         stop: 10,
         step: 2
       }), document.getElementById('rating-default-1-to-10-step-2'));
       React.render(React.createElement(Rating, {
-        start: 10,
+        start: 11,
         stop: 1,
         step: -2
       }), document.getElementById('rating-default-10-to-1-step--2'));
@@ -69,6 +69,11 @@
         empty: 'fa fa-star-o fa-2x',
         full: 'fa fa-star fa-2x'
       }), document.getElementById('rating-fontawesome-star'));
+      React.render(React.createElement(Rating, {
+        empty: 'fa fa-star-o fa-2x',
+        full: 'fa fa-star fa-2x',
+        fractions: 2
+      }), document.getElementById('rating-fractional'));
       // Bootstrap.
       React.render(React.createElement(Rating, {
         empty: 'glyphicon glyphicon-heart-empty',
