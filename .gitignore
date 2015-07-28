@@ -3,3 +3,5 @@ node_modules
 
 # Ignore vim temporary files
 *.swp
+
+# Ignore dist folder
