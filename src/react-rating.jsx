@@ -2,18 +2,7 @@
  
 var React = require('react');
 var Style = require('./style');
-
-var Symbol = React.createClass({
-  render: function () {
-    return (
-      <span onMouseDown={this.props.onMouseDown}
-          onMouseOver={this.props.onMouseOver}
-          onMouseLeave={this.props.onMouseLeave}>
-        <span style={this.props.style} className={this.props.className}/>
-      </span>
-    );
-  }
-});
+var Symbol = require('./WholeSymbol');
 
 var Rating = React.createClass({
   propTypes: {
@@ -86,13 +75,8 @@ var Rating = React.createClass({
       // The symbol with the mouse over prevails over the selected one.
       var index = this.state.indexOver !== undefined ?
         this.state.indexOver : this.state.index;
-      // The symbol can be defined as an style object or class names.
-      var symbol = i <= index ? this.props.full : this.props.empty;
-      var className = typeof symbol === 'string' ? symbol : '';
-      var style = typeof symbol === 'object' ? symbol : {};
       symbolNodes.push(<Symbol key={i}
-          className={className}
-          style={style}
+          icon={i <= index ? this.props.full : this.props.empty}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
           onMouseOver={!this.props.readonly && this.handleMouseOver.bind(this, i)}
           onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
