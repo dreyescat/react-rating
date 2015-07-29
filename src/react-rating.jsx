@@ -5,7 +5,8 @@ var Style = require('./style');
 var Symbol = require('./PercentageSymbol');
 
 var Rating = React.createClass({
-  propTypes: {
+  // Define propTypes only in development.
+  propTypes: __DEV__ && { 
     start: React.PropTypes.number,
     stop: React.PropTypes.number,
     step: React.PropTypes.number,

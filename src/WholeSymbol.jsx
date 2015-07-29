@@ -3,7 +3,8 @@
 var React = require('react');
 
 var WholeSymbol = React.createClass({
-  propTypes: {
+  // Define propTypes only in development.
+  propTypes: __DEV__ && {
     icon: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object]),
@@ -15,7 +16,8 @@ var WholeSymbol = React.createClass({
     return (
       <span onMouseDown={this.props.onMouseDown}
           onMouseOver={this.props.onMouseOver}
-          onMouseLeave={this.props.onMouseLeave}>
+          onMouseLeave={this.props.onMouseLeave}
+          onMouseMove={this.props.onMouseMove}>
         {iconNode}
       </span>
     );

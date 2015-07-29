@@ -1,7 +1,8 @@
 'use strict';
 
 var PercentualSymbol = React.createClass({
-  propTypes: {
+  // Define propTypes only in development. They will be void in production.
+  propTypes: __DEV__ && {
     icon: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object]),
