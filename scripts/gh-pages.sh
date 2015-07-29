@@ -1,19 +1,30 @@
 #!/usr/bin/env bash
 
-# Remove old dist
-rm -rf dist
 # Clone local repo to dist and point to gh-pages branch
-git clone . dist
-cd dist
-git checkout gh-pages
-# Checkout changes from master
-git checkout master -- :/index.html :/lib
+# http://stackoverflow.com/questions/1911109/clone-a-specific-git-branch
+# Clone gh-pages preventing fetching of all branches add --single-branch
+git clone -b gh-pages . dist
 
-# Add dependencies
-git add :/node_modules/react/dist
-git add :/node_modules/bootstrap/dist
-git add :/node_modules/font-awesome/css node_modules/font-awesome/fonts
+# Checkout changes from local master
+# Using git without having to change directory
+# http://stackoverflow.com/questions/5083224/git-pull-while-not-in-a-git-directory
+git -C dist checkout origin/master -- :/index.html :/lib
 
-git commit -m "Release"
+# Sync dependencies keeping full path (-R)
+rsync -avR node_modules/react/dist dist
+rsync -avR node_modules/bootstrap/dist dist
+rsync -avR node_modules/font-awesome/css dist
+rsync -avR node_modules/font-awesome/fonts dist
 
-git push origin gh-pages
+# Commit with the last commit message from master
+git -C dist commit -m "$(git log master -1 --pretty=%B)"
+
+# This only pushes to the origin, that is, the local repo from where
+# this temporary repo was cloned
+#git -C dist push origin gh-pages
+
+# Push to remote gh-pages
+git -C dist push https://github.com/dreyescat/react-rating.git gh-pages
+
+# Remove temporary dist folder
+rm -rf dist
