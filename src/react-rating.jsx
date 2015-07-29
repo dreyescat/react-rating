@@ -50,11 +50,6 @@ var Rating = React.createClass({
     }
     console.log(this._indexToRate(index));
   },
-  handleMouseOver: function (i) {
-    this.setState({
-      indexOver: i
-    });
-  },
   handleMouseLeave: function (i) {
     this.setState({
       indexOver: undefined
@@ -107,7 +102,6 @@ var Rating = React.createClass({
           icon={this.props.full}
           percent={100}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
-          onMouseOver={!this.props.readonly && this.handleMouseOver.bind(this, i)}
           onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
           />);
@@ -120,7 +114,6 @@ var Rating = React.createClass({
           icon={this.props.full}
           percent={index % 1 * 100}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
-          onMouseOver={!this.props.readonly && this.handleMouseOver.bind(this, i)}
           onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
           />);
@@ -134,7 +127,6 @@ var Rating = React.createClass({
           icon={this.props.empty}
           percent={0}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
-          onMouseOver={!this.props.readonly && this.handleMouseOver.bind(this, i)}
           onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
           />);
