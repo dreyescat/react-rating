@@ -20,7 +20,8 @@ var Rating = React.createClass({
     readonly: React.PropTypes.bool,
     fractions: React.PropTypes.number,
     scale: React.PropTypes.number,
-    onChange: React.PropTypes.func
+    onChange: React.PropTypes.func,
+    onRate: React.PropTypes.func
   },
   getDefaultProps: function () {
     return {
@@ -31,7 +32,8 @@ var Rating = React.createClass({
       full: Style.full,
       fractions: 1,
       scale: 3,
-      onChange: function (rate) {}
+      onChange: function (rate) {},
+      onRate: function (rate) {}
     };
   },
   componentWillReceiveProps: function (nextProps) {
@@ -56,6 +58,7 @@ var Rating = React.createClass({
     console.log(this._indexToRate(index));
   },
   handleMouseLeave: function (i) {
+    this.props.onRate();
     this.setState({
       indexOver: undefined
     });
@@ -63,6 +66,7 @@ var Rating = React.createClass({
   handleMouseMove: function (i, event) {
     var index = i + this._fractionalIndex(event);
     if (this.state.indexOver !== index) {
+      this.props.onRate(this._indexToRate(index));
       this.setState({
         indexOver: index
       });

@@ -26,6 +26,9 @@
     <div class="rating" id="rating-fractional"></div>
     <h3>Alert when rate changes</h3>
     <div class="rating" id="rating-default-change"></div>
+    <h3>Update a label when rate moves</h3>
+    <span class="rating" id="rating-default-onrate"></span>
+    <span class="label label-default" id="label-onrate"></span>
     <h3>1 to 10 rating</h3>
     <div class="rating" id="rating-default-1-to-10"></div>
     <h3>5 to 10 rating</h3>
@@ -48,6 +51,11 @@
           alert(rate);
         }
       }), document.getElementById('rating-default-change'));
+      React.render(React.createElement(Rating, {
+        onRate: function (rate) {
+          document.getElementById('label-onrate').innerHTML = rate || '';
+        }
+      }), document.getElementById('rating-default-onrate'));
       React.render(React.createElement(Rating, {
         stop: 10
       }), document.getElementById('rating-default-1-to-10'));
