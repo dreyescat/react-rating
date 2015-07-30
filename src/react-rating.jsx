@@ -34,10 +34,14 @@ var Rating = React.createClass({
       onChange: function (rate) {}
     };
   },
+  componentWillReceiveProps: function (nextProps) {
+    this.setState({
+      index: this._initialIndex(nextProps)
+    });
+  },
   getInitialState: function () {
     return {
-      index: this._contains(this.props.initialRate) ?
-        this._rateToIndex(this.props.initialRate) : undefined,
+      index: this._initialIndex(this.props),
       indexOver: undefined
     };
   },
@@ -62,6 +66,11 @@ var Rating = React.createClass({
       this.setState({
         indexOver: index
       });
+    }
+  },
+  _initialIndex: function (props) {
+    if (this._contains(props.initialRate)) {
+      return this._rateToIndex(props.initialRate);
     }
   },
   // Calculate the rate of an index according the the start and step.
