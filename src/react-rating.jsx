@@ -133,9 +133,9 @@ var Rating = React.createClass({
           />);
     }
     return (
-      <div>
+      <span>
         {symbolNodes}
-      </div>
+      </span>
     );
   }
 });
