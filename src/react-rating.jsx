@@ -108,38 +108,19 @@ var Rating = React.createClass({
     // The symbol with the mouse over prevails over the selected one.
     var index = this.state.indexOver !== undefined ?
       this.state.indexOver : this.state.index;
-    // Fill symbols until the selected one.
-    for (var i = 0; i < Math.floor(index); i++) {
+    // The index of the last full symbol or NaN if index is undefined.
+    var lastFullIndex = Math.floor(index);
+    for (var i = 0; i < this._rateToIndex(this.props.stop); i++) {
+      // Return the percentage of the decimal part of the last full index,
+      // 100 percent for those below the last full index or 0 percent for those
+      // indexes NaN or above the last full index.
+      var percent = i - lastFullIndex === 0 ? index % 1 * 100 :
+        i - lastFullIndex < 0 ? 100 : 0;
       symbolNodes.push(<Symbol
           key={i}
           background={this.props.empty}
           icon={this.props.full}
-          percent={100}
-          onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
-          onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
-          onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
-          />);
-    }
-    // Partially fill the selected one.
-    if (index !== undefined && index % 1 !== 0 ) {
-      symbolNodes.push(<Symbol
-          key={i}
-          background={this.props.empty}
-          icon={this.props.full}
-          percent={index % 1 * 100}
-          onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
-          onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
-          onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
-          />);
-      i += 1;
-    }
-    // Leave the rest empty.
-    for (; i < this._rateToIndex(this.props.stop); i++) {
-      symbolNodes.push(<Symbol
-          key={i}
-          background={this.props.empty}
-          icon={this.props.empty}
-          percent={0}
+          percent={percent}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
           onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
