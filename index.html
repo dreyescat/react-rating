@@ -12,6 +12,17 @@
     <script src="node_modules/react/dist/react.js"></script>
     <!-- React Rating component -->
     <script src="lib/react-rating.js"></script>
+    <style type="text/css">
+      .low {
+        color: red;
+      }
+      .medium {
+        color: orange;
+      }
+      .high {
+        color: green;
+      }
+    </style>
   </head>
   <body>
     <h3>Default rating</h3>
@@ -29,6 +40,12 @@
     <h3>Update a label when rate moves</h3>
     <span class="rating" id="rating-default-onrate"></span>
     <span class="label label-default" id="label-onrate"></span>
+    <h3>Colored rating</h3>
+    <span class="rating" id="rating-colored"></span>
+    <h3>Mixed symbols</h3>
+    <div class="rating" id="rating-mixed"></div>
+    <h3>Custom each symbol</h3>
+    <div class="rating" id="rating-custom"></div>
     <h3>1 to 10 rating</h3>
     <div class="rating" id="rating-default-1-to-10"></div>
     <h3>5 to 10 rating</h3>
@@ -87,6 +104,26 @@
         empty: 'glyphicon glyphicon-heart-empty',
         full: 'glyphicon glyphicon-heart'
       }), document.getElementById('rating-bootstrap-heart'));
+      // Mixing symbols.
+      React.render(React.createElement(Rating, {
+        empty: ['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x'],
+        full: ['fa fa-star fa-2x', 'fa fa-heart fa-2x']
+      }), document.getElementById('rating-mixed'));
+      React.render(React.createElement(Rating, {
+        stop: 6,
+        empty: ['fa fa-star-o fa-2x low', 'fa fa-star-o fa-2x low',
+          'fa fa-star-o fa-2x medium', 'fa fa-star-o fa-2x medium',
+          'fa fa-star-o fa-2x high', 'fa fa-star-o fa-2x high'],
+        full: ['fa fa-star fa-2x low', 'fa fa-star fa-2x low',
+          'fa fa-star fa-2x medium', 'fa fa-star fa-2x medium',
+          'fa fa-star fa-2x high', 'fa fa-star fa-2x high'],
+      }), document.getElementById('rating-colored'));
+      React.render(React.createElement(Rating, {
+        stop: 4,
+        empty: 'fa fa-battery-empty fa-2x',
+        full: ['fa fa-battery-1 fa-2x', 'fa fa-battery-2 fa-2x',
+          'fa fa-battery-3 fa-2x', 'fa fa-battery-4 fa-2x']
+      }), document.getElementById('rating-custom'));
     </script>
   </body>
 </html>

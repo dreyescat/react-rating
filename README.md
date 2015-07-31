@@ -50,16 +50,16 @@ npm install --save react
 
 ## Properties
 
-Property      | Type                    | Default              | Description
----           | ---                     | ---                  | ---
-`start`       | *number*                | 0                    | Range starting value (exclusive).
-`stop`        | *number*                | 5                    | Range stop value (inclusive).
-`step`        | *number*                | 1                    | Step increment (negative) or decrement (positive).
-`initialRate` | *number*                | undefined            | Initial rate value.
-`empty`       | *string* or *object*    | Style.empty          | Inline style object or classes applied to the rating symbols when empty.
-`filled`      | *string*                | Style.full           | Inline style object or classes applied to the rating symbols when filled.
-`readonly`    | *bool*                  | false                | Whether the rating can be modified or not.
-`fractions`   | *number*                | 1                    | Number of equal parts that make up a whole symbol.
+Property      | Type                              | Default              | Description
+---           | ---                               | ---                  | ---
+`start`       | *number*                          | 0                    | Range starting value (exclusive).
+`stop`        | *number*                          | 5                    | Range stop value (inclusive).
+`step`        | *number*                          | 1                    | Step increment (negative) or decrement (positive).
+`initialRate` | *number*                          | undefined            | Initial rate value.
+`empty`       | *string* or *object* or *array*   | Style.empty          | Inline style object or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`full`        | *string*                          | Style.full           | Inline style object or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`readonly`    | *bool*                            | false                | Whether the rating can be modified or not.
+`fractions`   | *number*                          | 1                    | Number of equal parts that make up a whole symbol.
 
 ## Callbacks
 

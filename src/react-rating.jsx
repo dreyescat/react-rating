@@ -12,10 +12,24 @@ var Rating = React.createClass({
     step: React.PropTypes.number,
     initialRate: React.PropTypes.number,
     empty: React.PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      React.PropTypes.arrayOf(React.PropTypes.oneOfType[
+        React.PropTypes.string,
+        React.PropTypes.object
+      ]),
+      // Class names.
       React.PropTypes.string,
+      // Style objects.
       React.PropTypes.object]),
     full: React.PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      React.PropTypes.arrayOf(React.PropTypes.oneOfType[
+        React.PropTypes.string,
+        React.PropTypes.object
+      ]),
+      // Class names.
       React.PropTypes.string,
+      // Style objects.
       React.PropTypes.object]),
     readonly: React.PropTypes.bool,
     fractions: React.PropTypes.number,
@@ -105,6 +119,8 @@ var Rating = React.createClass({
   },
   render: function () {
     var symbolNodes = [];
+    var empty = [].concat(this.props.empty);
+    var full = [].concat(this.props.full);
     // The symbol with the mouse over prevails over the selected one.
     var index = this.state.indexOver !== undefined ?
       this.state.indexOver : this.state.index;
@@ -118,8 +134,8 @@ var Rating = React.createClass({
         i - lastFullIndex < 0 ? 100 : 0;
       symbolNodes.push(<Symbol
           key={i}
-          background={this.props.empty}
-          icon={this.props.full}
+          background={empty[i % empty.length]}
+          icon={full[i % full.length]}
           percent={percent}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
           onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
