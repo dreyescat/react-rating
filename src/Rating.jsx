@@ -1,12 +1,12 @@
 'use strict';
- 
+
 var React = require('react');
 var Style = require('./style');
 var Symbol = require('./PercentageSymbol');
 
 var Rating = React.createClass({
   // Define propTypes only in development.
-  propTypes: __DEV__ && { 
+  propTypes: __DEV__ && {
     start: React.PropTypes.number,
     stop: React.PropTypes.number,
     step: React.PropTypes.number,

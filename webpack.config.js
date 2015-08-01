@@ -7,13 +7,7 @@ var banner = PACKAGE.name + ' - ' + PACKAGE.version + ' | ' +
 
 module.exports = {
   entry: {
-    // NOTE: In case we need another entry that depends on another entry point.
-    // Error: a dependency to an entry point is not allowed
-    // https://github.com/webpack/webpack/issues/300
-    // You can workaround it by putting the entry into a array.
-    //index: './src/index.jsx',
-    //'react-rating': ['./src/react-rating.jsx']
-    'react-rating': './src/react-rating.jsx'
+    'react-rating': './src/react-rating.js'
   },
   output: {
     // Output the bundled file.
