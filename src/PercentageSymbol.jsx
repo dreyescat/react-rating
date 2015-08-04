@@ -1,5 +1,7 @@
 'use strict';
 
+var React = require('react');
+
 var PercentualSymbol = React.createClass({
   // Define propTypes only in development. They will be void in production.
   propTypes: __DEV__ && {
