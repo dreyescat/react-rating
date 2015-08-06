@@ -4,7 +4,7 @@ var React = require('react');
 
 var PercentageSymbol = React.createClass({
   // Define propTypes only in development. They will be void in production.
-  propTypes: __DEV__ && {
+  propTypes: typeof __DEV__ !== 'undefined' && __DEV__ && {
     icon: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.object]),
