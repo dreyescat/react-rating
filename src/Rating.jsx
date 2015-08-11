@@ -87,8 +87,8 @@ var Rating = React.createClass({
     }
   },
   _initialIndex: function (props) {
-    if (this._contains(props.initialRate)) {
-      return this._rateToIndex(props.initialRate);
+    if (this._contains(props.initialRate, props)) {
+      return this._rateToIndex(props.initialRate, props);
     }
   },
   // Calculate the rate of an index according the the start and step.
@@ -96,14 +96,17 @@ var Rating = React.createClass({
     return this.props.start + Math.floor(index) * this.props.step +
       this.props.step * this._roundToFraction(index % 1);
   },
-  // Calculate the corresponding index for a rate.
-  _rateToIndex: function (rate) {
-    return (rate - this.props.start) / this.props.step;
+  // Calculate the corresponding index for a rate according to the provided
+  // props or this.props.
+  _rateToIndex: function (rate, props) {
+    props = props || this.props;
+    return (rate - props.start) / props.step;
   },
-  // Check the rate is in the proper range [start..stop].
-  _contains: function (rate) {
-    var start = this.props.step > 0 ? this.props.start : this.props.stop;
-    var stop = this.props.step > 0 ? this.props.stop : this.props.start;
+  // Check the rate is in the proper range [start..stop] according to
+  // the start, stop and step properties in props.
+  _contains: function (rate, props) {
+    var start = props.step > 0 ? props.start : props.stop;
+    var stop = props.step > 0 ? props.stop : props.start;
     return start <= rate && rate <= stop;
   },
   _roundToFraction: function (index) {
