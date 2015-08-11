@@ -100,7 +100,9 @@ var Rating = React.createClass({
   // props or this.props.
   _rateToIndex: function (rate, props) {
     props = props || this.props;
-    return (rate - props.start) / props.step;
+    // The index corresponds to the number of steps of size props.step
+    // that fits between rate and start.
+    return Math.max(Math.floor((rate - props.start) / props.step), 0);
   },
   // Check the rate is in the proper range [start..stop] according to
   // the start, stop and step properties in props.
