@@ -4,6 +4,23 @@ var React = require('react');
 var Style = require('./style');
 var Symbol = require('./PercentageSymbol');
 
+// Returns the index of the rate in the range (start, stop, step).
+// Returns undefined index if the rate is outside the range.
+// NOTE: A range.step of 0 produces an empty range and consequently returns an
+// undefined index.
+var indexOf = function (range, rate) {
+  // Check the rate is in the proper range [start..stop] according to
+  // the start, stop and step properties in props.
+  var step = range.step;
+  var start = step > 0 ? range.start : range.stop;
+  var stop = step > 0 ? range.stop : range.start;
+  if (step && start <= rate && rate <= stop) {
+    // The index corresponds to the number of steps of size props.step
+    // that fits between rate and start.
+    return Math.max(Math.floor((rate - range.start) / step), 0);
+  }
+};
+
 var Rating = React.createClass({
   // Define propTypes only in development.
   propTypes: typeof __DEV__ !== 'undefined' && __DEV__ && {
@@ -52,12 +69,12 @@ var Rating = React.createClass({
   },
   componentWillReceiveProps: function (nextProps) {
     this.setState({
-      index: this._initialIndex(nextProps)
+      index: indexOf(nextProps, nextProps.initialRate)
     });
   },
   getInitialState: function () {
     return {
-      index: this._initialIndex(this.props),
+      index: this._rateToIndex(this.props.initialRate),
       indexOver: undefined
     };
   },
@@ -86,11 +103,6 @@ var Rating = React.createClass({
       });
     }
   },
-  _initialIndex: function (props) {
-    if (this._contains(props.initialRate, props)) {
-      return this._rateToIndex(props.initialRate, props);
-    }
-  },
   // Calculate the rate of an index according the the start and step.
   _indexToRate: function (index) {
     return this.props.start + Math.floor(index) * this.props.step +
@@ -98,18 +110,8 @@ var Rating = React.createClass({
   },
   // Calculate the corresponding index for a rate according to the provided
   // props or this.props.
-  _rateToIndex: function (rate, props) {
-    props = props || this.props;
-    // The index corresponds to the number of steps of size props.step
-    // that fits between rate and start.
-    return Math.max(Math.floor((rate - props.start) / props.step), 0);
-  },
-  // Check the rate is in the proper range [start..stop] according to
-  // the start, stop and step properties in props.
-  _contains: function (rate, props) {
-    var start = props.step > 0 ? props.start : props.stop;
-    var stop = props.step > 0 ? props.stop : props.start;
-    return start <= rate && rate <= stop;
+  _rateToIndex: function (rate) {
+    return indexOf(this.props, rate);
   },
   _roundToFraction: function (index) {
     // Get the closest top fraction.
