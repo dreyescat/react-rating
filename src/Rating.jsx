@@ -86,7 +86,6 @@ var Rating = React.createClass({
         index: index
       });
     }
-    console.log(this._indexToRate(index));
   },
   handleMouseLeave: function (i) {
     this.props.onRate();
