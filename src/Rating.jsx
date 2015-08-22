@@ -144,12 +144,11 @@ var Rating = React.createClass({
           icon={full[i % full.length]}
           percent={percent}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
-          onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
           />);
     }
     return (
-      <span>
+      <span onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}>
         {symbolNodes}
       </span>
     );
