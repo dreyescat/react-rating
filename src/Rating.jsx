@@ -17,7 +17,9 @@ var indexOf = function (range, rate) {
   if (step && start <= rate && rate <= stop) {
     // The index corresponds to the number of steps of size props.step
     // that fits between rate and start.
-    return Math.max(Math.floor((rate - range.start) / step), 0);
+    // This index does not need to be a whole number because we can have
+    // fractional symbols, and consequently fractional/float indexes.
+    return (rate - range.start) / step;
   }
 };
 
@@ -132,7 +134,8 @@ var Rating = React.createClass({
       this.state.indexOver : this.state.index;
     // The index of the last full symbol or NaN if index is undefined.
     var lastFullIndex = Math.floor(index);
-    for (var i = 0; i < this._rateToIndex(this.props.stop); i++) {
+    // Render the number of whole symbols.
+    for (var i = 0; i < Math.floor(this._rateToIndex(this.props.stop)); i++) {
       // Return the percentage of the decimal part of the last full index,
       // 100 percent for those below the last full index or 0 percent for those
       // indexes NaN or above the last full index.
