@@ -29,6 +29,8 @@
     <div class="rating" id="rating-default"></div>
     <h3>Readonly rating</h3>
     <div class="rating" id="rating-default-readonly"></div>
+    <h3>Readonly fractional rating</h3>
+    <div class="rating" id="rating-default-readonly-fractional"></div>
     <h3>Fontawesome Five Star rating</h3>
     <div class="rating" id="rating-fontawesome-star"></div>
     <h3>Bootstrap Five Heart rating</h3>
@@ -63,6 +65,10 @@
         initialRate: 3,
         readonly: true
       }), document.getElementById('rating-default-readonly'));
+      React.render(React.createElement(Rating, {
+        initialRate: 2.5,
+        readonly: true
+      }), document.getElementById('rating-default-readonly-fractional'));
       React.render(React.createElement(Rating, {
         onChange: function (rate) {
           alert(rate);
