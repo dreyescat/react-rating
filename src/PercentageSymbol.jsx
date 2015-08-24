@@ -31,6 +31,7 @@ var PercentageSymbol = React.createClass({
         'auto'
     };
     var style = {
+      cursor: 'pointer',
       display: 'inline-block',
       position: 'relative'
     };
