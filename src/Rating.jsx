@@ -151,7 +151,7 @@ var Rating = React.createClass({
           />);
     }
     return (
-      <span onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this)}>
+      <span onMouseLeave={!this.props.readonly && this.handleMouseLeave}>
         {symbolNodes}
       </span>
     );
