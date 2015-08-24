@@ -82,9 +82,7 @@ describe('Rating', function () {
     });
 
     it('should not have mouse leave handler', function () {
-      rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.onMouseLeave).to.be.false;
-      });
+      expect(rating.props.onMouseLeave).to.be.false;
     });
   });
   /////////////////////////////////////////////////////////////////////////////
