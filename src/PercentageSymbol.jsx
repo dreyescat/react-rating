@@ -24,6 +24,7 @@ var PercentageSymbol = React.createClass({
       display: 'inline-block',
       position: 'absolute',
       overflow: 'hidden',
+      top: 0,
       left: 0,
       width: this.props.percent !== undefined ?
         this.props.percent + '%' :
