@@ -89,7 +89,7 @@ var Rating = React.createClass({
       });
     }
   },
-  handleMouseLeave: function (i) {
+  handleMouseLeave: function () {
     this.props.onRate();
     this.setState({
       indexOver: undefined
@@ -151,7 +151,7 @@ var Rating = React.createClass({
           />);
     }
     return (
-      <span onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this, i)}>
+      <span onMouseLeave={!this.props.readonly && this.handleMouseLeave.bind(this)}>
         {symbolNodes}
       </span>
     );
