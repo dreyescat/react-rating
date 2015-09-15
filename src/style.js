@@ -7,8 +7,7 @@ var style = {
   borderRadius: '50%',
   border: '5px double white',
   width: 30,
-  height: 30,
-  cursor: 'pointer'
+  height: 30
 };
 
 module.exports = {
