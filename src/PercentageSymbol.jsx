@@ -40,8 +40,6 @@ var PercentageSymbol = React.createClass({
     return (
       <span style={style}
           onMouseDown={this.props.onMouseDown}
-          onMouseOver={this.props.onMouseOver}
-          onMouseLeave={this.props.onMouseLeave}
           onMouseMove={this.props.onMouseMove}>
         {backgroundNode}
         <div style={iconContainerStyle}>
