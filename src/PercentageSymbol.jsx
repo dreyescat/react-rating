@@ -7,19 +7,34 @@ var PercentageSymbol = React.createClass({
   propTypes: typeof __DEV__ !== 'undefined' && __DEV__ && {
     icon: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.object]),
+      React.PropTypes.object,
+      React.PropTypes.element
+      ]),
     background: React.PropTypes.oneOfType([
       React.PropTypes.string,
-      React.PropTypes.object]),
+      React.PropTypes.object,
+      React.PropTypes.element
+      ]),
     percent: React.PropTypes.number
   },
+  // Return the corresponding React node for an icon.
+  _iconNode: function (icon) {
+    // If it is already a React Element just return it.
+    if (React.isValidElement(icon)) {
+      return icon;
+    }
+    // If it is an object, try to use it as a CSS style object.
+    if (typeof icon === 'object' && icon !== null) {
+      return <div style={icon}/>;
+    }
+    // If it is a string, use it as class names.
+    if (toString.call(icon) === '[object String]') {
+      return <div className={icon}/>;
+    }
+  },
   render: function () {
-    var backgroundNode = typeof this.props.background === 'string' ?
-      <div className={this.props.background}/> :
-      <div style={this.props.background}/>;
-    var iconNode = typeof this.props.icon === 'string' ?
-      <div className={this.props.icon}/> :
-      <div style={this.props.icon}/>;
+    var backgroundNode = this._iconNode(this.props.background);
+    var iconNode = this._iconNode(this.props.icon);
     var iconContainerStyle = {
       display: 'inline-block',
       position: 'absolute',

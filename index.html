@@ -12,6 +12,19 @@
     <script src="node_modules/react/dist/react.js"></script>
     <!-- React Rating component -->
     <script src="lib/react-rating.js"></script>
+    <!-- SVG icons generated with https://icomoon.io/app/ -->
+    <svg id="svg-source" style="display: none;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <symbol id="icon-star-empty" viewBox="0 0 1024 1024">
+          <title>star-empty</title>
+          <path class="path1" d="M1024 397.050l-353.78-51.408-158.22-320.582-158.216 320.582-353.784 51.408 256 249.538-60.432 352.352 316.432-166.358 316.432 166.358-60.434-352.352 256.002-249.538zM512 753.498l-223.462 117.48 42.676-248.83-180.786-176.222 249.84-36.304 111.732-226.396 111.736 226.396 249.836 36.304-180.788 176.222 42.678 248.83-223.462-117.48z"></path>
+        </symbol>
+        <symbol id="icon-star-full" viewBox="0 0 1024 1024">
+          <title>star-full</title>
+          <path class="path1" d="M1024 397.050l-353.78-51.408-158.22-320.582-158.216 320.582-353.784 51.408 256 249.538-60.432 352.352 316.432-166.358 316.432 166.358-60.434-352.352 256.002-249.538z"></path>
+        </symbol>
+      </defs>
+    </svg>
     <style type="text/css">
       .low {
         color: red;
@@ -22,6 +35,16 @@
       .high {
         color: green;
       }
+      .icon {
+        width: 26px;
+        height: 26px;
+      }
+      .icon-text {
+        display: inline-block;
+        width: 26px;
+        font-size: 2em;
+        background-color: white;
+      }
     </style>
   </head>
   <body>
@@ -31,6 +54,12 @@
     <div class="rating" id="rating-default-readonly"></div>
     <h3>Readonly fractional rating</h3>
     <div class="rating" id="rating-default-readonly-fractional"></div>
+    <h3>React svg element rating</h3>
+    <div class="rating" id="rating-svg"></div>
+    <h3>React span element rating</h3>
+    <div class="rating" id="rating-span"></div>
+    <h3>React img element rating</h3>
+    <div class="rating" id="rating-img"></div>
     <h3>Fontawesome Five Star rating</h3>
     <div class="rating" id="rating-fontawesome-star"></div>
     <h3>Bootstrap Five Heart rating</h3>
@@ -59,6 +88,62 @@
 
     <script type="text/javascript">
       var Rating = ReactRating;
+      var SVGIcon = React.createClass({
+        render: function () {
+          // Namespaced attributes are not supported in JSX. As a workaround
+          // we can use the dangerouslySetInnerHTML to set the innerHTML property.
+          // See https://github.com/facebook/react/issues/2250
+          var svg =
+            '<svg class="' + this.props.className + '">' +
+              '<use xlink:href="' + this.props.href + '"></use>' +
+            '</svg>';
+          return React.createElement('div', {
+            dangerouslySetInnerHTML: {__html: svg}
+          });
+        }
+      });
+      React.render(React.createElement(Rating, {
+        empty: React.createElement('span', {
+          className: 'icon-text'
+        }, '-'),
+        full: [
+          React.createElement('span', {
+            className: 'icon-text'
+          }, '1'),
+          React.createElement('span', {
+            className: 'icon-text'
+          }, '2'),
+          React.createElement('span', {
+            className: 'icon-text'
+          }, '3'),
+          React.createElement('span', {
+            className: 'icon-text'
+          }, '4'),
+          React.createElement('span', {
+            className: 'icon-text'
+          }, '5'),
+        ]
+      }), document.getElementById('rating-span'));
+      React.render(React.createElement(Rating, {
+        empty: React.createElement('img', {
+          src: 'assets/images/star-empty.png',
+          className: 'icon'
+        }),
+        full: React.createElement('img', {
+          src: 'assets/images/star-full.png',
+          className: 'icon'
+        })
+      }), document.getElementById('rating-img'));
+      React.render(React.createElement(Rating, {
+        empty: React.createElement(SVGIcon, {
+          href: '#icon-star-empty',
+          className: 'icon'
+        }),
+        full: React.createElement(SVGIcon, {
+          href: '#icon-star-full',
+          className: 'icon'
+        })
+      }), document.getElementById('rating-svg'));
       React.render(React.createElement(Rating),
         document.getElementById('rating-default'));
       React.render(React.createElement(Rating, {
