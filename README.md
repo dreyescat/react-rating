@@ -54,7 +54,7 @@ Property      | Type                                           | Default        
 ---           | ---                                            | ---                  | ---
 `start`       | *number*                                       | 0                    | Range starting value (exclusive).
 `stop`        | *number*                                       | 5                    | Range stop value (inclusive).
-`step`        | *number*                                       | 1                    | Step increment (negative) or decrement (positive).
+`step`        | *number*                                       | 1                    | Step increment (positive) or decrement (negative).
 `initialRate` | *number*                                       | undefined            | Initial rate value.
 `empty`       | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
 `full`        | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
