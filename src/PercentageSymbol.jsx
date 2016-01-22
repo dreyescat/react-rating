@@ -28,7 +28,7 @@ var PercentageSymbol = React.createClass({
       return <div style={icon}/>;
     }
     // If it is a string, use it as class names.
-    if (toString.call(icon) === '[object String]') {
+    if (Object.prototype.toString.call(icon) === '[object String]') {
       return <div className={icon}/>;
     }
   },
