@@ -16,5 +16,8 @@ module.exports = {
   }),
   full: merge(style, {
     backgroundColor: 'black'
+  }),
+  placeholder: merge(style, {
+    backgroundColor: 'red'
   })
 };

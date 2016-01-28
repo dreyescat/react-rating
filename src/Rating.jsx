@@ -73,7 +73,7 @@ var Rating = React.createClass({
       stop: 5,
       step: 1,
       empty: Style.empty,
-      placeholder: Style.full,
+      placeholder: Style.placeholder,
       full: Style.full,
       fractions: 1,
       scale: 3,
