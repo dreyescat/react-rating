@@ -30,7 +30,18 @@ var Rating = React.createClass({
     stop: React.PropTypes.number,
     step: React.PropTypes.number,
     initialRate: React.PropTypes.number,
+    placeholderRate: React.PropTypes.number,
     empty: React.PropTypes.oneOfType([
+      // Array of class names and/or style objects.
+      React.PropTypes.arrayOf(React.PropTypes.oneOfType[
+        React.PropTypes.string,
+        React.PropTypes.object
+      ]),
+      // Class names.
+      React.PropTypes.string,
+      // Style objects.
+      React.PropTypes.object]),
+    placeholder: React.PropTypes.oneOfType([
       // Array of class names and/or style objects.
       React.PropTypes.arrayOf(React.PropTypes.oneOfType[
         React.PropTypes.string,
@@ -62,6 +73,7 @@ var Rating = React.createClass({
       stop: 5,
       step: 1,
       empty: Style.empty,
+      placeholder: Style.full,
       full: Style.full,
       fractions: 1,
       scale: 3,
@@ -70,13 +82,15 @@ var Rating = React.createClass({
     };
   },
   componentWillReceiveProps: function (nextProps) {
-    this.setState({
-      index: indexOf(nextProps, nextProps.initialRate)
-    });
+      var rate = (nextProps.initialRate > 0) ? nextProps.initialRate : nextProps.placeholderRate;
+      this.setState({
+        index: indexOf(nextProps, rate)
+      });
   },
   getInitialState: function () {
+    var index = (this.props.initialRate > 0) ? this.props.initialRate : this.props.placeholderRate;
     return {
-      index: this._rateToIndex(this.props.initialRate),
+      index: this._rateToIndex(index),
       indexOver: undefined
     };
   },
@@ -85,7 +99,8 @@ var Rating = React.createClass({
     if (this.state.index !== index) {
       this.props.onChange(this._indexToRate(index));
       this.setState({
-        index: index
+        index: index,
+        selected: true
       });
     }
   },
@@ -128,6 +143,7 @@ var Rating = React.createClass({
   render: function () {
     var symbolNodes = [];
     var empty = [].concat(this.props.empty);
+    var placeholder = [].concat(this.props.placeholder);
     var full = [].concat(this.props.full);
     // The symbol with the mouse over prevails over the selected one.
     var index = this.state.indexOver !== undefined ?
@@ -135,16 +151,23 @@ var Rating = React.createClass({
     // The index of the last full symbol or NaN if index is undefined.
     var lastFullIndex = Math.floor(index);
     // Render the number of whole symbols.
+    
+    var icon = (!this.state.selected &&
+                  !this.props.initialRate && 
+                  this.props.placeholderRate > 0 && 
+                  this.state.indexOver == undefined) ? placeholder : full;
+    
     for (var i = 0; i < Math.floor(this._rateToIndex(this.props.stop)); i++) {
       // Return the percentage of the decimal part of the last full index,
       // 100 percent for those below the last full index or 0 percent for those
       // indexes NaN or above the last full index.
       var percent = i - lastFullIndex === 0 ? index % 1 * 100 :
         i - lastFullIndex < 0 ? 100 : 0;
+
       symbolNodes.push(<Symbol
           key={i}
           background={empty[i % empty.length]}
-          icon={full[i % full.length]}
+          icon={icon[i % icon.length]}
           percent={percent}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}

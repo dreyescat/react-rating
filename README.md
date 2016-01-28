@@ -50,16 +50,18 @@ npm install --save react
 
 ## Properties
 
-Property      | Type                                           | Default              | Description
----           | ---                                            | ---                  | ---
-`start`       | *number*                                       | 0                    | Range starting value (exclusive).
-`stop`        | *number*                                       | 5                    | Range stop value (inclusive).
-`step`        | *number*                                       | 1                    | Step increment (positive) or decrement (negative).
-`initialRate` | *number*                                       | undefined            | Initial rate value.
-`empty`       | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`full`        | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`readonly`    | *bool*                                         | false                | Whether the rating can be modified or not.
-`fractions`   | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
+Property          | Type                                           | Default              | Description
+---               | ---                                            | ---                  | ---
+`start`           | *number*                                       | 0                    | Range starting value (exclusive).
+`stop`            | *number*                                       | 5                    | Range stop value (inclusive).
+`step`            | *number*                                       | 1                    | Step increment (positive) or decrement (negative).
+`placeholderRate` | *number*                                       | undefined            | Placeholder rate value.
+`initialRate`     | *number*                                       | undefined            | Initial rate value.
+`empty`           | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`placeholder`     | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols in HTML input placeholder fashion. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`full`            | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
+`fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
 
 ## Callbacks
 
