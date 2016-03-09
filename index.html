@@ -85,11 +85,9 @@
     <div class="rating" id="rating-default-1-to-10-step-2"></div>
     <h3>10 to 1 with step -2 (odd numbers between [1..10] inverted order)</h3>
     <div class="rating" id="rating-default-10-to-1-step--2"></div>
-    <h3>system rating of 3.5, no individual rating</h3>
-    <div class="rating" id="rating-3-state-no-ind"></div>
-    <h3>system rating of 3.5, individual rating of 2</h3>
-    <div class="rating" id="rating-3-state-ind"></div>
-    
+    <h3>Rating with placeholder</h3>
+    <div class="rating" id="rating-placeholder"></div>
+
     <script type="text/javascript">
       var Rating = ReactRating;
       var SVGIcon = React.createClass({
@@ -220,36 +218,20 @@
           'fa fa-battery-3 fa-2x', 'fa fa-battery-4 fa-2x']
       }), document.getElementById('rating-custom'));
       React.render(React.createElement(Rating, {
-    	  placeholderRate: 3.5,
-          empty: React.createElement('img', {
-            src: 'assets/images/star-grey.png',
-            className: 'icon'
-          }),
-          placeholder: React.createElement('img', {
-            src: 'assets/images/star-red.png',
-            className: 'icon'
-          }),
-          full: React.createElement('img', {
-            src: 'assets/images/star-yellow.png',
-            className: 'icon'
-          })
-        }), document.getElementById('rating-3-state-no-ind'));
-      React.render(React.createElement(Rating, {
-    	  placeholder: 3.5,
-          initialRate: 2,
-          empty: React.createElement('img', {
-            src: 'assets/images/star-grey.png',
-            className: 'icon'
-          }),
-          placeholder: React.createElement('img', {
-            src: 'assets/images/star-red.png',
-            className: 'icon'
-          }),
-          full: React.createElement('img', {
-            src: 'assets/images/star-yellow.png',
-            className: 'icon'
-          })
-        }), document.getElementById('rating-3-state-ind'));
+        placeholderRate: 3.5,
+        empty: React.createElement('img', {
+          src: 'assets/images/star-grey.png',
+          className: 'icon'
+        }),
+        placeholder: React.createElement('img', {
+          src: 'assets/images/star-red.png',
+          className: 'icon'
+        }),
+        full: React.createElement('img', {
+          src: 'assets/images/star-yellow.png',
+          className: 'icon'
+        })
+      }), document.getElementById('rating-placeholder'));
     </script>
   </body>
 </html>
