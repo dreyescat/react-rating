@@ -65,6 +65,7 @@ var Rating = React.createClass({
     fractions: React.PropTypes.number,
     scale: React.PropTypes.number,
     onChange: React.PropTypes.func,
+    onClick: React.PropTypes.func,
     onRate: React.PropTypes.func
   },
   getDefaultProps: function () {
@@ -78,6 +79,7 @@ var Rating = React.createClass({
       fractions: 1,
       scale: 3,
       onChange: function (rate) {},
+      onClick: function (rate) {},
       onRate: function (rate) {}
     };
   },
@@ -96,6 +98,7 @@ var Rating = React.createClass({
   },
   handleMouseDown: function (i, event) {
     var index = i + this._fractionalIndex(event);
+    this.props.onClick(this._indexToRate(index));
     if (this.state.index !== index) {
       this.props.onChange(this._indexToRate(index));
       this.setState({

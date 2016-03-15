@@ -68,6 +68,7 @@ Property          | Type                                           | Default    
 Callback      | Type                    | Description
 ---           | ---                     | ---
 `onChange`    | function (rate) {}      | Called when the selected rate is changed.
+`onClick`     | function (rate) {}      | Called when a rate is clicked.
 `onRate`      | function (rate) {}      | Called when a rate is entered or left. When a rate is left it is called with `undefined`.
 
 ## License
