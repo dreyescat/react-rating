@@ -1,6 +1,6 @@
 {
   "name": "react-rating",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A rating react component with custom symbols",
   "main": "lib/react-rating.js",
   "files": [
