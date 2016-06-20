@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "test": "mocha --compilers js:babel/register --recursive",
-    "dev": "webpack-dev-server --progress --colors --port 8080",
+    "dev": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
     "build": "BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress",
     "preversion": "npm test",
     "version": "npm run build && git add -A lib",
