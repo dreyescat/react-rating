@@ -176,8 +176,24 @@ var Rating = React.createClass({
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
           />);
     }
+    var {
+      start,
+      stop,
+      step,
+      empty,
+      initialRate,
+      placeholderRate,
+      placeholder,
+      full,
+      readonly,
+      fractions,
+      scale,
+      onChange,
+      onClick,
+      onRate,
+      ...other } = this.props;
     return (
-      <span onMouseLeave={!this.props.readonly && this.handleMouseLeave}>
+      <span onMouseLeave={!readonly && this.handleMouseLeave} {...other}>
         {symbolNodes}
       </span>
     );
