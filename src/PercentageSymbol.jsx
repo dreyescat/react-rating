@@ -40,7 +40,7 @@ var PercentageSymbol = React.createClass({
       position: 'absolute',
       overflow: 'hidden',
       top: 0,
-      left: 0,
+      [this.props.direction === 'rtl' ? 'right' : 'left']: 0,
       width: this.props.percent !== undefined ?
         this.props.percent + '%' :
         'auto'

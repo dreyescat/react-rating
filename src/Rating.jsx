@@ -83,6 +83,12 @@ var Rating = React.createClass({
       onRate: function (rate) {}
     };
   },
+  componentDidMount: function () {
+    this.setState({
+      // detect the computed direction style for the mounted component
+      direction: window.getComputedStyle(this.refs.container, null).getPropertyValue("direction")
+    });
+  },
   componentWillReceiveProps: function (nextProps) {
       var rate = (nextProps.initialRate > 0) ? nextProps.initialRate : nextProps.placeholderRate;
       this.setState({
@@ -93,7 +99,9 @@ var Rating = React.createClass({
     var index = (this.props.initialRate > 0) ? this.props.initialRate : this.props.placeholderRate;
     return {
       index: this._rateToIndex(index),
-      indexOver: undefined
+      indexOver: undefined,
+      // Default direction is left to right
+      direction: 'ltr'
     };
   },
   handleMouseDown: function (i, event) {
@@ -140,7 +148,9 @@ var Rating = React.createClass({
     return Math.floor(index) + Math.floor(fraction * precision) / precision;
   },
   _fractionalIndex: function (event) {
-    var x = event.clientX - event.currentTarget.getBoundingClientRect().left;
+    var x = this.state.direction === 'rtl' ?
+      event.currentTarget.getBoundingClientRect().right - event.clientX :
+      event.clientX - event.currentTarget.getBoundingClientRect().left;
     return this._roundToFraction(x / event.currentTarget.offsetWidth);
   },
   render: function () {
@@ -174,6 +184,7 @@ var Rating = React.createClass({
           percent={percent}
           onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
+          direction={this.state.direction}
           />);
     }
     var {
@@ -193,7 +204,7 @@ var Rating = React.createClass({
       onRate,
       ...other } = this.props;
     return (
-      <span onMouseLeave={!readonly && this.handleMouseLeave} {...other}>
+      <span ref="container" onMouseLeave={!readonly && this.handleMouseLeave} {...other}>
         {symbolNodes}
       </span>
     );
