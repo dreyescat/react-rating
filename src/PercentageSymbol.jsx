@@ -25,11 +25,11 @@ var PercentageSymbol = React.createClass({
     }
     // If it is an object, try to use it as a CSS style object.
     if (typeof icon === 'object' && icon !== null) {
-      return <div style={icon}/>;
+      return <span style={icon}/>;
     }
     // If it is a string, use it as class names.
     if (Object.prototype.toString.call(icon) === '[object String]') {
-      return <div className={icon}/>;
+      return <span className={icon}/>;
     }
   },
   render: function () {
