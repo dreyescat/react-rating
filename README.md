@@ -61,6 +61,7 @@ Property          | Type                                           | Default    
 `placeholder`     | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols in HTML input placeholder fashion. Or an array of such symbols that will be applied in a circular manner (round-robin).
 `full`            | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
+`quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
 `fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
 
 ## Callbacks

@@ -71,6 +71,9 @@
     <h3>Update a label when rate moves</h3>
     <span class="rating" id="rating-default-onrate"></span>
     <span class="label label-default" id="label-onrate"></span>
+    <h3>Update a label when rate moves "quietly"</h3>
+    <span class="rating" id="rating-quiet-onrate"></span>
+    <span class="label label-default" id="label-quiet-onrate"></span>
     <h3>Colored rating</h3>
     <span class="rating" id="rating-colored"></span>
     <h3>Mixed symbols</h3>
@@ -166,6 +169,12 @@
           document.getElementById('label-onrate').innerHTML = rate || '';
         }
       }), document.getElementById('rating-default-onrate'));
+      React.render(React.createElement(Rating, {
+        quiet: true,
+        onRate: function (rate) {
+          document.getElementById('label-quiet-onrate').innerHTML = rate || '';
+        }
+      }), document.getElementById('rating-quiet-onrate'));
       React.render(React.createElement(Rating, {
         stop: 10
       }), document.getElementById('rating-default-1-to-10'));

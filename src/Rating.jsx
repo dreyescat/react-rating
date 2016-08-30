@@ -62,6 +62,7 @@ var Rating = React.createClass({
       // Style objects.
       React.PropTypes.object]),
     readonly: React.PropTypes.bool,
+    quiet: React.PropTypes.bool,
     fractions: React.PropTypes.number,
     scale: React.PropTypes.number,
     onChange: React.PropTypes.func,
@@ -158,8 +159,9 @@ var Rating = React.createClass({
     var empty = [].concat(this.props.empty);
     var placeholder = [].concat(this.props.placeholder);
     var full = [].concat(this.props.full);
-    // The symbol with the mouse over prevails over the selected one.
-    var index = this.state.indexOver !== undefined ?
+    // The symbol with the mouse over prevails over the selected one,
+    // provided that we are not in quiet mode.
+    var index = !this.props.quiet && this.state.indexOver !== undefined ?
       this.state.indexOver : this.state.index;
     // The index of the last full symbol or NaN if index is undefined.
     var lastFullIndex = Math.floor(index);
@@ -197,6 +199,7 @@ var Rating = React.createClass({
       placeholder,
       full,
       readonly,
+      quiet,
       fractions,
       scale,
       onChange,
