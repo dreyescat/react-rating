@@ -111,6 +111,7 @@ var Rating = React.createClass({
     if (this.state.index !== index) {
       this.props.onChange(this._indexToRate(index));
       this.setState({
+        indexOver: undefined,
         index: index,
         selected: true
       });
