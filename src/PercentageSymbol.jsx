@@ -46,7 +46,7 @@ var PercentageSymbol = React.createClass({
         'auto'
     };
     var style = {
-      cursor: this.props.onMouseDown || this.props.onMouseOver ?
+      cursor: this.props.onClick || this.props.onMouseOver ?
         'pointer' :
         'auto',
       display: 'inline-block',
@@ -54,7 +54,7 @@ var PercentageSymbol = React.createClass({
     };
     return (
       <span style={style}
-          onMouseDown={this.props.onMouseDown}
+          onClick={this.props.onClick}
           onMouseMove={this.props.onMouseMove}>
         {backgroundNode}
         <span style={iconContainerStyle}>

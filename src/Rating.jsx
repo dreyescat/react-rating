@@ -105,7 +105,7 @@ var Rating = React.createClass({
       direction: 'ltr'
     };
   },
-  handleMouseDown: function (i, event) {
+  handleClick: function (i, event) {
     var index = i + this._fractionalIndex(event);
     this.props.onClick(this._indexToRate(index));
     if (this.state.index !== index) {
@@ -185,7 +185,7 @@ var Rating = React.createClass({
           background={empty[i % empty.length]}
           icon={icon[i % icon.length]}
           percent={percent}
-          onMouseDown={!this.props.readonly && this.handleMouseDown.bind(this, i)}
+          onClick={!this.props.readonly && this.handleClick.bind(this, i)}
           onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
           direction={this.state.direction}
           />);
