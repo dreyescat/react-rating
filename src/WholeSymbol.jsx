@@ -14,7 +14,7 @@ var WholeSymbol = React.createClass({
       <span className={this.props.icon}/> :
       <span style={this.props.icon}/>;
     return (
-      <span onMouseDown={this.props.onMouseDown}
+      <span onClick={this.props.onClick}
           onMouseOver={this.props.onMouseOver}
           onMouseLeave={this.props.onMouseLeave}
           onMouseMove={this.props.onMouseMove}>

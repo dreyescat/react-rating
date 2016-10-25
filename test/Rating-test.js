@@ -75,9 +75,9 @@ describe('Rating', function () {
       });
     });
 
-    it('should not have mouse down handler', function () {
+    it('should not have click handler', function () {
       rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.onMouseDown).to.be.false;
+        expect(symbol.props.onClick).to.be.false;
       });
     });
 
