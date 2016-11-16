@@ -107,7 +107,7 @@ var Rating = React.createClass({
   },
   handleClick: function (i, event) {
     var index = i + this._fractionalIndex(event);
-    this.props.onClick(this._indexToRate(index));
+    this.props.onClick(this._indexToRate(index), event);
     if (this.state.index !== index) {
       this.props.onChange(this._indexToRate(index));
       this.setState({
