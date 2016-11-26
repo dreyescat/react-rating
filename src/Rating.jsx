@@ -93,7 +93,8 @@ var Rating = React.createClass({
   componentWillReceiveProps: function (nextProps) {
       var rate = (nextProps.initialRate > 0) ? nextProps.initialRate : nextProps.placeholderRate;
       this.setState({
-        index: indexOf(nextProps, rate)
+        index: indexOf(nextProps, rate),
+        selected: !!nextProps.initialRate
       });
   },
   getInitialState: function () {
