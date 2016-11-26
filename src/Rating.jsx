@@ -35,7 +35,8 @@ var Rating = React.createClass({
       // Array of class names and/or style objects.
       React.PropTypes.arrayOf(React.PropTypes.oneOfType[
         React.PropTypes.string,
-        React.PropTypes.object
+        React.PropTypes.object,
+        React.PropTypes.element
       ]),
       // Class names.
       React.PropTypes.string,
@@ -45,7 +46,8 @@ var Rating = React.createClass({
       // Array of class names and/or style objects.
       React.PropTypes.arrayOf(React.PropTypes.oneOfType[
         React.PropTypes.string,
-        React.PropTypes.object
+        React.PropTypes.object,
+        React.PropTypes.element
       ]),
       // Class names.
       React.PropTypes.string,
@@ -55,7 +57,8 @@ var Rating = React.createClass({
       // Array of class names and/or style objects.
       React.PropTypes.arrayOf(React.PropTypes.oneOfType[
         React.PropTypes.string,
-        React.PropTypes.object
+        React.PropTypes.object,
+        React.PropTypes.element
       ]),
       // Class names.
       React.PropTypes.string,
