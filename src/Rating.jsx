@@ -94,14 +94,16 @@ var Rating = React.createClass({
     });
   },
   componentWillReceiveProps: function (nextProps) {
-      var rate = (nextProps.initialRate > 0) ? nextProps.initialRate : nextProps.placeholderRate;
+      var rate = nextProps.initialRate !== undefined ?
+        nextProps.initialRate : nextProps.placeholderRate;
       this.setState({
         index: indexOf(nextProps, rate),
-        selected: !!nextProps.initialRate
+        selected: nextProps.initialRate !== undefined
       });
   },
   getInitialState: function () {
-    var index = (this.props.initialRate > 0) ? this.props.initialRate : this.props.placeholderRate;
+    var index = this.props.initialRate !== undefined ?
+      this.props.initialRate : this.props.placeholderRate;
     return {
       index: this._rateToIndex(index),
       indexOver: undefined,
@@ -172,10 +174,10 @@ var Rating = React.createClass({
     var lastFullIndex = Math.floor(index);
     // Render the number of whole symbols.
     
-    var icon = (!this.state.selected &&
-                  !this.props.initialRate && 
-                  this.props.placeholderRate > 0 && 
-                  this.state.indexOver == undefined) ? placeholder : full;
+    var icon = !this.state.selected &&
+      this.props.initialRate === undefined &&
+      this.props.placeholderRate !== undefined &&
+      this.state.indexOver === undefined ? placeholder : full;
     
     for (var i = 0; i < Math.floor(this._rateToIndex(this.props.stop)); i++) {
       // Return the percentage of the decimal part of the last full index,
