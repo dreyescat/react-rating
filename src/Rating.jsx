@@ -177,7 +177,8 @@ var Rating = React.createClass({
     var icon = !this.state.selected &&
       this.props.initialRate === undefined &&
       this.props.placeholderRate !== undefined &&
-      this.state.indexOver === undefined ? placeholder : full;
+      (this.props.quiet || this.state.indexOver === undefined) ?
+      placeholder : full;
     
     for (var i = 0; i < Math.floor(this._rateToIndex(this.props.stop)); i++) {
       // Return the percentage of the decimal part of the last full index,
