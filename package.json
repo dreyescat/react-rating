@@ -6,7 +6,8 @@
   "files": [
     "README.md",
     "LICENSE.md",
-    "lib/"
+    "lib/",
+    "src/"
   ],
   "scripts": {
     "test": "mocha --compilers js:babel/register --recursive",
