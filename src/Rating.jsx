@@ -33,33 +33,33 @@ var Rating = React.createClass({
     placeholderRate: React.PropTypes.number,
     empty: React.PropTypes.oneOfType([
       // Array of class names and/or style objects.
-      React.PropTypes.arrayOf(React.PropTypes.oneOfType[
+      React.PropTypes.arrayOf(React.PropTypes.oneOfType([
         React.PropTypes.string,
         React.PropTypes.object,
         React.PropTypes.element
-      ]),
+      ])),
       // Class names.
       React.PropTypes.string,
       // Style objects.
       React.PropTypes.object]),
     placeholder: React.PropTypes.oneOfType([
       // Array of class names and/or style objects.
-      React.PropTypes.arrayOf(React.PropTypes.oneOfType[
+      React.PropTypes.arrayOf(React.PropTypes.oneOfType([
         React.PropTypes.string,
         React.PropTypes.object,
         React.PropTypes.element
-      ]),
+      ])),
       // Class names.
       React.PropTypes.string,
       // Style objects.
       React.PropTypes.object]),
     full: React.PropTypes.oneOfType([
       // Array of class names and/or style objects.
-      React.PropTypes.arrayOf(React.PropTypes.oneOfType[
+      React.PropTypes.arrayOf(React.PropTypes.oneOfType([
         React.PropTypes.string,
         React.PropTypes.object,
         React.PropTypes.element
-      ]),
+      ])),
       // Class names.
       React.PropTypes.string,
       // Style objects.
@@ -173,13 +173,13 @@ var Rating = React.createClass({
     // The index of the last full symbol or NaN if index is undefined.
     var lastFullIndex = Math.floor(index);
     // Render the number of whole symbols.
-    
+
     var icon = !this.state.selected &&
       this.props.initialRate === undefined &&
       this.props.placeholderRate !== undefined &&
       (this.props.quiet || this.state.indexOver === undefined) ?
       placeholder : full;
-    
+
     for (var i = 0; i < Math.floor(this._rateToIndex(this.props.stop)); i++) {
       // Return the percentage of the decimal part of the last full index,
       // 100 percent for those below the last full index or 0 percent for those
