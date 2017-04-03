@@ -12,9 +12,18 @@ git -C dist checkout origin/master -- :/index.html :/lib :/assets
 
 # Sync dependencies keeping full path (-R)
 rsync -avR node_modules/react/dist dist
+rsync -avR node_modules/react-dom/dist dist
+
 rsync -avR node_modules/bootstrap/dist dist
+
 rsync -avR node_modules/font-awesome/css dist
 rsync -avR node_modules/font-awesome/fonts dist
+
+rsync -avR node_modules/prismjs/themes/prism.css dist
+rsync -avR node_modules/prismjs/prism.js dist
+rsync -avR node_modules/prismjs/components/prism-jsx.min.js dist
+
+rsync -avR node_modules/babel-core/browser.min.js dist
 
 # Add synched dependencies changes
 git -C dist add .
