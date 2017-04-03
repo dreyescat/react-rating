@@ -48,6 +48,7 @@
     "font-awesome": "^4.3.0",
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
+    "prismjs": "^1.6.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "webpack": "^1.10.1",

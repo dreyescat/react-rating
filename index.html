@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <!-- Prism -->
+    <link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+    <script src="node_modules/prismjs/prism.js"></script>
+    <script src="node_modules/prismjs/components/prism-jsx.min.js"></script>
     <!-- Babel -->
     <script src="node_modules/babel-core/browser.min.js"></script>
     <!-- React -->
@@ -96,11 +100,21 @@
     <div class="rating" id="rating-placeholder"></div>
 
     <script type="text/babel">
-      var Rating = ReactRating;
+      const Rating = ReactRating;
+      const insertCode = function (code, elementId) {
+        document
+          .getElementById(elementId)
+          .insertAdjacentHTML('afterend',
+            '<pre><code>' +
+            Prism.highlight(code, Prism.languages.jsx) +
+            '</code></pre>'
+          );
+      };
 
       ReactDOM.render(
         <Rating />
       , document.getElementById('rating-default'));
+      insertCode('<Rating />', 'rating-default');
 
       ReactDOM.render(
         <Rating
@@ -108,6 +122,11 @@
           readonly
         />
       , document.getElementById('rating-default-readonly'));
+      insertCode(
+`<Rating
+  initialRate={3}
+  readonly
+/>`, 'rating-default-readonly');
 
       ReactDOM.render(
         <Rating
@@ -115,25 +134,35 @@
           readonly
         />
       , document.getElementById('rating-default-readonly-fractional'));
+      insertCode(
+`<Rating
+  initialRate={2.5}
+  readonly
+/>`, 'rating-default-readonly-fractional');
 
-      const SVGIcon = (props) => {
-          // Namespaced attributes are not supported in JSX. As a workaround
-          // we can use the dangerouslySetInnerHTML to set the innerHTML property.
-          // See https://github.com/facebook/react/issues/2250
-          var svg =
-            '<svg class="' + props.className + '">' +
-              '<use xlink:href="' + props.href + '"></use>' +
-            '</svg>';
-          return React.createElement('div', {
-            dangerouslySetInnerHTML: {__html: svg}
-          });
-      };
+      const SVGIcon = (props) =>
+          <div>
+            <svg className={props.className}>
+              <use xlinkHref={props.href} />
+            </svg>
+          </div>;
       ReactDOM.render(
         <Rating
           empty={<SVGIcon href="#icon-star-empty" className="icon" />}
           full={<SVGIcon href="#icon-star-full" className="icon" />}
         />
       , document.getElementById('rating-svg'));
+      insertCode(
+`const SVGIcon = (props) =>
+  <div>
+    <svg className={props.className}>
+      <use xlinkHref={props.href} />
+    </svg>
+  </div>;
+<Rating
+  empty={<SVGIcon href="#icon-star-empty" className="icon" />}
+  full={<SVGIcon href="#icon-star-full" className="icon" />}
+/>`, 'rating-svg');
 
       ReactDOM.render(
         <Rating
@@ -141,6 +170,11 @@
           full={[1,2,3,4,5].map(n => <span className="icon-text">{n}</span>)}
         />
       , document.getElementById('rating-span'));
+      insertCode(
+`<Rating
+  empty={<span className="icon-text">-</span>}
+  full={[1,2,3,4,5].map(n => <span className="icon-text">{n}</span>)}
+/>`, 'rating-span');
 
       ReactDOM.render(
         <Rating
@@ -148,6 +182,11 @@
           full={<img src="assets/images/star-full.png" className="icon" />}
         />
       , document.getElementById('rating-img'));
+      insertCode(
+`<Rating
+  empty={<img src="assets/images/star-empty.png" className="icon" />}
+  full={<img src="assets/images/star-full.png" className="icon" />}
+/>`, 'rating-img');
 
       ReactDOM.render(
         <Rating
@@ -155,6 +194,11 @@
           full="fa fa-star fa-2x"
         />
       , document.getElementById('rating-fontawesome-star'));
+      insertCode(
+`<Rating
+  empty="fa fa-star-o fa-2x"
+  full="fa fa-star fa-2x"
+/>`, 'rating-fontawesome-star');
 
       ReactDOM.render(
         <Rating
@@ -162,6 +206,11 @@
           full="glyphicon glyphicon-heart"
         />
       , document.getElementById('rating-bootstrap-heart'));
+      insertCode(
+`<Rating
+  empty="glyphicon glyphicon-heart-empty"
+  full="glyphicon glyphicon-heart"
+/>`, 'rating-bootstrap-heart');
 
       ReactDOM.render(
         <Rating
@@ -170,18 +219,32 @@
           fractions={2}
         />
       , document.getElementById('rating-fractional'));
+      insertCode(
+`<Rating
+  empty="fa fa-star-o fa-2x"
+  full="fa fa-star fa-2x"
+  fractions={2}
+/>`, 'rating-fractional');
 
       ReactDOM.render(
         <Rating
           onChange={(rate) => alert(rate)}
         />
       , document.getElementById('rating-default-change'));
+      insertCode(
+`<Rating
+  onChange={(rate) => alert(rate)}
+/>`, 'rating-default-change');
 
       ReactDOM.render(
         <Rating
           onRate={(rate) => document.getElementById('label-onrate').innerHTML = rate || ''}
         />
       , document.getElementById('rating-default-onrate'));
+      insertCode(
+`<Rating
+  onRate={(rate) => document.getElementById('label-onrate').innerHTML = rate || ''}
+/>`, 'label-onrate');
 
       ReactDOM.render(
         <Rating
@@ -189,12 +252,21 @@
           onRate={(rate) => document.getElementById('label-quiet-onrate').innerHTML = rate || ''}
         />
       , document.getElementById('rating-quiet-onrate'));
+      insertCode(
+`<Rating
+  quiet
+  onRate={(rate) => document.getElementById('label-quiet-onrate').innerHTML = rate || ''}
+/>`, 'label-quiet-onrate');
 
       ReactDOM.render(
         <Rating
           stop={10}
         />
       , document.getElementById('rating-default-1-to-10'));
+      insertCode(
+`<Rating
+  stop={10}
+/>`, 'rating-default-1-to-10');
 
       ReactDOM.render(
         <Rating
@@ -202,6 +274,11 @@
           stop={10}
         />
       , document.getElementById('rating-default-5-to-10'));
+      insertCode(
+`<Rating
+  start={4}
+  stop={10}
+/>`, 'rating-default-5-to-10');
 
       ReactDOM.render(
         <Rating
@@ -209,6 +286,11 @@
           step={2}
         />
       , document.getElementById('rating-default-1-to-10-step-2'));
+      insertCode(
+`<Rating
+  stop={10}
+  step={2}
+/>`, 'rating-default-1-to-10-step-2');
 
       ReactDOM.render(
         <Rating
@@ -217,6 +299,12 @@
           step={-2}
         />
       , document.getElementById('rating-default-10-to-1-step--2'));
+      insertCode(
+`<Rating
+  start={11}
+  stop={1}
+  step={-2}
+/>`, 'rating-default-10-to-1-step--2');
 
       // Mixing symbols.
       ReactDOM.render(
@@ -225,6 +313,11 @@
           full={['fa fa-star fa-2x', 'fa fa-heart fa-2x']}
         />
       , document.getElementById('rating-mixed'));
+      insertCode(
+`<Rating
+  empty={['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x']}
+  full={['fa fa-star fa-2x', 'fa fa-heart fa-2x']}
+/>`, 'rating-mixed');
 
       ReactDOM.render(
         <Rating
@@ -237,6 +330,16 @@
             'fa fa-star fa-2x high', 'fa fa-star fa-2x high']}
         />
       , document.getElementById('rating-colored'));
+      insertCode(
+`<Rating
+  stop={6}
+  empty={['fa fa-star-o fa-2x low', 'fa fa-star-o fa-2x low',
+    'fa fa-star-o fa-2x medium', 'fa fa-star-o fa-2x medium',
+    'fa fa-star-o fa-2x high', 'fa fa-star-o fa-2x high']}
+  full={['fa fa-star fa-2x low', 'fa fa-star fa-2x low',
+    'fa fa-star fa-2x medium', 'fa fa-star fa-2x medium',
+    'fa fa-star fa-2x high', 'fa fa-star fa-2x high']}
+/>`, 'rating-colored');
 
       ReactDOM.render(
         <Rating
@@ -246,6 +349,13 @@
             'fa fa-battery-3 fa-2x', 'fa fa-battery-4 fa-2x']}
         />
       , document.getElementById('rating-custom'));
+      insertCode(
+`<Rating
+  stop={4}
+  empty="fa fa-battery-empty fa-2x"
+  full={['fa fa-battery-1 fa-2x', 'fa fa-battery-2 fa-2x',
+    'fa fa-battery-3 fa-2x', 'fa fa-battery-4 fa-2x']}
+/>`, 'rating-custom');
 
       ReactDOM.render(
         <Rating
@@ -255,6 +365,13 @@
           full={<img src="assets/images/star-yellow.png" className="icon" />}
         />
       , document.getElementById('rating-placeholder'));
+      insertCode(
+`<Rating
+  placeholderRate={3.5}
+  empty={<img src="assets/images/star-grey.png" className="icon" />}
+  placeholder={<img src="assets/images/star-red.png" className="icon" />}
+  full={<img src="assets/images/star-yellow.png" className="icon" />}
+/>`, 'rating-placeholder');
     </script>
   </body>
 </html>
