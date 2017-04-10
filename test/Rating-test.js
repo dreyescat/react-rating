@@ -1,7 +1,7 @@
 // Use expect BDD assertion style.
 var expect = require('chai').expect;
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-dom/test-utils');
 var Rating = require('../src/Rating');
 
 var render = function (component) {
