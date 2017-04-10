@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var Style = require('./style');
 var Symbol = require('./PercentageSymbol');
 
@@ -23,7 +24,7 @@ var indexOf = function (range, rate) {
   }
 };
 
-var Rating = React.createClass({
+var Rating = createReactClass({
   // Define propTypes only in development.
   propTypes: typeof __DEV__ !== 'undefined' && __DEV__ && {
     start: React.PropTypes.number,

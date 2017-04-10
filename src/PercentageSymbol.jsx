@@ -1,8 +1,9 @@
 'use strict';
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 
-var PercentageSymbol = React.createClass({
+var PercentageSymbol = createReactClass({
   // Define propTypes only in development. They will be void in production.
   propTypes: typeof __DEV__ !== 'undefined' && __DEV__ && {
     icon: React.PropTypes.oneOfType([
