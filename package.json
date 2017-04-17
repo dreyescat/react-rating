@@ -47,6 +47,8 @@
     "chai": "^3.2.0",
     "create-react-class": "^15.5.1",
     "cross-env": "^3.2.4",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3",
     "font-awesome": "^4.3.0",
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",

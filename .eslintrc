@@ -1,0 +1,38 @@
+{
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "globals": {
+    "__DEV__": true
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "func-names": ["error", "never"],
+    "comma-dangle": ["error", "never"],
+    "linebreak-style": "off",
+    "no-unused-vars": ["warn", {
+      "args": "none"
+    }],
+    "no-trailing-spaces": "error",
+    "no-throw-literal": "off",
+    "no-restricted-syntax": "off",
+    "no-prototype-builtins": "off",
+    "no-underscore-dangle": "off",
+    "no-confusing-arrow": ["error", {"allowParens": true}],
+    "no-param-reassign": ["error", { "props": false }],
+    "camelcase": ["error", {properties: "never"}],
+    "react/forbid-prop-types": "off",
+  }
+}
