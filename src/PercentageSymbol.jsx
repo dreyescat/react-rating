@@ -19,9 +19,9 @@ const _iconNode = (icon) => {
 };
 
 const PercentageSymbol = (props) => {
-  var backgroundNode = _iconNode(props.background);
-  var iconNode = _iconNode(props.icon);
-  var iconContainerStyle = {
+  const backgroundNode = _iconNode(props.background);
+  const iconNode = _iconNode(props.icon);
+  const iconContainerStyle = {
     display: 'inline-block',
     position: 'absolute',
     overflow: 'hidden',
@@ -31,7 +31,7 @@ const PercentageSymbol = (props) => {
       props.percent + '%' :
       'auto'
   };
-  var style = {
+  const style = {
     cursor: props.onClick || props.onMouseOver ?
       'pointer' :
       'auto',

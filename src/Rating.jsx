@@ -26,7 +26,7 @@ const indexOf = (range, rate) => {
 class Rating extends React.Component {
   constructor(props) {
     super(props);
-    var index = props.initialRate !== undefined ?
+    const index = props.initialRate !== undefined ?
       props.initialRate : props.placeholderRate;
     this.state = {
       index: indexOf(props, index),
@@ -47,7 +47,7 @@ class Rating extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      var rate = nextProps.initialRate !== undefined ?
+      const rate = nextProps.initialRate !== undefined ?
         nextProps.initialRate : nextProps.placeholderRate;
       this.setState({
         index: indexOf(nextProps, rate),
@@ -56,7 +56,7 @@ class Rating extends React.Component {
   }
 
   handleClick(i, event) {
-    var index = i + this._fractionalIndex(event);
+    const index = i + this._fractionalIndex(event);
     this.props.onClick(this._indexToRate(index), event);
     if (this.state.index !== index) {
       this.props.onChange(this._indexToRate(index));
@@ -76,7 +76,7 @@ class Rating extends React.Component {
   }
 
   handleMouseMove(i, event) {
-    var index = i + this._fractionalIndex(event);
+    const index = i + this._fractionalIndex(event);
     if (this.state.indexOver !== index) {
       this.props.onRate(this._indexToRate(index));
       this.setState({
@@ -99,64 +99,26 @@ class Rating extends React.Component {
 
   _roundToFraction(index) {
     // Get the closest top fraction.
-    var fraction = Math.ceil(index % 1 * this.props.fractions) / this.props.fractions;
+    const fraction = Math.ceil(index % 1 * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
-    var precision = Math.pow(10, this.props.scale);
+    const precision = Math.pow(10, this.props.scale);
     return Math.floor(index) + Math.floor(fraction * precision) / precision;
   }
 
   _fractionalIndex(event) {
-    var x = this.state.direction === 'rtl' ?
+    const x = this.state.direction === 'rtl' ?
       event.currentTarget.getBoundingClientRect().right - event.clientX :
       event.clientX - event.currentTarget.getBoundingClientRect().left;
     return this._roundToFraction(x / event.currentTarget.offsetWidth);
   }
 
   render() {
-    var symbolNodes = [];
-    var empty = [].concat(this.props.empty);
-    var placeholder = [].concat(this.props.placeholder);
-    var full = [].concat(this.props.full);
-    // The symbol with the mouse over prevails over the selected one,
-    // provided that we are not in quiet mode.
-    var index = !this.props.quiet && this.state.indexOver !== undefined ?
-      this.state.indexOver : this.state.index;
-    // The index of the last full symbol or NaN if index is undefined.
-    var lastFullIndex = Math.floor(index);
-    // Render the number of whole symbols.
-
-    var icon = !this.state.selected &&
-      this.props.initialRate === undefined &&
-      this.props.placeholderRate !== undefined &&
-      (this.props.quiet || this.state.indexOver === undefined) ?
-      placeholder : full;
-
-    for (var i = 0; i < Math.floor(this._rateToIndex(this.props.stop)); i++) {
-      // Return the percentage of the decimal part of the last full index,
-      // 100 percent for those below the last full index or 0 percent for those
-      // indexes NaN or above the last full index.
-      var percent = i - lastFullIndex === 0 ? index % 1 * 100 :
-        i - lastFullIndex < 0 ? 100 : 0;
-
-      symbolNodes.push(<Symbol
-          key={i}
-          background={empty[i % empty.length]}
-          icon={icon[i % icon.length]}
-          percent={percent}
-          onClick={!this.props.readonly && this.handleClick.bind(this, i)}
-          onMouseMove={!this.props.readonly && this.handleMouseMove.bind(this, i)}
-          direction={this.state.direction}
-          />);
-    }
-    var {
+    const {
       start,
       stop,
       step,
-      empty,
       initialRate,
       placeholderRate,
-      placeholder,
-      full,
       readonly,
       quiet,
       fractions,
@@ -164,7 +126,44 @@ class Rating extends React.Component {
       onChange,
       onClick,
       onRate,
-      ...other } = this.props;
+      ...other
+    } = this.props;
+    const symbolNodes = [];
+    const empty = [].concat(this.props.empty);
+    const placeholder = [].concat(this.props.placeholder);
+    const full = [].concat(this.props.full);
+    // The symbol with the mouse over prevails over the selected one,
+    // provided that we are not in quiet mode.
+    const index = !quiet && this.state.indexOver !== undefined ?
+      this.state.indexOver : this.state.index;
+    // The index of the last full symbol or NaN if index is undefined.
+    const lastFullIndex = Math.floor(index);
+    // Render the number of whole symbols.
+
+    const icon = !this.state.selected &&
+      initialRate === undefined &&
+      placeholderRate !== undefined &&
+      (quiet || this.state.indexOver === undefined) ?
+      placeholder : full;
+
+    for (let i = 0; i < Math.floor(this._rateToIndex(stop)); i++) {
+      // Return the percentage of the decimal part of the last full index,
+      // 100 percent for those below the last full index or 0 percent for those
+      // indexes NaN or above the last full index.
+      const percent = i - lastFullIndex === 0 ? index % 1 * 100 :
+        i - lastFullIndex < 0 ? 100 : 0;
+
+      symbolNodes.push(<Symbol
+          key={i}
+          background={empty[i % empty.length]}
+          icon={icon[i % icon.length]}
+          percent={percent}
+          onClick={!readonly && this.handleClick.bind(this, i)}
+          onMouseMove={!readonly && this.handleMouseMove.bind(this, i)}
+          direction={this.state.direction}
+          />);
+    }
+
     return (
       <span ref="container" onMouseLeave={!readonly && this.handleMouseLeave} {...other}>
         {symbolNodes}
