@@ -1,20 +1,19 @@
 'use strict';
 
-var React = require('react');
-var createReactClass = require('create-react-class');
-var Style = require('./style');
-var Symbol = require('./PercentageSymbol');
+import React from 'react';
+import Style from './style';
+import Symbol from './PercentageSymbol';
 
 // Returns the index of the rate in the range (start, stop, step).
 // Returns undefined index if the rate is outside the range.
 // NOTE: A range.step of 0 produces an empty range and consequently returns an
 // undefined index.
-var indexOf = function (range, rate) {
+const indexOf = (range, rate) => {
   // Check the rate is in the proper range [start..stop] according to
   // the start, stop and step properties in props.
-  var step = range.step;
-  var start = step > 0 ? range.start : range.stop;
-  var stop = step > 0 ? range.stop : range.start;
+  const step = range.step;
+  const start = step > 0 ? range.start : range.stop;
+  const stop = step > 0 ? range.stop : range.start;
   if (step && start <= rate && rate <= stop) {
     // The index corresponds to the number of steps of size props.step
     // that fits between rate and start.
@@ -24,95 +23,39 @@ var indexOf = function (range, rate) {
   }
 };
 
-var Rating = createReactClass({
-  // Define propTypes only in development.
-  propTypes: typeof __DEV__ !== 'undefined' && __DEV__ && {
-    start: React.PropTypes.number,
-    stop: React.PropTypes.number,
-    step: React.PropTypes.number,
-    initialRate: React.PropTypes.number,
-    placeholderRate: React.PropTypes.number,
-    empty: React.PropTypes.oneOfType([
-      // Array of class names and/or style objects.
-      React.PropTypes.arrayOf(React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.object,
-        React.PropTypes.element
-      ])),
-      // Class names.
-      React.PropTypes.string,
-      // Style objects.
-      React.PropTypes.object]),
-    placeholder: React.PropTypes.oneOfType([
-      // Array of class names and/or style objects.
-      React.PropTypes.arrayOf(React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.object,
-        React.PropTypes.element
-      ])),
-      // Class names.
-      React.PropTypes.string,
-      // Style objects.
-      React.PropTypes.object]),
-    full: React.PropTypes.oneOfType([
-      // Array of class names and/or style objects.
-      React.PropTypes.arrayOf(React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.object,
-        React.PropTypes.element
-      ])),
-      // Class names.
-      React.PropTypes.string,
-      // Style objects.
-      React.PropTypes.object]),
-    readonly: React.PropTypes.bool,
-    quiet: React.PropTypes.bool,
-    fractions: React.PropTypes.number,
-    scale: React.PropTypes.number,
-    onChange: React.PropTypes.func,
-    onClick: React.PropTypes.func,
-    onRate: React.PropTypes.func
-  },
-  getDefaultProps: function () {
-    return {
-      start: 0,
-      stop: 5,
-      step: 1,
-      empty: Style.empty,
-      placeholder: Style.placeholder,
-      full: Style.full,
-      fractions: 1,
-      scale: 3,
-      onChange: function (rate) {},
-      onClick: function (rate) {},
-      onRate: function (rate) {}
+class Rating extends React.Component {
+  constructor(props) {
+    super(props);
+    var index = props.initialRate !== undefined ?
+      props.initialRate : props.placeholderRate;
+    this.state = {
+      index: indexOf(props, index),
+      indexOver: undefined,
+      // Default direction is left to right
+      direction: 'ltr'
     };
-  },
-  componentDidMount: function () {
+    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+  }
+
+  componentDidMount() {
     this.setState({
       // detect the computed direction style for the mounted component
       direction: window.getComputedStyle(this.refs.container, null).getPropertyValue("direction")
     });
-  },
-  componentWillReceiveProps: function (nextProps) {
+  }
+
+  componentWillReceiveProps(nextProps) {
       var rate = nextProps.initialRate !== undefined ?
         nextProps.initialRate : nextProps.placeholderRate;
       this.setState({
         index: indexOf(nextProps, rate),
         selected: nextProps.initialRate !== undefined
       });
-  },
-  getInitialState: function () {
-    var index = this.props.initialRate !== undefined ?
-      this.props.initialRate : this.props.placeholderRate;
-    return {
-      index: this._rateToIndex(index),
-      indexOver: undefined,
-      // Default direction is left to right
-      direction: 'ltr'
-    };
-  },
-  handleClick: function (i, event) {
+  }
+
+  handleClick(i, event) {
     var index = i + this._fractionalIndex(event);
     this.props.onClick(this._indexToRate(index), event);
     if (this.state.index !== index) {
@@ -123,14 +66,16 @@ var Rating = createReactClass({
         selected: true
       });
     }
-  },
-  handleMouseLeave: function () {
+  }
+
+  handleMouseLeave() {
     this.props.onRate();
     this.setState({
       indexOver: undefined
     });
-  },
-  handleMouseMove: function (i, event) {
+  }
+
+  handleMouseMove(i, event) {
     var index = i + this._fractionalIndex(event);
     if (this.state.indexOver !== index) {
       this.props.onRate(this._indexToRate(index));
@@ -138,31 +83,36 @@ var Rating = createReactClass({
         indexOver: index
       });
     }
-  },
+  }
+
   // Calculate the rate of an index according the the start and step.
-  _indexToRate: function (index) {
+  _indexToRate(index) {
     return this.props.start + Math.floor(index) * this.props.step +
       this.props.step * this._roundToFraction(index % 1);
-  },
+  }
+
   // Calculate the corresponding index for a rate according to the provided
   // props or this.props.
-  _rateToIndex: function (rate) {
+  _rateToIndex(rate) {
     return indexOf(this.props, rate);
-  },
-  _roundToFraction: function (index) {
+  }
+
+  _roundToFraction(index) {
     // Get the closest top fraction.
     var fraction = Math.ceil(index % 1 * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
     var precision = Math.pow(10, this.props.scale);
     return Math.floor(index) + Math.floor(fraction * precision) / precision;
-  },
-  _fractionalIndex: function (event) {
+  }
+
+  _fractionalIndex(event) {
     var x = this.state.direction === 'rtl' ?
       event.currentTarget.getBoundingClientRect().right - event.clientX :
       event.clientX - event.currentTarget.getBoundingClientRect().left;
     return this._roundToFraction(x / event.currentTarget.offsetWidth);
-  },
-  render: function () {
+  }
+
+  render() {
     var symbolNodes = [];
     var empty = [].concat(this.props.empty);
     var placeholder = [].concat(this.props.placeholder);
@@ -221,6 +171,69 @@ var Rating = createReactClass({
       </span>
     );
   }
-});
+}
+
+Rating.defaultProps = {
+  start: 0,
+  stop: 5,
+  step: 1,
+  empty: Style.empty,
+  placeholder: Style.placeholder,
+  full: Style.full,
+  fractions: 1,
+  scale: 3,
+  onChange: function (rate) {},
+  onClick: function (rate) {},
+  onRate: function (rate) {}
+}
+
+// Define propTypes only in development.
+Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
+  start: React.PropTypes.number,
+  stop: React.PropTypes.number,
+  step: React.PropTypes.number,
+  initialRate: React.PropTypes.number,
+  placeholderRate: React.PropTypes.number,
+  empty: React.PropTypes.oneOfType([
+    // Array of class names and/or style objects.
+    React.PropTypes.arrayOf(React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.object,
+      React.PropTypes.element
+    ])),
+    // Class names.
+    React.PropTypes.string,
+    // Style objects.
+    React.PropTypes.object]),
+  placeholder: React.PropTypes.oneOfType([
+    // Array of class names and/or style objects.
+    React.PropTypes.arrayOf(React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.object,
+      React.PropTypes.element
+    ])),
+    // Class names.
+    React.PropTypes.string,
+    // Style objects.
+    React.PropTypes.object]),
+  full: React.PropTypes.oneOfType([
+    // Array of class names and/or style objects.
+    React.PropTypes.arrayOf(React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.object,
+      React.PropTypes.element
+    ])),
+    // Class names.
+    React.PropTypes.string,
+    // Style objects.
+    React.PropTypes.object]),
+  readonly: React.PropTypes.bool,
+  quiet: React.PropTypes.bool,
+  fractions: React.PropTypes.number,
+  scale: React.PropTypes.number,
+  onChange: React.PropTypes.func,
+  onClick: React.PropTypes.func,
+  onRate: React.PropTypes.func
+};
 
 module.exports = Rating;
