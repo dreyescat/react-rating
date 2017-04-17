@@ -12,7 +12,7 @@
   "scripts": {
     "test": "mocha --compilers js:babel/register --recursive",
     "dev": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
-    "build": "BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress",
+    "build": "cross-env BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress",
     "preversion": "npm test",
     "version": "npm run build && git add -A lib",
     "postversion": "git push && git push --tags",
@@ -46,6 +46,7 @@
     "bootstrap": "^3.3.5",
     "chai": "^3.2.0",
     "create-react-class": "^15.5.1",
+    "cross-env": "^3.2.4",
     "font-awesome": "^4.3.0",
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
