@@ -161,7 +161,7 @@ class Rating extends React.Component {
     }
 
     return (
-      <span ref="container" onMouseLeave={!readonly && this.handleMouseLeave} {...other}>
+      <span ref={(ref) => {this.container = ref;} } onMouseLeave={!readonly && this.handleMouseLeave} {...other}>
         {symbolNodes}
       </span>
     );
