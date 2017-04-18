@@ -47,12 +47,12 @@ class Rating extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      const rate = nextProps.initialRate !== undefined ?
-        nextProps.initialRate : nextProps.placeholderRate;
-      this.setState({
-        index: indexOf(nextProps, rate),
-        selected: nextProps.initialRate !== undefined
-      });
+    const rate = nextProps.initialRate !== undefined ?
+      nextProps.initialRate : nextProps.placeholderRate;
+    this.setState({
+      index: indexOf(nextProps, rate),
+      selected: nextProps.initialRate !== undefined
+    });
   }
 
   handleClick(i, event) {

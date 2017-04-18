@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = 
+module.exports =
   function () {
     var res = {};
     for (var i = 0; i < arguments.length; i++) {

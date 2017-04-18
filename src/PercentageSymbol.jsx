@@ -56,12 +56,12 @@ PercentageSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     React.PropTypes.string,
     React.PropTypes.object,
     React.PropTypes.element
-    ]),
+  ]),
   background: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.object,
     React.PropTypes.element
-    ]),
+  ]),
   percent: React.PropTypes.number
 };
 

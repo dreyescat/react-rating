@@ -1,6 +1,8 @@
 {
+  "parser": "babel-eslint",
   "extends": "eslint:recommended",
   "parserOptions": {
+    "sourceType": "module",
     "ecmaVersion": 6,
     "ecmaFeatures": {
       "jsx": true
@@ -23,6 +25,7 @@
     "comma-dangle": ["error", "never"],
     "linebreak-style": "off",
     "no-unused-vars": ["warn", {
+      "ignoreRestSiblings": true,
       "args": "none"
     }],
     "no-trailing-spaces": "error",
@@ -34,5 +37,6 @@
     "no-param-reassign": ["error", { "props": false }],
     "camelcase": ["error", {properties: "never"}],
     "react/forbid-prop-types": "off",
+    "react/jsx-uses-vars": "error"
   }
 }
