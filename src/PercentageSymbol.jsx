@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 
 import React from 'react';
@@ -33,16 +34,17 @@ const PercentageSymbol = (props) => {
       'auto'
   };
   const style = {
-    cursor: props.onClick || props.onMouseOver ?
+    cursor: !props.readonly ?
       'pointer' :
       'auto',
     display: 'inline-block',
     position: 'relative'
   };
+
   return (
     <span style={style}
-        onClick={props.onClick}
-        onMouseMove={props.onMouseMove}>
+        onMouseMove={props.onMouseMove}
+        onMouseLeave={props.onMouseLeave}>
       {backgroundNode}
       <span style={iconContainerStyle}>
         {iconNode}
