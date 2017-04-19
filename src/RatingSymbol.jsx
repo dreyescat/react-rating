@@ -20,7 +20,7 @@ const _iconNode = (icon) => {
   }
 };
 
-const PercentageSymbol = (props) => {
+const RatingSymbol = (props) => {
   const backgroundNode = _iconNode(props.background);
   const iconNode = _iconNode(props.icon);
   const iconContainerStyle = {
@@ -42,9 +42,8 @@ const PercentageSymbol = (props) => {
   };
 
   return (
-    <span style={style}
-        onMouseMove={props.onMouseMove}
-        onMouseLeave={props.onMouseLeave}>
+    <span
+      style={style}>
       {backgroundNode}
       <span style={iconContainerStyle}>
         {iconNode}
@@ -54,18 +53,19 @@ const PercentageSymbol = (props) => {
 }
 
 // Define propTypes only in development. They will be void in production.
-PercentageSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  icon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.element
+RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
+  icon: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.object,
+    React.PropTypes.element
   ]),
   background: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
     PropTypes.element
   ]),
-  percent: PropTypes.number
+  percent: React.PropTypes.number,
+  direction: React.PropTypes.string
 };
 
-module.exports = PercentageSymbol;
+module.exports = RatingSymbol;

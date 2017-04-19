@@ -13,9 +13,9 @@ var render = function (component) {
 describe('PercentageSymbol', function () {
   describe('with inline icon and background style', function () {
     var symbol,
-        Style = require('../src/style.js'),
-        icon = Style.full,
-        background= Style.empty;
+      Style = require('../src/utils/style.js'),
+      icon = Style.full,
+      background= Style.empty;
 
     beforeEach(function () {
       symbol = render(<PercentageSymbol icon={icon} background={background} />);
@@ -39,8 +39,8 @@ describe('PercentageSymbol', function () {
 
   describe('with class name icon and background style', function () {
     var symbol,
-        icon = 'fa fa-star fa-2x',
-        background = 'fa fa-star-o fa-2x';
+      icon = 'fa fa-star fa-2x',
+      background = 'fa fa-star-o fa-2x';
 
     beforeEach(function () {
       symbol = render(<PercentageSymbol icon={icon} background={background} />);
@@ -59,9 +59,9 @@ describe('PercentageSymbol', function () {
 
   describe('with 25 percent icon', function () {
     var symbol,
-        Style = require('../src/style.js'),
-        icon = Style.full,
-        background= Style.empty;
+      Style = require('../src/utils/style.js'),
+      icon = Style.full,
+      background= Style.empty;
 
     beforeEach(function () {
       symbol = render(<PercentageSymbol
@@ -76,4 +76,3 @@ describe('PercentageSymbol', function () {
     });
   });
 });
-

@@ -34,14 +34,14 @@ describe('Rating', function () {
     });
 
     it('should have all symbols background set to empty', function () {
-      var Style = require('../src/style');
+      var Style = require('../src/utils/style');
       rating.props.children.forEach(function (symbol) {
         expect(symbol.props.background).to.be.equal(Style.empty);
       });
     });
 
     it('should have all symbols icon set to full', function () {
-      var Style = require('../src/style');
+      var Style = require('../src/utils/style');
       rating.props.children.forEach(function (symbol) {
         expect(symbol.props.icon).to.be.equal(Style.full);
       });
@@ -153,8 +153,8 @@ describe('Rating', function () {
   /////////////////////////////////////////////////////////////////////////////
   describe('with custom class name style', function () {
     var rating,
-        empty = 'fa fa-star-o fa-2x',
-        full = 'fa fa-star fa-2x';
+      empty = 'fa fa-star-o fa-2x',
+      full = 'fa fa-star fa-2x';
 
     beforeEach(function () {
       rating = render(<Rating empty={empty} full={full} />);
@@ -170,9 +170,9 @@ describe('Rating', function () {
 
   describe('with custom inline style', function () {
     var rating,
-        Style = require('../src/style'),
-        empty = Style.empty,
-        full = Style.full;
+      Style = require('../src/utils/style'),
+      empty = Style.empty,
+      full = Style.full;
 
     beforeEach(function () {
       rating = render(<Rating empty={empty} full={full} />);
@@ -188,8 +188,8 @@ describe('Rating', function () {
 
   describe('with custom list of class name styles', function () {
     var rating,
-        empty = ['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x'],
-        full = ['fa fa-star fa-2x', 'fa fa-heart-o fa-2x'];
+      empty = ['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x'],
+      full = ['fa fa-star fa-2x', 'fa fa-heart-o fa-2x'];
 
     beforeEach(function () {
       rating = render(<Rating start={0} stop={6} empty={empty} full={full} />);
@@ -203,4 +203,3 @@ describe('Rating', function () {
     });
   });
 });
-
