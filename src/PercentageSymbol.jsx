@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types'
 
 // Return the corresponding React node for an icon.
 const _iconNode = (icon) => {
@@ -52,17 +53,17 @@ const PercentageSymbol = (props) => {
 
 // Define propTypes only in development. They will be void in production.
 PercentageSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  icon: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
-    React.PropTypes.element
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.element
   ]),
-  background: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
-    React.PropTypes.element
+  background: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.element
   ]),
-  percent: React.PropTypes.number
+  percent: PropTypes.number
 };
 
 module.exports = PercentageSymbol;

@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types'
 import Style from './style';
 import Symbol from './PercentageSymbol';
 
@@ -188,51 +189,51 @@ Rating.defaultProps = {
 
 // Define propTypes only in development.
 Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  start: React.PropTypes.number,
-  stop: React.PropTypes.number,
-  step: React.PropTypes.number,
-  initialRate: React.PropTypes.number,
-  placeholderRate: React.PropTypes.number,
-  empty: React.PropTypes.oneOfType([
+  start: PropTypes.number,
+  stop: PropTypes.number,
+  step: PropTypes.number,
+  initialRate: PropTypes.number,
+  placeholderRate: PropTypes.number,
+  empty: PropTypes.oneOfType([
     // Array of class names and/or style objects.
-    React.PropTypes.arrayOf(React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object,
-      React.PropTypes.element
+    PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.element
     ])),
     // Class names.
-    React.PropTypes.string,
+    PropTypes.string,
     // Style objects.
-    React.PropTypes.object]),
-  placeholder: React.PropTypes.oneOfType([
+    PropTypes.object]),
+  placeholder: PropTypes.oneOfType([
     // Array of class names and/or style objects.
-    React.PropTypes.arrayOf(React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object,
-      React.PropTypes.element
+    PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.element
     ])),
     // Class names.
-    React.PropTypes.string,
+    PropTypes.string,
     // Style objects.
-    React.PropTypes.object]),
-  full: React.PropTypes.oneOfType([
+    PropTypes.object]),
+  full: PropTypes.oneOfType([
     // Array of class names and/or style objects.
-    React.PropTypes.arrayOf(React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.object,
-      React.PropTypes.element
+    PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.element
     ])),
     // Class names.
-    React.PropTypes.string,
+    PropTypes.string,
     // Style objects.
-    React.PropTypes.object]),
-  readonly: React.PropTypes.bool,
-  quiet: React.PropTypes.bool,
-  fractions: React.PropTypes.number,
-  scale: React.PropTypes.number,
-  onChange: React.PropTypes.func,
-  onClick: React.PropTypes.func,
-  onRate: React.PropTypes.func
+    PropTypes.object]),
+  readonly: PropTypes.bool,
+  quiet: PropTypes.bool,
+  fractions: PropTypes.number,
+  scale: PropTypes.number,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  onRate: PropTypes.func
 };
 
 module.exports = Rating;
