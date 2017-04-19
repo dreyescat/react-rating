@@ -2,27 +2,19 @@
 import React, { PropTypes } from 'react';
 import Style from './utils/style';
 import Rating from './Rating';
-
-function react_rating_noop(value) {}
-react_rating_noop._name = 'react_rating_noop';
+import noop from './utils/noop';
 
 class RatingContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.initialValue || undefined
+      value: props.initialValue || props.start
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.translateDisplayValueToValue = this.translateDisplayValueToValue.bind(this);
     this.tranlateValueToDisplayValue = this.tranlateValueToDisplayValue.bind(this);
     this.calculateTotalSymbols = this.calculateTotalSymbols.bind(this);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // if (prevState.value !== this.state.value) {
-    //   this.props.onChange(this.state.value);
-    // }
   }
 
   handleClick(value, e) {
@@ -42,7 +34,7 @@ class RatingContainer extends React.Component {
   }
 
   tranlateValueToDisplayValue(value) {
-    return (value === undefined) ? value : value - this.props.start;
+    return value - this.props.start;
   }
 
   calculateTotalSymbols(start, stop, step) {
@@ -91,8 +83,8 @@ RatingContainer.defaultProps = {
   readonly: false,
   quiet: false,
   fractions: 1,
-  onChange: react_rating_noop,
-  onClick: react_rating_noop
+  onChange: noop,
+  onClick: noop
 };
 
 // Define propTypes only in development.
