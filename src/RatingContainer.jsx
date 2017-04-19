@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PropTypes } from 'react';
 import Style from './utils/style';
 import Rating from './Rating';
@@ -13,7 +14,6 @@ class RatingContainer extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.translateDisplayValueToValue = this.translateDisplayValueToValue.bind(this);
     this.tranlateValueToDisplayValue = this.tranlateValueToDisplayValue.bind(this);
-    this.calculateTotalSymbols = this.calculateTotalSymbols.bind(this);
   }
 
   handleClick(value, e) {
@@ -25,26 +25,25 @@ class RatingContainer extends React.Component {
   }
 
   handleChange(displayValue) {
-    this.props.onChange(this.translateDisplayValueToValue(displayValue));
+    const value = displayValue === undefined? displayValue : this.translateDisplayValueToValue(displayValue);
+    this.props.onChange(value);
   }
 
   translateDisplayValueToValue(displayValue) {
-    return displayValue + this.props.start;
+    const translatedValue = displayValue + this.props.start;
+    // minimum value cannot be equal to start, since it's exclusive
+    return translatedValue === this.props.start ? this.props.step / this.props.fractions : translatedValue;
   }
 
   tranlateValueToDisplayValue(value) {
     return value - this.props.start;
   }
 
-  calculateTotalSymbols(start, stop, step) {
-    return Math.floor((stop - start) / step);
-  }
-
   render() {
     const {
       step,
-      empty,
-      full,
+      emptySymbol,
+      fullSymbol,
       readonly,
       quiet,
       fractions,
@@ -53,18 +52,22 @@ class RatingContainer extends React.Component {
       stop
     } = this.props;
 
+    function calculateTotalSymbols(start, stop, step) {
+      return Math.floor((stop - start) / step);
+    }
+
     return (
       <Rating
         step={step}
-        empty={empty}
-        full={full}
+        emptySymbol={emptySymbol}
+        fullSymbol={fullSymbol}
         readonly={readonly}
         quiet={quiet}
         fractions={fractions}
         direction={direction}
         onClick={this.handleClick}
         onChange={this.handleChange}
-        totalSymbols={this.calculateTotalSymbols(start, stop, step)}
+        totalSymbols={calculateTotalSymbols(start, stop, step)}
         establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
       />
     );
@@ -76,8 +79,8 @@ RatingContainer.defaultProps = {
   start: 0,
   stop: 5,
   step: 1,
-  empty: Style.empty,
-  full: Style.full,
+  emptySymbol: Style.empty,
+  fullSymbol: Style.full,
   readonly: false,
   quiet: false,
   fractions: 1,
@@ -92,7 +95,7 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   stop: PropTypes.number,
   step: PropTypes.number,
   initialValue: PropTypes.number,
-  empty: PropTypes.oneOfType([
+  emptySymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
     // Class names.
@@ -100,7 +103,7 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Style objects.
     PropTypes.object
   ]),
-  full: PropTypes.oneOfType([
+  fullSymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
     // Class names.

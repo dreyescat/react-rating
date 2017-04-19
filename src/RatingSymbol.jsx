@@ -28,21 +28,16 @@ const RatingSymbol = (props) => {
     overflow: 'hidden',
     top: 0,
     [props.direction === 'rtl' ? 'right' : 'left']: 0,
-    width: props.percent !== undefined ?
-      props.percent + '%' :
-      'auto'
+    width: props.percent + '%'
   };
   const style = {
-    cursor: !props.readonly ?
-      'pointer' :
-      'auto',
+    cursor: !props.readonly ? 'pointer' : 'auto',
     display: 'inline-block',
     position: 'relative'
   };
 
   return (
-    <span
-      style={style}>
+    <span style={style}>
       {backgroundNode}
       <span style={iconContainerStyle}>
         {iconNode}
@@ -53,18 +48,18 @@ const RatingSymbol = (props) => {
 
 // Define propTypes only in development. They will be void in production.
 RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  icon: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
-    React.PropTypes.element
-  ]),
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.element
+  ]).isRequired,
   background: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
     PropTypes.element
-  ]),
-  percent: React.PropTypes.number,
-  direction: React.PropTypes.string
+  ]).isRequired,
+  percent: PropTypes.number.isRequired,
+  direction: PropTypes.string.isRequired
 };
 
 module.exports = RatingSymbol;

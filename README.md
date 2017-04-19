@@ -55,11 +55,9 @@ Property          | Type                                           | Default    
 `start`           | *number*                                       | 0                    | Range starting value (exclusive).
 `stop`            | *number*                                       | 5                    | Range stop value (inclusive).
 `step`            | *number*                                       | 1                    | Step increment (positive) or decrement (negative).
-`placeholderRate` | *number*                                       | undefined            | Placeholder rate value.
-`initialRate`     | *number*                                       | undefined            | Initial rate value.
-`empty`           | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`placeholder`     | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols in HTML input placeholder fashion. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`full`            | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`initialValue`    | *number*                                       | undefined            | Initial rate value.
+`emptySymbol`     | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`fullSymbol`      | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
 `fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
@@ -68,9 +66,8 @@ Property          | Type                                           | Default    
 
 Callback      | Type                           | Description
 ---           | ---                            | ---
-`onChange`    | function (rate) {}             | Called when the selected rate is changed.
-`onClick`     | function (rate, event) {}      | Called when a rate is clicked.
-`onRate`      | function (rate) {}             | Called when a rate is entered or left. When a rate is left it is called with `undefined`.
+`onChange`    | function (value) {}            | Gets called with the `value` when you hover over a different value. Gets called with `undefined` when your mouse leaves the `Rating` element. Gets called in `quiet` mode too. 
+`onClick`     | function (value, event) {}     | Gets called with the `value` and the click `event` when a value is clicked.
 
 ## License
 
