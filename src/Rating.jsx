@@ -30,7 +30,7 @@ class Rating extends React.Component {
 
   onMouseEnter() {
     this.setState({
-      interacting: true
+      interacting: this.props.readonly ? false : true
     });
   }
 
@@ -88,26 +88,25 @@ class Rating extends React.Component {
     const {
       step,
       readonly,
-      quiet
+      quiet,
+      totalSymbols
     } = this.props;
+    const { direction, displayValue } = this.state;
     const symbolNodes = [];
     const empty = [].concat(this.props.empty);
     const full = [].concat(this.props.full);
-    const value = !quiet ? this.state.displayValue : this.props.establishedValue;
 
     // The index of the last full symbol or NaN if index is undefined.
-    const fullSymbols = Math.floor(value / step);
+    const fullSymbols = Math.floor(displayValue / step);
+
     // Render the number of whole symbols.
-
-    const icon = full;
-
-    for (let i = 0; i < this.props.totalSymbols; i++) {
+    for (let i = 0; i < totalSymbols; i++) {
       let percent;
 
       if (i - fullSymbols < 0) {
         percent = 100;
       } else if (i - fullSymbols === 0) {
-        percent = (value - (i * step)) / step * 100;
+        percent = (displayValue - (i * step)) / step * 100;
       } else {
         percent = 0;
       }
@@ -117,15 +116,15 @@ class Rating extends React.Component {
           key={i}
           readonly={readonly}
           background={empty[i % empty.length]}
-          icon={icon[i % icon.length]}
+          icon={full[i % full.length]}
           percent={percent}
-          direction={this.state.direction} />
+          direction={direction} />
       );
     }
 
     return (
       <span
-        style={{ display: 'inline-block', direction: this.state.direction }}
+        style={{ display: 'inline-block', direction: direction }}
         ref={(ref) => { this.container = ref; }}
         onClick={!readonly && this.onClick}
         onMouseEnter={!readonly && this.onMouseEnter}
