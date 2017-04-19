@@ -19,7 +19,7 @@ describe('Rating', function () {
     });
 
     it('should render a 5 symbol rating', function () {
-      var Symbol = require('../src/PercentageSymbol');
+      var Symbol = require('../src/RatingSymbol');
       var children = rating.props.children;
       var symbols = children.filter(function (child) {
         return TestUtils.isElementOfType(child, Symbol);
