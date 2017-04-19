@@ -1,4 +1,3 @@
-/* eslint-disable */
 'use strict';
 
 import React from 'react';
@@ -66,7 +65,8 @@ class Rating extends React.Component {
     // Get the closest top fraction.
     const fraction = Math.ceil((percentage - (complete * symbolWidthPercentage)) % 1 * this.props.fractions * this.props.totalSymbols) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
-    const precision = Math.pow(10, this.props.scale);
+    const scale = 3;
+    const precision = Math.pow(10, scale);
     const displayValue = (complete + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
     return (displayValue >= 0) ? displayValue : 0;
   }
@@ -138,8 +138,33 @@ class Rating extends React.Component {
   }
 }
 
-Rating.defaultProps = {
-  scale: 3
+// Define propTypes only in development.
+Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
+  step: PropTypes.number.isRequired,
+  empty: PropTypes.oneOfType([
+    // Array of class names and/or style objects.
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
+    // Class names.
+    PropTypes.string,
+    // Style objects.
+    PropTypes.object
+  ]).isRequired,
+  full: PropTypes.oneOfType([
+    // Array of class names and/or style objects.
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
+    // Class names.
+    PropTypes.string,
+    // Style objects.
+    PropTypes.object
+  ]).isRequired,
+  readonly: PropTypes.bool.isRequired,
+  quiet: PropTypes.bool.isRequired,
+  fractions: PropTypes.number.isRequired,
+  direction: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  totalSymbols: PropTypes.number.isRequired,
+  establishedValue: PropTypes.number.isRequired
 };
 
 export default Rating;

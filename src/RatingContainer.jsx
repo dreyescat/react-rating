@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PropTypes } from 'react';
 import Style from './utils/style';
 import Rating from './Rating';
@@ -43,23 +42,19 @@ class RatingContainer extends React.Component {
 
   render() {
     const {
-      start,
-      stop,
       step,
       empty,
       full,
       readonly,
       quiet,
       fractions,
-      direction
+      direction,
+      start,
+      stop
     } = this.props;
 
     return (
       <Rating
-        onClick={this.handleClick}
-        onChange={this.handleChange}
-        totalSymbols={this.calculateTotalSymbols(start, stop, step)}
-        establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
         step={step}
         empty={empty}
         full={full}
@@ -67,6 +62,10 @@ class RatingContainer extends React.Component {
         quiet={quiet}
         fractions={fractions}
         direction={direction}
+        onClick={this.handleClick}
+        onChange={this.handleChange}
+        totalSymbols={this.calculateTotalSymbols(start, stop, step)}
+        establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
       />
     );
   }
@@ -78,7 +77,6 @@ RatingContainer.defaultProps = {
   stop: 5,
   step: 1,
   empty: Style.empty,
-  placeholder: Style.placeholder,
   full: Style.full,
   readonly: false,
   quiet: false,
@@ -94,7 +92,6 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   stop: PropTypes.number,
   step: PropTypes.number,
   initialValue: PropTypes.number,
-  placeholderValue: PropTypes.number,
   empty: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
