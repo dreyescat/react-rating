@@ -92,20 +92,14 @@ class Rating extends React.Component {
     } = this.props;
     const symbolNodes = [];
     const empty = [].concat(this.props.empty);
-    const placeholder = [].concat(this.props.placeholder);
     const full = [].concat(this.props.full);
-    const value = (!this.state.interacting && this.props.placeholderValue && !this.state.dirty)
-      ? this.props.placeholderValue
-      : !quiet ? this.state.displayValue : this.props.establishedValue;
+    const value = !quiet ? this.state.displayValue : this.props.establishedValue;
 
     // The index of the last full symbol or NaN if index is undefined.
     const fullSymbols = Math.floor(value / step);
     // Render the number of whole symbols.
 
-    const icon = (!this.state.interacting && this.props.placeholderValue && !this.state.dirty)
-    // !this.state.selected && initialRate === undefined && placeholderRate !== undefined && (quiet || this.state.value === undefined)
-      ? placeholder
-      : full;
+    const icon = full;
 
     for (let i = 0; i < this.props.totalSymbols; i++) {
       let percent;

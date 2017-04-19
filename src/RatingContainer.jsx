@@ -54,10 +54,8 @@ class RatingContainer extends React.Component {
       start,
       stop,
       step,
-      placeholderValue,
       empty,
       full,
-      placeholder,
       readonly,
       quiet,
       fractions,
@@ -70,11 +68,9 @@ class RatingContainer extends React.Component {
         onChange={this.handleChange}
         totalSymbols={this.calculateTotalSymbols(start, stop, step)}
         establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
-        placeholderValue={this.tranlateValueToDisplayValue(placeholderValue)}
         step={step}
         empty={empty}
         full={full}
-        placeholder={placeholder}
         readonly={readonly}
         quiet={quiet}
         fractions={fractions}
@@ -108,14 +104,6 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   initialValue: PropTypes.number,
   placeholderValue: PropTypes.number,
   empty: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object
-  ]),
-  placeholder: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
     // Class names.
