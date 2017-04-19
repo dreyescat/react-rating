@@ -56,8 +56,9 @@
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
     "prismjs": "^1.6.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"
   }
