@@ -25,7 +25,7 @@ class Rating extends React.PureComponent {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      dirty: this.state.dirty || true,
+      dirty: ((this.props.establishedValue !== nextProps.establishedValue) && !this.state.dirty) ? true : false,
       displayValue: nextProps.establishedValue
     });
   }
