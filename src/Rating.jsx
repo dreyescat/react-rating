@@ -72,18 +72,6 @@ class Rating extends React.PureComponent {
     });
   }
 
-  mapPercentageToDisplayValue(percentage) {
-    const symbolWidthPercentage = 1 / this.props.totalSymbols;
-    const complete = Math.floor(percentage / symbolWidthPercentage);
-    // Get the closest top fraction.
-    const fraction = Math.ceil((percentage - (complete * symbolWidthPercentage)) % 1 * this.props.fractions * this.props.totalSymbols) / this.props.fractions;
-    // Truncate decimal trying to avoid float precission issues.
-    const precision = Math.pow(10, 3);
-    const displayValue = (complete + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
-    // ensure the returned value is greater than 0
-    return (displayValue > 0) ? displayValue : (this.props.step / this.props.fractions);
-  }
-
   calculateDisplayValue(event) {
     const percentage = this.calculateHoverPercentage(event);
     return this.mapPercentageToDisplayValue(percentage);
@@ -95,6 +83,18 @@ class Rating extends React.PureComponent {
       : event.clientX - this.container.getBoundingClientRect().left;
 
     return delta / this.container.offsetWidth;
+  }
+
+  mapPercentageToDisplayValue(percentage) {
+    const symbolWidthPercentage = 1 / this.props.totalSymbols;
+    const complete = Math.floor(percentage / symbolWidthPercentage);
+    // Get the closest top fraction.
+    const fraction = Math.ceil((percentage - (complete * symbolWidthPercentage)) % 1 * this.props.fractions * this.props.totalSymbols) / this.props.fractions;
+    // Truncate decimal trying to avoid float precission issues.
+    const precision = Math.pow(10, 3);
+    const displayValue = (complete + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
+    // ensure the returned value is greater than 0
+    return (displayValue > 0) ? displayValue : (this.props.step / this.props.fractions);
   }
 
   render() {
