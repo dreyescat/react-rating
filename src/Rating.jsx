@@ -46,12 +46,12 @@ class Rating extends React.PureComponent {
     }
   }
 
-  symbolClick(index, event) {
+  symbolClick(symbolIndex, event) {
     this.props.onClick(this.state.displayValue, event);
   }
 
-  symbolMouseMove(index, event) {
-    const value = this.calculateDisplayValue(index, event);
+  symbolMouseMove(symbolIndex, event) {
+    const value = this.calculateDisplayValue(symbolIndex, event);
     if (value !== this.state.displayValue) {
       this.setState({
         displayValue: value
@@ -72,13 +72,13 @@ class Rating extends React.PureComponent {
     });
   }
 
-  calculateDisplayValue(index, event) {
+  calculateDisplayValue(symbolIndex, event) {
     const precision = Math.pow(10, 3);
     const percentage = this.calculateHoverPercentage(event);
     // Get the closest top fraction.
     const fraction = Math.ceil((percentage) % 1 * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
-    const displayValue = (index + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
+    const displayValue = (symbolIndex + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
     // ensure the returned value is greater than 0
     return (displayValue > 0) ? displayValue : (this.props.step / this.props.fractions);
   }
@@ -111,7 +111,7 @@ class Rating extends React.PureComponent {
     const value = quiet ? establishedValue : displayValue;
     // The amount of full symbols
     const fullSymbols = Math.floor(value / step);
-    //Get the index of the clicked symbol
+
     for (let i = 0; i < totalSymbols; i++) {
       let percent;
       // Calculate each symbol's fullness percentage
