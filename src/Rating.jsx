@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Style from './utils/style';
 import Symbol from './RatingSymbol';
 
-class Rating extends React.Component {
+class Rating extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +22,13 @@ class Rating extends React.Component {
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      dirty: this.state.dirty || true,
+      displayValue: this.props.establishedValue
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,12 +48,7 @@ class Rating extends React.Component {
   }
 
   onClick(event) {
-    this.setState({
-      dirty: this.state.dirty || true,
-      displayValue: this.calculateDisplayValue(event)
-    }, () => {
-      this.props.onClick(this.state.displayValue, event);
-    });
+    this.props.onClick(this.calculateDisplayValue(event), event);
   }
 
   onMouseEnter() {
