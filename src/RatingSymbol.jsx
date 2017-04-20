@@ -1,7 +1,7 @@
-/* eslint-disable */
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Return the corresponding React node for an icon.
 const _iconNode = (icon) => {
@@ -19,58 +19,74 @@ const _iconNode = (icon) => {
   }
 };
 
-const RatingSymbol = (props) => {
-  const backgroundNode = _iconNode(props.background);
-  const iconNode = _iconNode(props.icon);
-  const iconContainerStyle = {
-    display: 'inline-block',
-    position: 'absolute',
-    overflow: 'hidden',
-    top: 0,
-    [props.direction === 'rtl' ? 'right' : 'left']: 0,
-    width: props.percent + '%'
-  };
-  const style = {
-    cursor: !props.readonly ? 'pointer' : 'auto',
-    display: 'inline-block',
-    position: 'relative'
-  };
+class RatingSymbol extends React.PureComponent {
+  render() {
+    const {
+      index,
+      icon,
+      background,
+      percent,
+      direction,
+      readonly,
+      onClick,
+      onMouseMove
+    } = this.props;
+    const backgroundNode = _iconNode(background);
+    const iconNode = _iconNode(icon);
+    const iconContainerStyle = {
+      display: 'inline-block',
+      position: 'absolute',
+      overflow: 'hidden',
+      top: 0,
+      [direction === 'rtl' ? 'right' : 'left']: 0,
+      width: percent + '%'
+    };
+    const style = {
+      cursor: !readonly ? 'pointer' : 'auto',
+      display: 'inline-block',
+      position: 'relative'
+    };
 
-  function handleMouseMove(e) {
-    props.onMouseMove(props.index, e);
-  }
+    function handleMouseMove(e) {
+      onMouseMove(index, e);
+    }
 
-  function handleMouseClick(e) {
-    props.onClick(props.index, e);
-  }
+    function handleMouseClick(e) {
+      onClick(index, e);
+    }
 
-  return (
-    <span
-      style={style}
-      onClick={handleMouseClick}
-      onMouseMove={handleMouseMove}>
-      {backgroundNode}
-      <span style={iconContainerStyle}>
-        {iconNode}
+    return (
+      <span
+        style={style}
+        onClick={handleMouseClick}
+        onMouseMove={handleMouseMove}>
+        {backgroundNode}
+        <span style={iconContainerStyle}>
+          {iconNode}
+        </span>
       </span>
-    </span>
-  );
+    );
+  }
 }
 
 // Define propTypes only in development. They will be void in production.
 RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  icon: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
-    React.PropTypes.element
+  index: PropTypes.number.isRequired,
+  readonly: PropTypes.bool.isRequired,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.element
   ]).isRequired,
-  background: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
-    React.PropTypes.element
+  background: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.element
   ]).isRequired,
-  percent: React.PropTypes.number.isRequired,
-  direction: React.PropTypes.string.isRequired
+  percent: PropTypes.number.isRequired,
+  direction: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onMouseMove: PropTypes.func.isRequired
 };
 
 module.exports = RatingSymbol;
