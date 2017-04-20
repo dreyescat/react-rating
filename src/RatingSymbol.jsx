@@ -1,7 +1,7 @@
+/* eslint-disable */
 'use strict';
 
 import React from 'react';
-import PropTypes from 'prop-types'
 
 // Return the corresponding React node for an icon.
 const _iconNode = (icon) => {
@@ -36,8 +36,19 @@ const RatingSymbol = (props) => {
     position: 'relative'
   };
 
+  function handleMouseMove(e) {
+    props.onMouseMove(props.index, e);
+  }
+
+  function handleMouseClick(e) {
+    props.onClick(props.index, e);
+  }
+
   return (
-    <span style={style}>
+    <span
+      style={style}
+      onClick={handleMouseClick}
+      onMouseMove={handleMouseMove}>
       {backgroundNode}
       <span style={iconContainerStyle}>
         {iconNode}
@@ -48,18 +59,18 @@ const RatingSymbol = (props) => {
 
 // Define propTypes only in development. They will be void in production.
 RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  icon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.element
+  icon: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.object,
+    React.PropTypes.element
   ]).isRequired,
-  background: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.element
+  background: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.object,
+    React.PropTypes.element
   ]).isRequired,
-  percent: PropTypes.number.isRequired,
-  direction: PropTypes.string.isRequired
+  percent: React.PropTypes.number.isRequired,
+  direction: React.PropTypes.string.isRequired
 };
 
 module.exports = RatingSymbol;

@@ -17,15 +17,15 @@ class Rating extends React.PureComponent {
       //Indicates if the rating element has been clicked even once
       dirty: false
     };
-    this.onClick = this.onClick.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);
-    this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.symbolMouseMove = this.symbolMouseMove.bind(this);
+    this.symbolClick = this.symbolClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      dirty: ((this.props.establishedValue !== nextProps.establishedValue) && !this.state.dirty) ? true : false,
+      dirty: ((this.props.establishedValue !== nextProps.establishedValue) && !this.state.dirty) ? true : this.state.dirty,
       displayValue: nextProps.establishedValue
     });
   }
@@ -46,23 +46,23 @@ class Rating extends React.PureComponent {
     }
   }
 
-  onClick(event) {
-    this.props.onClick(this.calculateDisplayValue(event), event);
+  symbolClick(index, event) {
+    this.props.onClick(this.state.displayValue, event);
+  }
+
+  symbolMouseMove(index, event) {
+    const value = this.calculateDisplayValue(index, event);
+    if (value !== this.state.displayValue) {
+      this.setState({
+        displayValue: value
+      });
+    }
   }
 
   onMouseEnter() {
     this.setState({
       interacting: this.props.readonly ? false : true
     });
-  }
-
-  onMouseMove(event) {
-    const value = this.calculateDisplayValue(event);
-    if (value !== this.state.displayValue) {
-      this.setState({
-        displayValue: value
-      });
-    }
   }
 
   onMouseLeave() {
@@ -72,27 +72,26 @@ class Rating extends React.PureComponent {
     });
   }
 
-  calculateDisplayValue(event) {
+  calculateDisplayValue(index, event) {
     const percentage = this.calculateHoverPercentage(event);
-    return this.mapPercentageToDisplayValue(percentage);
+    return this.mapPercentageToDisplayValue(index, percentage);
   }
 
   calculateHoverPercentage(event) {
     const delta = this.props.direction === 'rtl'
-      ? this.container.getBoundingClientRect().right - event.clientX
-      : event.clientX - this.container.getBoundingClientRect().left;
+      ? event.target.getBoundingClientRect().right - event.clientX
+      : event.clientX - event.target.getBoundingClientRect().left;
 
-    return delta / this.container.offsetWidth;
+    // Returnin 0 if the delta is negative solves the flickering issue
+    return delta < 0 ? 0 : delta / event.target.offsetWidth;
   }
 
-  mapPercentageToDisplayValue(percentage) {
-    const symbolWidthPercentage = 1 / this.props.totalSymbols;
-    const complete = Math.floor(percentage / symbolWidthPercentage);
+  mapPercentageToDisplayValue(index, percentage) {
     // Get the closest top fraction.
-    const fraction = Math.ceil((percentage - (complete * symbolWidthPercentage)) % 1 * this.props.fractions * this.props.totalSymbols) / this.props.fractions;
+    const fraction = Math.ceil((percentage) % 1 * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
     const precision = Math.pow(10, 3);
-    const displayValue = (complete + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
+    const displayValue = (index + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
     // ensure the returned value is greater than 0
     return (displayValue > 0) ? displayValue : (this.props.step / this.props.fractions);
   }
@@ -116,7 +115,7 @@ class Rating extends React.PureComponent {
     const value = quiet ? establishedValue : displayValue;
     // The amount of full symbols
     const fullSymbols = Math.floor(value / step);
-
+    //Get the index of the clicked symbol
     for (let i = 0; i < totalSymbols; i++) {
       let percent;
       // Calculate each symbol's fullness percentage
@@ -131,10 +130,13 @@ class Rating extends React.PureComponent {
       symbolNodes.push(
         <Symbol
           key={i}
+          index={i}
           readonly={readonly}
           background={empty[i % empty.length]}
           icon={full[i % full.length]}
           percent={percent}
+          onClick={!readonly && this.symbolClick}
+          onMouseMove={!readonly && this.symbolMouseMove}
           direction={direction} />
       );
     }
@@ -143,9 +145,7 @@ class Rating extends React.PureComponent {
       <span
         style={{ display: 'inline-block', direction: direction }}
         ref={(ref) => { this.container = ref; }}
-        onClick={!readonly && this.onClick}
         onMouseEnter={!readonly && this.onMouseEnter}
-        onMouseMove={!readonly && this.onMouseMove}
         onMouseLeave={!readonly && this.onMouseLeave}
         >
         {symbolNodes}
