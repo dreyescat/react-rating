@@ -58,9 +58,12 @@ class Rating extends React.PureComponent {
   }
 
   onMouseMove(event) {
-    this.setState({
-      displayValue: this.calculateDisplayValue(event)
-    });
+    const value = this.calculateDisplayValue(event);
+    if (value !== this.state.displayValue) {
+      this.setState({
+        displayValue: value
+      });
+    }
   }
 
   onMouseLeave() {
