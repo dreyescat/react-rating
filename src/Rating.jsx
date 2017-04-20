@@ -2,7 +2,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types'
-import Style from './utils/style';
 import Symbol from './RatingSymbol';
 
 class Rating extends React.PureComponent {
