@@ -31,17 +31,10 @@ class Rating extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.interacting) {
-      if (prevState.displayValue !== this.state.displayValue) {
-          //if our display value has changed and we have a user defined onChange function, call it
-        if (this.props.onChange._name !== 'react_rating_noop') {
-          this.props.onChange(this.state.displayValue);
-        }
-      }
-    } else {
-        //The user's mouse has left the rating element
+    if (prevState.displayValue !== this.state.displayValue) {
+      //if our display value has changed and we have a user defined onChange function, call it
       if (this.props.onChange._name !== 'react_rating_noop') {
-        this.props.onChange(undefined);
+        this.props.onChange(this.state.displayValue);
       }
     }
   }
