@@ -73,8 +73,14 @@ class Rating extends React.PureComponent {
   }
 
   calculateDisplayValue(index, event) {
+    const precision = Math.pow(10, 3);
     const percentage = this.calculateHoverPercentage(event);
-    return this.mapPercentageToDisplayValue(index, percentage);
+    // Get the closest top fraction.
+    const fraction = Math.ceil((percentage) % 1 * this.props.fractions) / this.props.fractions;
+    // Truncate decimal trying to avoid float precission issues.
+    const displayValue = (index + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
+    // ensure the returned value is greater than 0
+    return (displayValue > 0) ? displayValue : (this.props.step / this.props.fractions);
   }
 
   calculateHoverPercentage(event) {
@@ -84,16 +90,6 @@ class Rating extends React.PureComponent {
 
     // Returnin 0 if the delta is negative solves the flickering issue
     return delta < 0 ? 0 : delta / event.target.offsetWidth;
-  }
-
-  mapPercentageToDisplayValue(index, percentage) {
-    // Get the closest top fraction.
-    const fraction = Math.ceil((percentage) % 1 * this.props.fractions) / this.props.fractions;
-    // Truncate decimal trying to avoid float precission issues.
-    const precision = Math.pow(10, 3);
-    const displayValue = (index + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
-    // ensure the returned value is greater than 0
-    return (displayValue > 0) ? displayValue : (this.props.step / this.props.fractions);
   }
 
   render() {
