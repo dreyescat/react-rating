@@ -32,7 +32,9 @@ class RatingContainer extends React.Component {
   translateDisplayValueToValue(displayValue) {
     const translatedValue = displayValue + this.props.start;
     // minimum value cannot be equal to start, since it's exclusive
-    return translatedValue === this.props.start ? this.props.step / this.props.fractions : translatedValue;
+    return translatedValue === this.props.start
+      ? translatedValue + (this.props.step / this.props.fractions)
+      : translatedValue;
   }
 
   tranlateValueToDisplayValue(value) {
