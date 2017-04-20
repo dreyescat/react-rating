@@ -55,7 +55,7 @@ Property          | Type                                           | Default    
 `start`           | *number*                                       | 0                    | Range starting value (exclusive).
 `stop`            | *number*                                       | 5                    | Range stop value (inclusive).
 `step`            | *number*                                       | 1                    | How many values each Symbol represents.
-`fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
+`fractions`       | *number*                                       | 1                    | Number of equal subdivisions that can be selected as a rating in each Symbol.
 `initialRating`   | *number*                                       | The smallest possible value based on `step` and `fractions`            | Initial rating value.
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
