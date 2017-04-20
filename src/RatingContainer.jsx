@@ -75,26 +75,29 @@ class RatingContainer extends React.Component {
 }
 
 RatingContainer.defaultProps = {
-  direction: 'ltr',
   start: 0,
   stop: 5,
   step: 1,
-  emptySymbol: Style.empty,
-  fullSymbol: Style.full,
   readonly: false,
   quiet: false,
   fractions: 1,
+  direction: 'ltr',
   onChange: noop,
-  onClick: noop
+  onClick: noop,
+  emptySymbol: Style.empty,
+  fullSymbol: Style.full
 };
 
 // Define propTypes only in development.
 RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  direction: PropTypes.string,
   start: PropTypes.number,
   stop: PropTypes.number,
   step: PropTypes.number,
   initialValue: PropTypes.number,
+  readonly: PropTypes.bool,
+  quiet: PropTypes.bool,
+  fractions: PropTypes.number,
+  direction: PropTypes.string,
   emptySymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
@@ -111,9 +114,6 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Style objects.
     PropTypes.object
   ]),
-  readonly: PropTypes.bool,
-  quiet: PropTypes.bool,
-  fractions: PropTypes.number,
   onChange: PropTypes.func,
   onClick: PropTypes.func
 };

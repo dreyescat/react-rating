@@ -56,17 +56,18 @@ Property          | Type                                           | Default    
 `stop`            | *number*                                       | 5                    | Range stop value (inclusive).
 `step`            | *number*                                       | 1                    | Step increment (positive) or decrement (negative).
 `initialValue`    | *number*                                       | undefined            | Initial rate value.
-`emptySymbol`     | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`fullSymbol`      | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
 `fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
+`directions`      | *ltr* or *rtl*                                 | ltr                  | The direction of the rating element contents
+`emptySymbol`     | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`fullSymbol`      | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
 
 ## Callbacks
 
 Callback      | Type                           | Description
 ---           | ---                            | ---
-`onChange`    | function (value) {}            | Gets called with the `value` when you hover over a different value. Gets called with `undefined` when your mouse leaves the `Rating` element. Gets called in `quiet` mode too. 
+`onChange`    | function (value) {}            | Gets called with the `value` when you hover over a different value. Gets called with `undefined` when your mouse leaves the `Rating` element. Gets called in `quiet` mode too.
 `onClick`     | function (value, event) {}     | Gets called with the `value` and the click `event` when a value is clicked.
 
 ## License
