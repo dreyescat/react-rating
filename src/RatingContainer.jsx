@@ -8,12 +8,18 @@ class RatingContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.initialValue || props.start
+      value: props.initialRating || this.props.start + (this.props.step / this.props.fractions)
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.translateDisplayValueToValue = this.translateDisplayValueToValue.bind(this);
     this.tranlateValueToDisplayValue = this.tranlateValueToDisplayValue.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      value: nextProps.initialRating
+    });
   }
 
   handleClick(value, e) {
@@ -95,7 +101,7 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   start: PropTypes.number,
   stop: PropTypes.number,
   step: PropTypes.number,
-  initialValue: PropTypes.number,
+  initialRating: PropTypes.number,
   readonly: PropTypes.bool,
   quiet: PropTypes.bool,
   fractions: PropTypes.number,

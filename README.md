@@ -54,11 +54,11 @@ Property          | Type                                           | Default    
 ---               | ---                                            | ---                  | ---
 `start`           | *number*                                       | 0                    | Range starting value (exclusive).
 `stop`            | *number*                                       | 5                    | Range stop value (inclusive).
-`step`            | *number*                                       | 1                    | Step increment (positive) or decrement (negative).
-`initialValue`    | *number*                                       | undefined            | Initial rate value.
+`step`            | *number*                                       | 1                    | How many values each Symbol represents.
+`fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
+`initialRating`   | *number*                                       | The smallest possible value based on `step` and `fractions`            | Initial rating value.
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
-`fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
 `directions`      | *ltr* or *rtl*                                 | ltr                  | The direction of the rating element contents
 `emptySymbol`     | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
 `fullSymbol`      | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
