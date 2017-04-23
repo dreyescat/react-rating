@@ -32,10 +32,12 @@ class Rating extends React.PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.displayValue !== this.state.displayValue) {
-      //if our display value has changed and we have a user defined onChange function, call it
-      if (this.props.onChange._name !== 'react_rating_noop') {
-        this.props.onChange(this.state.displayValue);
-      }
+      this.props.onHover(this.state.displayValue);
+    }
+    if (this.state.interacting) {
+      this.props.onMouseEnter();
+    } else {
+      this.props.onMouseLeave();
     }
   }
 
@@ -167,7 +169,9 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   fractions: PropTypes.number.isRequired,
   direction: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onHover: PropTypes.func.isRequired,
+  onMouseEnter: PropTypes.func.isRequired,
+  onMouseLeave: PropTypes.func.isRequired,
   totalSymbols: PropTypes.number.isRequired,
   establishedValue: PropTypes.number.isRequired
 };

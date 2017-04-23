@@ -67,8 +67,11 @@ Property          | Type                                           | Default    
 
 Callback      | Type                           | Description
 ---           | ---                            | ---
-`onChange`    | function (value) {}            | Gets called with the `value` when you hover over a different value. Gets called with `undefined` when your mouse leaves the `Rating` element. Gets called in `quiet` mode too.
-`onClick`     | function (value, event) {}     | Gets called with the `value` and the click `event` when a value is clicked.
+`onChange`    | function (value) {}            | Gets called with the `value` when you click on a different value than the currently set one.
+`onHover`     | function (value) {}            | Gets called with the `value` when you hover over a symbol. The value is equal to the value that corresponds to that part of the symbol. Gets called in `quiet` mode too.
+`onMouseEnter`| function () {}                 | Gets called once each time your mouse enters the rating container.
+`onMouseLeave`| function () {}                 | Gets called once each time your mouse leaves the rating container.
+
 
 ## License
 

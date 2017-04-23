@@ -4,14 +4,14 @@ import Style from './utils/style';
 import Rating from './Rating';
 import noop from './utils/noop';
 
-class RatingContainer extends React.Component {
+class RatingContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       value: props.initialRating || this.props.start + (this.props.step / this.props.fractions)
     };
     this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleHover = this.handleHover.bind(this);
     this.translateDisplayValueToValue = this.translateDisplayValueToValue.bind(this);
     this.tranlateValueToDisplayValue = this.tranlateValueToDisplayValue.bind(this);
   }
@@ -22,17 +22,25 @@ class RatingContainer extends React.Component {
     });
   }
 
-  handleClick(value, e) {
-    const newValue = this.translateDisplayValueToValue(value);
-    this.props.onClick(newValue, e);
-    this.setState({
-      value: newValue
-    });
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.value !== prevState.value) {
+      //if we have a new value trigger onChange callback
+      this.props.onChange(this.state.value);
+    }
   }
 
-  handleChange(displayValue) {
+  handleClick(value, e) {
+    const newValue = this.translateDisplayValueToValue(value);
+    if (this.state.value !== newValue) { // Avoid calling setState if not necessary. Micro optimisation.
+      this.setState({
+        value: newValue
+      });
+    }
+  }
+
+  handleHover(displayValue) {
     const value = displayValue === undefined? displayValue : this.translateDisplayValueToValue(displayValue);
-    this.props.onChange(value);
+    this.props.onHover(value);
   }
 
   translateDisplayValueToValue(displayValue) {
@@ -57,7 +65,9 @@ class RatingContainer extends React.Component {
       fractions,
       direction,
       start,
-      stop
+      stop,
+      onMouseEnter,
+      onMouseLeave
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -74,7 +84,9 @@ class RatingContainer extends React.Component {
         fractions={fractions}
         direction={direction}
         onClick={this.handleClick}
-        onChange={this.handleChange}
+        onHover={this.handleHover}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         totalSymbols={calculateTotalSymbols(start, stop, step)}
         establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
       />
@@ -91,7 +103,9 @@ RatingContainer.defaultProps = {
   fractions: 1,
   direction: 'ltr',
   onChange: noop,
-  onClick: noop,
+  onHover: noop,
+  onMouseEnter: noop,
+  onMouseLeave: noop,
   emptySymbol: Style.empty,
   fullSymbol: Style.full
 };
@@ -122,8 +136,10 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Style objects.
     PropTypes.object
   ]),
+  onHover: PropTypes.func,
   onChange: PropTypes.func,
-  onClick: PropTypes.func
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 };
 
 export default RatingContainer;
