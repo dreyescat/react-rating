@@ -120,6 +120,9 @@ class Rating extends React.Component {
       step,
       initialRate,
       placeholderRate,
+      empty,
+      full,
+      placeholder,
       readonly,
       quiet,
       fractions,
@@ -130,9 +133,9 @@ class Rating extends React.Component {
       ...other
     } = this.props;
     const symbolNodes = [];
-    const empty = [].concat(this.props.empty);
-    const placeholder = [].concat(this.props.placeholder);
-    const full = [].concat(this.props.full);
+    const emptySymbols = [].concat(this.props.empty);
+    const placeholderSymbols = [].concat(this.props.placeholder);
+    const fullSymbols = [].concat(this.props.full);
     // The symbol with the mouse over prevails over the selected one,
     // provided that we are not in quiet mode.
     const index = !quiet && this.state.indexOver !== undefined ?
@@ -145,7 +148,7 @@ class Rating extends React.Component {
       initialRate === undefined &&
       placeholderRate !== undefined &&
       (quiet || this.state.indexOver === undefined) ?
-      placeholder : full;
+      placeholderSymbols : fullSymbols;
 
     for (let i = 0; i < Math.floor(this._rateToIndex(stop)); i++) {
       // Return the percentage of the decimal part of the last full index,
@@ -156,7 +159,7 @@ class Rating extends React.Component {
 
       symbolNodes.push(<Symbol
           key={i}
-          background={empty[i % empty.length]}
+          background={emptySymbols[i % emptySymbols.length]}
           icon={icon[i % icon.length]}
           percent={percent}
           onClick={!readonly && this.handleClick.bind(this, i)}
