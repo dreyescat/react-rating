@@ -54,23 +54,24 @@ Property          | Type                                           | Default    
 ---               | ---                                            | ---                  | ---
 `start`           | *number*                                       | 0                    | Range starting value (exclusive).
 `stop`            | *number*                                       | 5                    | Range stop value (inclusive).
-`step`            | *number*                                       | 1                    | Step increment (positive) or decrement (negative).
-`placeholderRate` | *number*                                       | undefined            | Placeholder rate value.
-`initialRate`     | *number*                                       | undefined            | Initial rate value.
-`empty`           | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`placeholder`     | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols in HTML input placeholder fashion. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`full`            | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`step`            | *number*                                       | 1                    | How many values each Symbol represents.
+`fractions`       | *number*                                       | 1                    | Number of equal subdivisions that can be selected as a rating in each Symbol.
+`initialRating`   | *number*                                       | The smallest possible value based on `step` and `fractions`            | Initial rating value.
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
-`fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
+`directions`      | *ltr* or *rtl*                                 | ltr                  | The direction of the rating element contents
+`emptySymbol`     | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`fullSymbol`      | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
 
 ## Callbacks
 
 Callback      | Type                           | Description
 ---           | ---                            | ---
-`onChange`    | function (rate) {}             | Called when the selected rate is changed.
-`onClick`     | function (rate, event) {}      | Called when a rate is clicked.
-`onRate`      | function (rate) {}             | Called when a rate is entered or left. When a rate is left it is called with `undefined`.
+`onChange`    | function (value) {}            | Gets called with the `value` when you click on a different value than the currently set one.
+`onHover`     | function (value) {}            | Gets called with the `value` when you hover over a symbol. The value is equal to the value that corresponds to that part of the symbol. Gets called in `quiet` mode too.
+`onMouseEnter`| function () {}                 | Gets called once each time your mouse enters the rating container.
+`onMouseLeave`| function () {}                 | Gets called once each time your mouse leaves the rating container.
+
 
 ## License
 

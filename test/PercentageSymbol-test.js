@@ -2,7 +2,7 @@
 var expect = require('chai').expect;
 var React = require('react');
 var TestUtils = require('react-dom/test-utils');
-var PercentageSymbol = require('../src/PercentageSymbol');
+var RatingSymbol = require('../src/RatingSymbol');
 
 var render = function (component) {
   var renderer = TestUtils.createRenderer();
@@ -10,15 +10,15 @@ var render = function (component) {
   return renderer.getRenderOutput()
 };
 
-describe('PercentageSymbol', function () {
+describe('RatingSymbol', function () {
   describe('with inline icon and background style', function () {
     var symbol,
-        Style = require('../src/style.js'),
-        icon = Style.full,
-        background= Style.empty;
+      Style = require('../src/utils/style.js'),
+      icon = Style.full,
+      background= Style.empty;
 
     beforeEach(function () {
-      symbol = render(<PercentageSymbol icon={icon} background={background} />);
+      symbol = render(<RatingSymbol icon={icon} background={background} />);
     });
 
     it('should have inline styled background', function () {
@@ -39,11 +39,11 @@ describe('PercentageSymbol', function () {
 
   describe('with class name icon and background style', function () {
     var symbol,
-        icon = 'fa fa-star fa-2x',
-        background = 'fa fa-star-o fa-2x';
+      icon = 'fa fa-star fa-2x',
+      background = 'fa fa-star-o fa-2x';
 
     beforeEach(function () {
-      symbol = render(<PercentageSymbol icon={icon} background={background} />);
+      symbol = render(<RatingSymbol icon={icon} background={background} />);
     });
 
     it('should have class styled background', function () {
@@ -59,12 +59,12 @@ describe('PercentageSymbol', function () {
 
   describe('with 25 percent icon', function () {
     var symbol,
-        Style = require('../src/style.js'),
-        icon = Style.full,
-        background= Style.empty;
+      Style = require('../src/utils/style.js'),
+      icon = Style.full,
+      background= Style.empty;
 
     beforeEach(function () {
-      symbol = render(<PercentageSymbol
+      symbol = render(<RatingSymbol
         icon={icon}
         background={background}
         percent={25} />);
@@ -76,4 +76,3 @@ describe('PercentageSymbol', function () {
     });
   });
 });
-
