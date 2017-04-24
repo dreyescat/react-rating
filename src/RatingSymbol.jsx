@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -89,4 +87,4 @@ RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   onMouseMove: PropTypes.func.isRequired
 };
 
-module.exports = RatingSymbol;
+export default RatingSymbol;
