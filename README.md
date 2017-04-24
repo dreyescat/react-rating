@@ -59,7 +59,7 @@ Property          | Type                                           | Default    
 `initialRating`   | *number*                                       | The smallest possible value based on `step` and `fractions`            | Initial rating value.
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
-`directions`      | *ltr* or *rtl*                                 | ltr                  | The direction of the rating element contents
+`direction`       | *ltr* or *rtl*                                 | ltr                  | The direction of the rating element contents
 `emptySymbol`     | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
 `fullSymbol`      | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
 
@@ -67,11 +67,9 @@ Property          | Type                                           | Default    
 
 Callback      | Type                           | Description
 ---           | ---                            | ---
+`onClick`     | function (value, event) {}     | Gets called with the `value` and the click `event` when the value is clicked.
 `onChange`    | function (value) {}            | Gets called with the `value` when you click on a different value than the currently set one.
 `onHover`     | function (value) {}            | Gets called with the `value` when you hover over a symbol. The value is equal to the value that corresponds to that part of the symbol. Gets called in `quiet` mode too.
-`onMouseEnter`| function () {}                 | Gets called once each time your mouse enters the rating container.
-`onMouseLeave`| function () {}                 | Gets called once each time your mouse leaves the rating container.
-
 
 ## License
 
