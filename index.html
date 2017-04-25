@@ -238,24 +238,24 @@
 
       ReactDOM.render(
         <Rating
-          onRate={(rate) => document.getElementById('label-onrate').innerHTML = rate || ''}
+          onHover={(rate) => document.getElementById('label-onrate').innerHTML = rate || ''}
         />
       , document.getElementById('rating-default-onrate'));
       insertCode(
 `<Rating
-  onRate={(rate) => document.getElementById('label-onrate').innerHTML = rate || ''}
+  onHover={(rate) => document.getElementById('label-onrate').innerHTML = rate || ''}
 />`, 'label-onrate');
 
       ReactDOM.render(
         <Rating
           quiet
-          onRate={(rate) => document.getElementById('label-quiet-onrate').innerHTML = rate || ''}
+          onHover={(rate) => document.getElementById('label-quiet-onrate').innerHTML = rate || ''}
         />
       , document.getElementById('rating-quiet-onrate'));
       insertCode(
 `<Rating
   quiet
-  onRate={(rate) => document.getElementById('label-quiet-onrate').innerHTML = rate || ''}
+  onHover={(rate) => document.getElementById('label-quiet-onrate').innerHTML = rate || ''}
 />`, 'label-quiet-onrate');
 
       ReactDOM.render(
