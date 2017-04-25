@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { PropTypes } from 'react';
 import Style from './utils/style';
 import Rating from './Rating';
