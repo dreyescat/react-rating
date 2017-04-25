@@ -46,11 +46,15 @@ class RatingSymbol extends React.PureComponent {
     };
 
     function handleMouseMove(e) {
-      onMouseMove(index, e);
+      if (onMouseMove) {
+        onMouseMove(index, e);
+      }
     }
 
     function handleMouseClick(e) {
-      onClick(index, e);
+      if (onClick) {
+        onClick(index, e);
+      }
     }
 
     return (
@@ -83,8 +87,8 @@ RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   ]).isRequired,
   percent: PropTypes.number.isRequired,
   direction: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onMouseMove: PropTypes.func.isRequired
+  onClick: PropTypes.func,
+  onMouseMove: PropTypes.func
 };
 
 export default RatingSymbol;
