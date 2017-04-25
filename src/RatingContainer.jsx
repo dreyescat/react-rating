@@ -7,7 +7,7 @@ class RatingContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.initialRating || this.props.start + (this.props.step / this.props.fractions)
+      value: props.initialRating
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleHover = this.handleHover.bind(this);
