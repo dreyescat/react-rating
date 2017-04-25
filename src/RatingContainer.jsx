@@ -64,9 +64,7 @@ class RatingContainer extends React.PureComponent {
       fractions,
       direction,
       start,
-      stop,
-      onMouseEnter,
-      onMouseLeave
+      stop
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -84,8 +82,6 @@ class RatingContainer extends React.PureComponent {
         direction={direction}
         onClick={this.handleClick}
         onHover={this.handleHover}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
         totalSymbols={calculateTotalSymbols(start, stop, step)}
         establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
       />
@@ -103,8 +99,6 @@ RatingContainer.defaultProps = {
   direction: 'ltr',
   onChange: noop,
   onHover: noop,
-  onMouseEnter: noop,
-  onMouseLeave: noop,
   emptySymbol: Style.empty,
   fullSymbol: Style.full
 };
@@ -136,9 +130,7 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     PropTypes.object
   ]),
   onHover: PropTypes.func,
-  onChange: PropTypes.func,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func
+  onChange: PropTypes.func
 };
 
 export default RatingContainer;

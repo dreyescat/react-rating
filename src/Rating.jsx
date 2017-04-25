@@ -34,11 +34,6 @@ class Rating extends React.PureComponent {
     if (prevState.displayValue !== this.state.displayValue) {
       this.props.onHover(this.state.displayValue);
     }
-    if (this.state.interacting) {
-      this.props.onMouseEnter();
-    } else {
-      this.props.onMouseLeave();
-    }
   }
 
   symbolClick(symbolIndex, event) {
@@ -170,8 +165,6 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   direction: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
   totalSymbols: PropTypes.number.isRequired,
   establishedValue: PropTypes.number.isRequired
 };
