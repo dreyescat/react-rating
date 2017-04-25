@@ -148,8 +148,8 @@
           </div>;
       ReactDOM.render(
         <Rating
-          empty={<SVGIcon href="#icon-star-empty" className="icon" />}
-          full={<SVGIcon href="#icon-star-full" className="icon" />}
+          emptySymbol={<SVGIcon href="#icon-star-empty" className="icon" />}
+          fullSymbol={<SVGIcon href="#icon-star-full" className="icon" />}
         />
       , document.getElementById('rating-svg'));
       insertCode(
@@ -160,69 +160,69 @@
     </svg>
   </div>;
 <Rating
-  empty={<SVGIcon href="#icon-star-empty" className="icon" />}
-  full={<SVGIcon href="#icon-star-full" className="icon" />}
+  emptySymbol={<SVGIcon href="#icon-star-empty" className="icon" />}
+  fullSymbol={<SVGIcon href="#icon-star-full" className="icon" />}
 />`, 'rating-svg');
 
       ReactDOM.render(
         <Rating
-          empty={<span className="icon-text">-</span>}
-          full={[1,2,3,4,5].map(n => <span className="icon-text">{n}</span>)}
+          emptySymbol={<span className="icon-text">-</span>}
+          fullSymbol={[1,2,3,4,5].map(n => <span className="icon-text">{n}</span>)}
         />
       , document.getElementById('rating-span'));
       insertCode(
 `<Rating
-  empty={<span className="icon-text">-</span>}
-  full={[1,2,3,4,5].map(n => <span className="icon-text">{n}</span>)}
+  emptySymbol={<span className="icon-text">-</span>}
+  fullSymbol={[1,2,3,4,5].map(n => <span className="icon-text">{n}</span>)}
 />`, 'rating-span');
 
       ReactDOM.render(
         <Rating
-          empty={<img src="assets/images/star-empty.png" className="icon" />}
-          full={<img src="assets/images/star-full.png" className="icon" />}
+          emptySymbol={<img src="assets/images/star-empty.png" className="icon" />}
+          fullSymbol={<img src="assets/images/star-full.png" className="icon" />}
         />
       , document.getElementById('rating-img'));
       insertCode(
 `<Rating
-  empty={<img src="assets/images/star-empty.png" className="icon" />}
-  full={<img src="assets/images/star-full.png" className="icon" />}
+  emptySymbol={<img src="assets/images/star-empty.png" className="icon" />}
+  fullSymbol={<img src="assets/images/star-full.png" className="icon" />}
 />`, 'rating-img');
 
       ReactDOM.render(
         <Rating
-          empty="fa fa-star-o fa-2x"
-          full="fa fa-star fa-2x"
+          emptySymbol="fa fa-star-o fa-2x"
+          fullSymbol="fa fa-star fa-2x"
         />
       , document.getElementById('rating-fontawesome-star'));
       insertCode(
 `<Rating
-  empty="fa fa-star-o fa-2x"
-  full="fa fa-star fa-2x"
+  emptySymbol="fa fa-star-o fa-2x"
+  fullSymbol="fa fa-star fa-2x"
 />`, 'rating-fontawesome-star');
 
       ReactDOM.render(
         <Rating
-          empty="glyphicon glyphicon-heart-empty"
-          full="glyphicon glyphicon-heart"
+          emptySymbol="glyphicon glyphicon-heart-empty"
+          fullSymbol="glyphicon glyphicon-heart"
         />
       , document.getElementById('rating-bootstrap-heart'));
       insertCode(
 `<Rating
-  empty="glyphicon glyphicon-heart-empty"
-  full="glyphicon glyphicon-heart"
+  emptySymbol="glyphicon glyphicon-heart-empty"
+  fullSymbol="glyphicon glyphicon-heart"
 />`, 'rating-bootstrap-heart');
 
       ReactDOM.render(
         <Rating
-          empty="fa fa-star-o fa-2x"
-          full="fa fa-star fa-2x"
+          emptySymbol="fa fa-star-o fa-2x"
+          fullSymbol="fa fa-star fa-2x"
           fractions={2}
         />
       , document.getElementById('rating-fractional'));
       insertCode(
 `<Rating
-  empty="fa fa-star-o fa-2x"
-  full="fa fa-star fa-2x"
+  emptySymbol="fa fa-star-o fa-2x"
+  fullSymbol="fa fa-star fa-2x"
   fractions={2}
 />`, 'rating-fractional');
 
@@ -309,23 +309,23 @@
       // Mixing symbols.
       ReactDOM.render(
         <Rating
-          empty={['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x']}
-          full={['fa fa-star fa-2x', 'fa fa-heart fa-2x']}
+          emptySymbol={['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x']}
+          fullSymbol={['fa fa-star fa-2x', 'fa fa-heart fa-2x']}
         />
       , document.getElementById('rating-mixed'));
       insertCode(
 `<Rating
-  empty={['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x']}
-  full={['fa fa-star fa-2x', 'fa fa-heart fa-2x']}
+  emptySymbol={['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x']}
+  fullSymbol={['fa fa-star fa-2x', 'fa fa-heart fa-2x']}
 />`, 'rating-mixed');
 
       ReactDOM.render(
         <Rating
           stop={6}
-          empty={['fa fa-star-o fa-2x low', 'fa fa-star-o fa-2x low',
+          emptySymbol={['fa fa-star-o fa-2x low', 'fa fa-star-o fa-2x low',
             'fa fa-star-o fa-2x medium', 'fa fa-star-o fa-2x medium',
             'fa fa-star-o fa-2x high', 'fa fa-star-o fa-2x high']}
-          full={['fa fa-star fa-2x low', 'fa fa-star fa-2x low',
+          fullSymbol={['fa fa-star fa-2x low', 'fa fa-star fa-2x low',
             'fa fa-star fa-2x medium', 'fa fa-star fa-2x medium',
             'fa fa-star fa-2x high', 'fa fa-star fa-2x high']}
         />
@@ -333,10 +333,10 @@
       insertCode(
 `<Rating
   stop={6}
-  empty={['fa fa-star-o fa-2x low', 'fa fa-star-o fa-2x low',
+  emptySymbol={['fa fa-star-o fa-2x low', 'fa fa-star-o fa-2x low',
     'fa fa-star-o fa-2x medium', 'fa fa-star-o fa-2x medium',
     'fa fa-star-o fa-2x high', 'fa fa-star-o fa-2x high']}
-  full={['fa fa-star fa-2x low', 'fa fa-star fa-2x low',
+  fullSymbol={['fa fa-star fa-2x low', 'fa fa-star fa-2x low',
     'fa fa-star fa-2x medium', 'fa fa-star fa-2x medium',
     'fa fa-star fa-2x high', 'fa fa-star fa-2x high']}
 />`, 'rating-colored');
@@ -344,33 +344,33 @@
       ReactDOM.render(
         <Rating
           stop={4}
-          empty="fa fa-battery-empty fa-2x"
-          full={['fa fa-battery-1 fa-2x', 'fa fa-battery-2 fa-2x',
+          emptySymbol="fa fa-battery-empty fa-2x"
+          fullSymbol={['fa fa-battery-1 fa-2x', 'fa fa-battery-2 fa-2x',
             'fa fa-battery-3 fa-2x', 'fa fa-battery-4 fa-2x']}
         />
       , document.getElementById('rating-custom'));
       insertCode(
 `<Rating
   stop={4}
-  empty="fa fa-battery-empty fa-2x"
-  full={['fa fa-battery-1 fa-2x', 'fa fa-battery-2 fa-2x',
+  emptySymbol="fa fa-battery-empty fa-2x"
+  fullSymbol={['fa fa-battery-1 fa-2x', 'fa fa-battery-2 fa-2x',
     'fa fa-battery-3 fa-2x', 'fa fa-battery-4 fa-2x']}
 />`, 'rating-custom');
 
       ReactDOM.render(
         <Rating
           placeholderRate={3.5}
-          empty={<img src="assets/images/star-grey.png" className="icon" />}
+          emptySymbol={<img src="assets/images/star-grey.png" className="icon" />}
           placeholder={<img src="assets/images/star-red.png" className="icon" />}
-          full={<img src="assets/images/star-yellow.png" className="icon" />}
+          fullSymbol={<img src="assets/images/star-yellow.png" className="icon" />}
         />
       , document.getElementById('rating-placeholder'));
       insertCode(
 `<Rating
   placeholderRate={3.5}
-  empty={<img src="assets/images/star-grey.png" className="icon" />}
+  emptySymbol={<img src="assets/images/star-grey.png" className="icon" />}
   placeholder={<img src="assets/images/star-red.png" className="icon" />}
-  full={<img src="assets/images/star-yellow.png" className="icon" />}
+  fullSymbol={<img src="assets/images/star-yellow.png" className="icon" />}
 />`, 'rating-placeholder');
     </script>
   </body>
