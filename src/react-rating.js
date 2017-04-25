@@ -1,1 +1,1 @@
-module.exports = require('./Rating');
+module.exports = require('./RatingContainer');
