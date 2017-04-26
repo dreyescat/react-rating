@@ -22,15 +22,16 @@ class RatingContainer extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // If we have a new value trigger onChange callback
     if (this.state.value !== prevState.value) {
-      //if we have a new value trigger onChange callback
       this.props.onChange(this.state.value);
     }
   }
 
   handleClick(value, e) {
     const newValue = this.translateDisplayValueToValue(value);
-    if (this.state.value !== newValue) { // Avoid calling setState if not necessary. Micro optimisation.
+    // Avoid calling setState if not necessary. Micro optimisation.
+    if (this.state.value !== newValue) {
       this.setState({
         value: newValue
       });
@@ -38,20 +39,21 @@ class RatingContainer extends React.PureComponent {
   }
 
   handleHover(displayValue) {
-    const value = displayValue === undefined? displayValue : this.translateDisplayValueToValue(displayValue);
+    const value = displayValue === undefined ?
+      displayValue : this.translateDisplayValueToValue(displayValue);
     this.props.onHover(value);
   }
 
   translateDisplayValueToValue(displayValue) {
-    const translatedValue = displayValue + this.props.start;
+    const translatedValue = displayValue * this.props.step + this.props.start;
     // minimum value cannot be equal to start, since it's exclusive
     return translatedValue === this.props.start
-      ? translatedValue + (this.props.step / this.props.fractions)
+      ? translatedValue + (1 / this.props.fractions)
       : translatedValue;
   }
 
   tranlateValueToDisplayValue(value) {
-    return value - this.props.start;
+    return (value - this.props.start) / this.props.step;
   }
 
   render() {
@@ -73,7 +75,6 @@ class RatingContainer extends React.PureComponent {
 
     return (
       <Rating
-        step={step}
         emptySymbol={emptySymbol}
         fullSymbol={fullSymbol}
         readonly={readonly}

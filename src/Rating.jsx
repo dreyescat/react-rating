@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import PropTypes from 'prop-types'
 import Symbol from './RatingSymbol';
@@ -8,13 +6,11 @@ class Rating extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      //Indicates the value that is displayed to the user in the form of symbols
-      // always starts at the minimum possible value (step / fractions)
-      // always ends at (stop - start)
+      // Indicates the value that is displayed to the user in the form of symbols
       displayValue: this.props.establishedValue,
-      //Indicates if the user is currently hovering over the rating element
+      // Indicates if the user is currently hovering over the rating element
       interacting: false,
-      //Indicates if the rating element has been clicked even once
+      // Indicates if the rating element has been clicked even once
       dirty: false
     };
     this.onMouseEnter = this.onMouseEnter.bind(this);
@@ -51,7 +47,7 @@ class Rating extends React.PureComponent {
 
   onMouseEnter() {
     this.setState({
-      interacting: this.props.readonly ? false : true
+      interacting: !this.props.readonly
     });
   }
 
@@ -63,14 +59,14 @@ class Rating extends React.PureComponent {
   }
 
   calculateDisplayValue(symbolIndex, event) {
-    const precision = Math.pow(10, 3);
     const percentage = this.calculateHoverPercentage(event);
     // Get the closest top fraction.
     const fraction = Math.ceil((percentage) % 1 * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
-    const displayValue = (symbolIndex + (Math.floor(percentage) + Math.floor(fraction * precision) / precision)) * this.props.step;
+    const precision = Math.pow(10, 3);
+    const displayValue = symbolIndex + (Math.floor(percentage) + Math.floor(fraction * precision) / precision);
     // ensure the returned value is greater than 0
-    return (displayValue > 0) ? displayValue : (this.props.step / this.props.fractions);
+    return (displayValue > 0) ? displayValue : (1 / this.props.fractions);
   }
 
   calculateHoverPercentage(event) {
@@ -78,13 +74,12 @@ class Rating extends React.PureComponent {
       ? event.target.getBoundingClientRect().right - event.clientX
       : event.clientX - event.target.getBoundingClientRect().left;
 
-    // Returnin 0 if the delta is negative solves the flickering issue
+    // Returning 0 if the delta is negative solves the flickering issue
     return delta < 0 ? 0 : delta / event.target.offsetWidth;
   }
 
   render() {
     const {
-      step,
       readonly,
       quiet,
       totalSymbols,
@@ -100,7 +95,7 @@ class Rating extends React.PureComponent {
     // The value that will be used as base for calculating how to render the symbols
     const value = quiet ? establishedValue : displayValue;
     // The amount of full symbols
-    const fullSymbols = Math.floor(value / step);
+    const fullSymbols = Math.floor(value);
 
     for (let i = 0; i < totalSymbols; i++) {
       let percent;
@@ -108,7 +103,7 @@ class Rating extends React.PureComponent {
       if (i - fullSymbols < 0) {
         percent = 100;
       } else if (i - fullSymbols === 0) {
-        percent = (value - (i * step)) / step * 100;
+        percent = (value - i) * 100;
       } else {
         percent = 0;
       }
@@ -142,7 +137,6 @@ class Rating extends React.PureComponent {
 
 // Define propTypes only in development.
 Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
-  step: PropTypes.number.isRequired,
   emptySymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
