@@ -65,7 +65,7 @@ class Rating extends React.PureComponent {
     // Get the closest top fraction.
     const fraction = Math.ceil(percentage % 1 * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
-    const precision = Math.pow(10, 3);
+    const precision = 10 ** 3;
     const displayValue =
       symbolIndex + (Math.floor(percentage) + Math.floor(fraction * precision) / precision);
     // ensure the returned value is greater than 0
@@ -87,16 +87,28 @@ class Rating extends React.PureComponent {
       quiet,
       totalSymbols,
       establishedValue,
+      placeholderValue,
       direction,
       emptySymbol,
-      fullSymbol
+      fullSymbol,
+      placeholderSymbol
     } = this.props;
-    const { displayValue } = this.state;
+    const { displayValue, interacting } = this.state;
     const symbolNodes = [];
     const empty = [].concat(emptySymbol);
     const full = [].concat(fullSymbol);
+    const placeholder = [].concat(placeholderSymbol);
+    const shouldDisplayPlaceholder =
+      placeholderValue > 0 && establishedValue === 0 && !interacting;
+
     // The value that will be used as base for calculating how to render the symbols
-    const value = quiet ? establishedValue : displayValue;
+    let value;
+    if (shouldDisplayPlaceholder) {
+      value = placeholderValue;
+    } else {
+      value = quiet ? establishedValue : displayValue;
+    }
+
     // The amount of full symbols
     const fullSymbols = Math.floor(value);
 
@@ -116,8 +128,10 @@ class Rating extends React.PureComponent {
           key={i}
           index={i}
           readonly={readonly}
-          background={empty[i % empty.length]}
-          icon={full[i % full.length]}
+          inactiveIcon={empty[i % empty.length]}
+          activeIcon={
+            shouldDisplayPlaceholder ? placeholder[i % full.length] : full[i % full.length]
+          }
           percent={percent}
           onClick={!readonly && this.symbolClick}
           onMouseMove={!readonly && this.symbolMouseMove}
@@ -156,6 +170,14 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Style objects.
     PropTypes.object
   ]).isRequired,
+  placeholderSymbol: PropTypes.oneOfType([
+    // Array of class names and/or style objects.
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
+    // Class names.
+    PropTypes.string,
+    // Style objects.
+    PropTypes.object
+  ]),
   readonly: PropTypes.bool.isRequired,
   quiet: PropTypes.bool.isRequired,
   fractions: PropTypes.number.isRequired,
@@ -163,7 +185,8 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
   totalSymbols: PropTypes.number.isRequired,
-  establishedValue: PropTypes.number.isRequired
+  establishedValue: PropTypes.number.isRequired,
+  placeholderValue: PropTypes.number.isRequired
 };
 
 export default Rating;

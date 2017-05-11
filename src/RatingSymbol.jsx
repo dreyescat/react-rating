@@ -9,11 +9,11 @@ const _iconNode = (icon) => {
   }
   // If it is an object, try to use it as a CSS style object.
   if (typeof icon === 'object' && icon !== null) {
-    return <span style={icon}/>;
+    return <span style={icon} />;
   }
   // If it is a string, use it as class names.
   if (Object.prototype.toString.call(icon) === '[object String]') {
-    return <span className={icon}/>;
+    return <span className={icon} />;
   }
 };
 
@@ -21,23 +21,23 @@ class RatingSymbol extends React.PureComponent {
   render() {
     const {
       index,
-      icon,
-      background,
+      inactiveIcon,
+      activeIcon,
       percent,
       direction,
       readonly,
       onClick,
       onMouseMove
     } = this.props;
-    const backgroundNode = _iconNode(background);
-    const iconNode = _iconNode(icon);
+    const backgroundNode = _iconNode(inactiveIcon);
+    const iconNode = _iconNode(activeIcon);
     const iconContainerStyle = {
       display: 'inline-block',
       position: 'absolute',
       overflow: 'hidden',
       top: 0,
       [direction === 'rtl' ? 'right' : 'left']: 0,
-      width: percent + '%'
+      width: `${percent}%`
     };
     const style = {
       cursor: !readonly ? 'pointer' : 'auto',
@@ -61,7 +61,8 @@ class RatingSymbol extends React.PureComponent {
       <span
         style={style}
         onClick={handleMouseClick}
-        onMouseMove={handleMouseMove}>
+        onMouseMove={handleMouseMove}
+      >
         {backgroundNode}
         <span style={iconContainerStyle}>
           {iconNode}
@@ -75,12 +76,12 @@ class RatingSymbol extends React.PureComponent {
 RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   index: PropTypes.number.isRequired,
   readonly: PropTypes.bool.isRequired,
-  icon: PropTypes.oneOfType([
+  inactiveIcon: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
     PropTypes.element
   ]).isRequired,
-  background: PropTypes.oneOfType([
+  activeIcon: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
     PropTypes.element

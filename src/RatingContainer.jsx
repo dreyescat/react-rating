@@ -62,6 +62,7 @@ class RatingContainer extends React.PureComponent {
       step,
       emptySymbol,
       fullSymbol,
+      placeholderSymbol,
       readonly,
       quiet,
       fractions,
@@ -78,6 +79,7 @@ class RatingContainer extends React.PureComponent {
       <Rating
         emptySymbol={emptySymbol}
         fullSymbol={fullSymbol}
+        placeholderSymbol={placeholderSymbol}
         readonly={readonly}
         quiet={quiet}
         fractions={fractions}
@@ -86,6 +88,7 @@ class RatingContainer extends React.PureComponent {
         onHover={this.handleHover}
         totalSymbols={calculateTotalSymbols(start, stop, step)}
         establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
+        placeholderValue={this.tranlateValueToDisplayValue(this.props.placeholderRating)}
       />
     );
   }
@@ -102,7 +105,9 @@ RatingContainer.defaultProps = {
   onChange: noop,
   onHover: noop,
   emptySymbol: Style.empty,
-  fullSymbol: Style.full
+  fullSymbol: Style.full,
+  placeholderSymbol: Style.placeholder,
+  placeholderRating: 0
 };
 
 // Define propTypes only in development.
@@ -111,6 +116,7 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   stop: PropTypes.number,
   step: PropTypes.number,
   initialRating: PropTypes.number,
+  placeholderRating: PropTypes.number,
   readonly: PropTypes.bool,
   quiet: PropTypes.bool,
   fractions: PropTypes.number,
@@ -124,6 +130,14 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     PropTypes.object
   ]),
   fullSymbol: PropTypes.oneOfType([
+    // Array of class names and/or style objects.
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
+    // Class names.
+    PropTypes.string,
+    // Style objects.
+    PropTypes.object
+  ]),
+  placeholderSymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
     // Class names.
