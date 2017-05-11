@@ -129,9 +129,6 @@ class Rating extends React.PureComponent {
     return (
       <span
         style={{ display: 'inline-block', direction }}
-        ref={(ref) => {
-          this.container = ref;
-        }}
         onMouseEnter={!readonly && this.onMouseEnter}
         onMouseLeave={!readonly && this.onMouseLeave}
       >
