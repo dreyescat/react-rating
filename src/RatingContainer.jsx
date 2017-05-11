@@ -7,7 +7,7 @@ class RatingContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.initialRating
+      value: props.initialRating || 0
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleHover = this.handleHover.bind(this);
@@ -39,8 +39,9 @@ class RatingContainer extends React.PureComponent {
   }
 
   handleHover(displayValue) {
-    const value = displayValue === undefined ?
-      displayValue : this.translateDisplayValueToValue(displayValue);
+    const value = displayValue === undefined
+      ? displayValue
+      : this.translateDisplayValueToValue(displayValue);
     this.props.onHover(value);
   }
 
@@ -48,7 +49,7 @@ class RatingContainer extends React.PureComponent {
     const translatedValue = displayValue * this.props.step + this.props.start;
     // minimum value cannot be equal to start, since it's exclusive
     return translatedValue === this.props.start
-      ? translatedValue + (1 / this.props.fractions)
+      ? translatedValue + 1 / this.props.fractions
       : translatedValue;
   }
 

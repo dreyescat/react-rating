@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import Symbol from './RatingSymbol';
 
 class Rating extends React.PureComponent {
@@ -21,7 +21,9 @@ class Rating extends React.PureComponent {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      dirty: ((this.props.establishedValue !== nextProps.establishedValue) && !this.state.dirty) ? true : this.state.dirty,
+      dirty: this.props.establishedValue !== nextProps.establishedValue && !this.state.dirty
+        ? true
+        : this.state.dirty,
       displayValue: nextProps.establishedValue
     });
   }
@@ -61,12 +63,13 @@ class Rating extends React.PureComponent {
   calculateDisplayValue(symbolIndex, event) {
     const percentage = this.calculateHoverPercentage(event);
     // Get the closest top fraction.
-    const fraction = Math.ceil((percentage) % 1 * this.props.fractions) / this.props.fractions;
+    const fraction = Math.ceil(percentage % 1 * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
     const precision = Math.pow(10, 3);
-    const displayValue = symbolIndex + (Math.floor(percentage) + Math.floor(fraction * precision) / precision);
+    const displayValue =
+      symbolIndex + (Math.floor(percentage) + Math.floor(fraction * precision) / precision);
     // ensure the returned value is greater than 0
-    return (displayValue > 0) ? displayValue : (1 / this.props.fractions);
+    return displayValue > 0 ? displayValue : 1 / this.props.fractions;
   }
 
   calculateHoverPercentage(event) {
@@ -118,17 +121,20 @@ class Rating extends React.PureComponent {
           percent={percent}
           onClick={!readonly && this.symbolClick}
           onMouseMove={!readonly && this.symbolMouseMove}
-          direction={direction} />
+          direction={direction}
+        />
       );
     }
 
     return (
       <span
-        style={{ display: 'inline-block', direction: direction }}
-        ref={(ref) => { this.container = ref; }}
+        style={{ display: 'inline-block', direction }}
+        ref={(ref) => {
+          this.container = ref;
+        }}
         onMouseEnter={!readonly && this.onMouseEnter}
         onMouseLeave={!readonly && this.onMouseLeave}
-        >
+      >
         {symbolNodes}
       </span>
     );
