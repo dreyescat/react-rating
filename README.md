@@ -54,14 +54,15 @@ Property          | Type                                           | Default    
 ---               | ---                                            | ---                  | ---
 `start`           | *number*                                       | 0                    | Range starting value (exclusive).
 `stop`            | *number*                                       | 5                    | Range stop value (inclusive).
-`step`            | *number*                                       | 1                    | How many values each Symbol represents.
-`fractions`       | *number*                                       | 1                    | Number of equal subdivisions that can be selected as a rating in each Symbol.
-`initialRating`   | *number*                                       | The smallest possible value based on `step` and `fractions`            | Initial rating value.
+`step`            | *number*                                       | 1                    | Describes how many values each Symbol represents. For example, for a `start` value of 0, a `stop` value of 10 and a `step` of 2, we will end up with 5 Symbols, with each Symbol representing value increments of 2.
+`fractions`       | *number*                                       | 1                    | Number of equal subdivisions that can be selected as a rating in each Symbol. For example, for a `fractions` value of 2, you will be able to select a rating with a precision of down to half a Symbol.
+`placeholderRating`   | *number*                                   | 0                    | If you do not define an `initialRating` value, you can use a placeholder rating. Visually, this will have the same result as if you had defined an `initialRating` value, however the component's internal value will be 0 until you set a rating by clicking.
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
 `direction`       | *ltr* or *rtl*                                 | ltr                  | The direction of the rating element contents
-`emptySymbol`     | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`fullSymbol`      | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
+`emptySymbol`     | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Can also be an array of such symbols that will be applied in a circular manner (round-robin).
+`fullSymbol`      | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Can also be an array of such symbols that will be applied in a circular manner (round-robin).
+`placeholderSymbol`      | *element* or *object* or *string* or *array*   | Style.placeholder           | React element, inline style object, or classes applied to the placeholder rating symbols. Can also be an array of such symbols that will be applied in a circular manner (round-robin).
 
 ## Callbacks
 
