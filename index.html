@@ -359,17 +359,17 @@
 
       ReactDOM.render(
         <Rating
-          placeholderRate={3.5}
+          placeholderRating={3.5}
           emptySymbol={<img src="assets/images/star-grey.png" className="icon" />}
-          placeholder={<img src="assets/images/star-red.png" className="icon" />}
+          placeholderSymbol={<img src="assets/images/star-red.png" className="icon" />}
           fullSymbol={<img src="assets/images/star-yellow.png" className="icon" />}
         />
       , document.getElementById('rating-placeholder'));
       insertCode(
 `<Rating
-  placeholderRate={3.5}
+  placeholderRating={3.5}
   emptySymbol={<img src="assets/images/star-grey.png" className="icon" />}
-  placeholder={<img src="assets/images/star-red.png" className="icon" />}
+  placeholderSymbol={<img src="assets/images/star-red.png" className="icon" />}
   fullSymbol={<img src="assets/images/star-yellow.png" className="icon" />}
 />`, 'rating-placeholder');
     </script>
