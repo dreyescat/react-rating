@@ -7,7 +7,7 @@ class RatingContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.initialRating || 0
+      value: props.initialRating
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleHover = this.handleHover.bind(this);
@@ -54,6 +54,9 @@ class RatingContainer extends React.PureComponent {
   }
 
   tranlateValueToDisplayValue(value) {
+    if (value === undefined) {
+      return;
+    }
     return (value - this.props.start) / this.props.step;
   }
 
@@ -106,8 +109,7 @@ RatingContainer.defaultProps = {
   onHover: noop,
   emptySymbol: Style.empty,
   fullSymbol: Style.full,
-  placeholderSymbol: Style.placeholder,
-  placeholderRating: 0
+  placeholderSymbol: Style.placeholder
 };
 
 // Define propTypes only in development.

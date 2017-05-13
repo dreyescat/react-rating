@@ -99,7 +99,9 @@ class Rating extends React.PureComponent {
     const full = [].concat(fullSymbol);
     const placeholder = [].concat(placeholderSymbol);
     const shouldDisplayPlaceholder =
-      placeholderValue > 0 && establishedValue === 0 && !interacting;
+      placeholderValue !== undefined &&
+      establishedValue === undefined &&
+      !interacting;
 
     // The value that will be used as base for calculating how to render the symbols
     let value;
