@@ -107,9 +107,13 @@ class Rating extends React.Component {
   }
 
   _fractionalIndex(event) {
+    const clientX = event.nativeEvent.type.indexOf("touch") > -1 ?
+      event.nativeEvent.type.indexOf("touchend") > -1 ?
+        event.changedTouches[0].clientX : event.touches[0].clientX
+      : event.clientX;
     const x = this.state.direction === 'rtl' ?
-      event.currentTarget.getBoundingClientRect().right - event.clientX :
-      event.clientX - event.currentTarget.getBoundingClientRect().left;
+    event.currentTarget.getBoundingClientRect().right - clientX :
+    clientX - event.currentTarget.getBoundingClientRect().left;
     return this._roundToFraction(x / event.currentTarget.offsetWidth);
   }
 
@@ -164,6 +168,8 @@ class Rating extends React.Component {
           percent={percent}
           onClick={!readonly && this.handleClick.bind(this, i)}
           onMouseMove={!readonly && this.handleMouseMove.bind(this, i)}
+          onTouchMove={!readonly && this.handleMouseMove.bind(this, i)}
+          onTouchEnd={!readonly && this.handleClick.bind(this, i)}
           direction={this.state.direction}
           />);
     }
