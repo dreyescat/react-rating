@@ -103,7 +103,9 @@ class Rating extends React.Component {
     const fraction = Math.ceil(index % 1 * this.props.fractions) / this.props.fractions;
     // Truncate decimal trying to avoid float precission issues.
     const precision = Math.pow(10, this.props.scale);
-    return Math.floor(index) + Math.floor(fraction * precision) / precision;
+    const roundedValue = Math.floor(index) + Math.floor(fraction * precision) / precision;
+    // Handles bugs when the touchend is past the star stop
+    return roundedValue > this.props.stop ? this.props.stop : roundedValue;
   }
 
   _fractionalIndex(event) {
