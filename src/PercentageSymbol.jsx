@@ -42,7 +42,9 @@ const PercentageSymbol = (props) => {
   return (
     <span style={style}
         onClick={props.onClick}
-        onMouseMove={props.onMouseMove}>
+        onMouseMove={props.onMouseMove}
+        onTouchMove={props.onMouseMove}
+        onTouchEnd={props.onClick}>
       {backgroundNode}
       <span style={iconContainerStyle}>
         {iconNode}
