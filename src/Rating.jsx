@@ -35,6 +35,7 @@ class Rating extends React.Component {
       // Default direction is left to right
       direction: 'ltr'
     };
+    this.ratingContainer = null;
     this.handleClick = this.handleClick.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
@@ -43,7 +44,7 @@ class Rating extends React.Component {
   componentDidMount() {
     this.setState({
       // detect the computed direction style for the mounted component
-      direction: window.getComputedStyle(this.refs.container, null).getPropertyValue("direction")
+      direction: window.getComputedStyle(this.ratingContainer, null).getPropertyValue("direction")
     });
   }
 
@@ -177,7 +178,13 @@ class Rating extends React.Component {
     }
 
     return (
-      <span ref="container" onMouseLeave={!readonly && this.handleMouseLeave} {...other}>
+      <span
+        ref={container => {
+          this.ratingContainer = container;
+        }}
+        onMouseLeave={!readonly && this.handleMouseLeave}
+        {...other}
+      >
         {symbolNodes}
       </span>
     );
