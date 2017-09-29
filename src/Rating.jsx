@@ -58,6 +58,9 @@ class Rating extends React.Component {
   }
 
   handleClick(i, event) {
+    if (this.props.readonly) {
+      return
+    }
     const index = i + this._fractionalIndex(event);
     this.props.onClick(this._indexToRate(index), event);
     if (this.state.index !== index) {
@@ -71,6 +74,9 @@ class Rating extends React.Component {
   }
 
   handleMouseLeave() {
+    if (this.props.readonly) {
+      return
+    }
     this.props.onRate();
     this.setState({
       indexOver: undefined
@@ -78,6 +84,9 @@ class Rating extends React.Component {
   }
 
   handleMouseMove(i, event) {
+    if (this.props.readonly) {
+      return
+    }
     const index = i + this._fractionalIndex(event);
     if (this.state.indexOver !== index) {
       this.props.onRate(this._indexToRate(index));
@@ -115,8 +124,8 @@ class Rating extends React.Component {
         event.changedTouches[0].clientX : event.touches[0].clientX
       : event.clientX;
     const x = this.state.direction === 'rtl' ?
-    event.currentTarget.getBoundingClientRect().right - clientX :
-    clientX - event.currentTarget.getBoundingClientRect().left;
+      event.currentTarget.getBoundingClientRect().right - clientX :
+      clientX - event.currentTarget.getBoundingClientRect().left;
     return this._roundToFraction(x / event.currentTarget.offsetWidth);
   }
 
@@ -164,17 +173,19 @@ class Rating extends React.Component {
       const percent = i - lastFullIndex === 0 ? index % 1 * 100 :
         i - lastFullIndex < 0 ? 100 : 0;
 
-      symbolNodes.push(<Symbol
+      symbolNodes.push(
+        <Symbol
           key={i}
           background={emptySymbols[i % emptySymbols.length]}
           icon={icon[i % icon.length]}
           percent={percent}
-          onClick={!readonly && this.handleClick.bind(this, i)}
-          onMouseMove={!readonly && this.handleMouseMove.bind(this, i)}
-          onTouchMove={!readonly && this.handleMouseMove.bind(this, i)}
-          onTouchEnd={!readonly && this.handleClick.bind(this, i)}
+          onClick={this.handleClick.bind(this, i)}
+          onMouseMove={this.handleMouseMove.bind(this, i)}
+          onTouchMove={this.handleMouseMove.bind(this, i)}
+          onTouchEnd={this.handleClick.bind(this, i)}
           direction={this.state.direction}
-          />);
+        />
+      );
     }
 
     return (
@@ -182,7 +193,7 @@ class Rating extends React.Component {
         ref={container => {
           this.ratingContainer = container;
         }}
-        onMouseLeave={!readonly && this.handleMouseLeave}
+        onMouseLeave={this.handleMouseLeave}
         {...other}
       >
         {symbolNodes}
