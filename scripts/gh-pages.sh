@@ -11,8 +11,8 @@ git clone -b gh-pages https://github.com/dreyescat/react-rating.git dist
 git -C dist checkout origin/master -- :/index.html :/lib :/assets
 
 # Sync dependencies keeping full path (-R)
-rsync -avR node_modules/react/dist dist
-rsync -avR node_modules/react-dom/dist dist
+rsync -avR node_modules/react/umd dist
+rsync -avR node_modules/react-dom/umd dist
 
 rsync -avR node_modules/bootstrap/dist dist
 
