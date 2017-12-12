@@ -2,10 +2,11 @@
 var expect = require('chai').expect;
 var React = require('react');
 var TestUtils = require('react-dom/test-utils');
+var createRenderer = require('react-test-renderer/shallow').createRenderer;
 var PercentageSymbol = require('../src/PercentageSymbol');
 
 var render = function (component) {
-  var renderer = TestUtils.createRenderer();
+  var renderer = createRenderer();
   renderer.render(component);
   return renderer.getRenderOutput()
 };
