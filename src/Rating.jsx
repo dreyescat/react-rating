@@ -173,16 +173,19 @@ class Rating extends React.Component {
       const percent = i - lastFullIndex === 0 ? index % 1 * 100 :
         i - lastFullIndex < 0 ? 100 : 0;
 
+      const listeners = !readonly && {
+        onClick: this.handleClick.bind(this, i),
+        onMouseMove: this.handleMouseMove.bind(this, i),
+        onTouchMove: this.handleMouseMove.bind(this, i),
+        onTouchEnd: this.handleClick.bind(this, i)
+      };
       symbolNodes.push(
         <Symbol
           key={i}
           background={emptySymbols[i % emptySymbols.length]}
           icon={icon[i % icon.length]}
           percent={percent}
-          onClick={this.handleClick.bind(this, i)}
-          onMouseMove={this.handleMouseMove.bind(this, i)}
-          onTouchMove={this.handleMouseMove.bind(this, i)}
-          onTouchEnd={this.handleClick.bind(this, i)}
+          {...listeners}
           direction={this.state.direction}
         />
       );
@@ -193,7 +196,7 @@ class Rating extends React.Component {
         ref={container => {
           this.ratingContainer = container;
         }}
-        onMouseLeave={this.handleMouseLeave}
+        onMouseLeave={!readonly ? this.handleMouseLeave : undefined}
         {...other}
       >
         {symbolNodes}
