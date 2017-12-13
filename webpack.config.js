@@ -59,5 +59,9 @@ module.exports = {
       __DEV__: process.env.BUILD_DEV && 'true'
     }),
     new webpack.BannerPlugin(banner)
-  ]
+  ],
+  devServer: {
+    host: '0.0.0.0',
+    disableHostCheck: true
+  }
 };

@@ -2,10 +2,11 @@
 var expect = require('chai').expect;
 var React = require('react');
 var TestUtils = require('react-dom/test-utils');
+var createRenderer = require('react-test-renderer/shallow').createRenderer;
 var Rating = require('../src/Rating');
 
 var render = function (component) {
-  var renderer = TestUtils.createRenderer();
+  var renderer = createRenderer();
   renderer.render(component);
   return renderer.getRenderOutput()
 };
@@ -71,18 +72,18 @@ describe('Rating', function () {
 
     it('should not have mouse move handler', function () {
       rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.onMouseMove).to.be.false;
+        expect(symbol.props.onMouseMove).to.be.undefined;
       });
     });
 
     it('should not have click handler', function () {
       rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.onClick).to.be.false;
+        expect(symbol.props.onClick).to.be.undefined;
       });
     });
 
     it('should not have mouse leave handler', function () {
-      expect(rating.props.onMouseLeave).to.be.false;
+      expect(rating.props.onMouseLeave).to.be.undefined;
     });
   });
   /////////////////////////////////////////////////////////////////////////////
