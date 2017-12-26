@@ -9,7 +9,7 @@ class RatingContainer extends React.PureComponent {
     this.state = {
       value: props.initialRating
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleHover = this.handleHover.bind(this);
     this.translateDisplayValueToValue = this.translateDisplayValueToValue.bind(this);
     this.tranlateValueToDisplayValue = this.tranlateValueToDisplayValue.bind(this);
@@ -28,7 +28,7 @@ class RatingContainer extends React.PureComponent {
     }
   }
 
-  handleClick(value, e) {
+  handleChange(value, e) {
     const newValue = this.translateDisplayValueToValue(value);
     // Avoid calling setState if not necessary. Micro optimisation.
     if (this.state.value !== newValue) {
@@ -87,7 +87,7 @@ class RatingContainer extends React.PureComponent {
         quiet={quiet}
         fractions={fractions}
         direction={direction}
-        onClick={this.handleClick}
+        onClick={this.handleChange}
         onHover={this.handleHover}
         totalSymbols={calculateTotalSymbols(start, stop, step)}
         establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
