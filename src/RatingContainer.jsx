@@ -11,8 +11,6 @@ class RatingContainer extends React.PureComponent {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleHover = this.handleHover.bind(this);
-    this.translateDisplayValueToValue = this.translateDisplayValueToValue.bind(this);
-    this.tranlateValueToDisplayValue = this.tranlateValueToDisplayValue.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
