@@ -62,6 +62,8 @@ class RatingSymbol extends React.PureComponent {
         style={style}
         onClick={handleMouseClick}
         onMouseMove={handleMouseMove}
+        onTouchMove={handleMouseMove}
+        onTouchEnd={handleMouseClick}
       >
         {backgroundNode}
         <span style={iconContainerStyle}>

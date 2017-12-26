@@ -73,9 +73,14 @@ class Rating extends React.PureComponent {
   }
 
   calculateHoverPercentage(event) {
+    const clientX = event.nativeEvent.type.indexOf("touch") > -1 ?
+          event.nativeEvent.type.indexOf("touchend") > -1 ?
+            event.changedTouches[0].clientX : event.touches[0].clientX
+          : event.clientX;
+
     const delta = this.props.direction === 'rtl'
-      ? event.target.getBoundingClientRect().right - event.clientX
-      : event.clientX - event.target.getBoundingClientRect().left;
+      ? event.target.getBoundingClientRect().right - clientX
+      : clientX - event.target.getBoundingClientRect().left;
 
     // Returning 0 if the delta is negative solves the flickering issue
     return delta < 0 ? 0 : delta / event.target.offsetWidth;
@@ -137,6 +142,8 @@ class Rating extends React.PureComponent {
           percent={percent}
           onClick={!readonly && this.symbolClick}
           onMouseMove={!readonly && this.symbolMouseMove}
+          onTouchMove={!readonly && this.symbolMouseMove}
+          onTouchEnd={this.symbolClick}
           direction={direction}
         />
       );
