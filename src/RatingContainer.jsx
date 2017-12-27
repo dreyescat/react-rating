@@ -53,7 +53,7 @@ class RatingContainer extends React.PureComponent {
 
   tranlateValueToDisplayValue(value) {
     if (value === undefined) {
-      return;
+      return 0;
     }
     return (value - this.props.start) / this.props.step;
   }

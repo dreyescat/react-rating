@@ -6,7 +6,8 @@ class Rating extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      // Indicates the value that is displayed to the user in the form of symbols
+      // Indicates the value that is displayed to the user in the form of symbols.
+      // It can be either 0 (for no displayed symbols) or [1, end]
       displayValue: this.props.establishedValue,
       // Indicates if the user is currently hovering over the rating element
       interacting: false,
@@ -143,7 +144,7 @@ class Rating extends React.PureComponent {
           onClick={!readonly && this.symbolClick}
           onMouseMove={!readonly && this.symbolMouseMove}
           onTouchMove={!readonly && this.symbolMouseMove}
-          onTouchEnd={this.symbolClick}
+          onTouchEnd={!readonly && this.symbolClick}
           direction={direction}
         />
       );
