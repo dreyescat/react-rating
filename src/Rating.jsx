@@ -108,7 +108,7 @@ class Rating extends React.PureComponent {
     const placeholder = [].concat(placeholderSymbol);
     const shouldDisplayPlaceholder =
       placeholderValue !== undefined &&
-      establishedValue === undefined &&
+      establishedValue === 0 &&
       !interacting;
 
     // The value that will be used as base for calculating how to render the symbols
@@ -197,7 +197,7 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
   totalSymbols: PropTypes.number.isRequired,
-  establishedValue: PropTypes.number.isRequired,
+  establishedValue: PropTypes.number.isRequired, // Always >= 0
   placeholderValue: PropTypes.number.isRequired
 };
 
