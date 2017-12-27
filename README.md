@@ -56,6 +56,7 @@ Property          | Type                                           | Default    
 `stop`            | *number*                                       | 5                    | Range stop value (inclusive).
 `step`            | *number*                                       | 1                    | Describes how many values each Symbol represents. For example, for a `start` value of 0, a `stop` value of 10 and a `step` of 2, we will end up with 5 Symbols, with each Symbol representing value increments of 2.
 `fractions`       | *number*                                       | 1                    | Number of equal subdivisions that can be selected as a rating in each Symbol. For example, for a `fractions` value of 2, you will be able to select a rating with a precision of down to half a Symbol.
+`initialRating`   | *number*                                   | 0                    | The value that will be used as an initial rating.
 `placeholderRating`   | *number*                                   | 0                    | If you do not define an `initialRating` value, you can use a placeholder rating. Visually, this will have the same result as if you had defined an `initialRating` value, however the component's internal value will be 0 until you set a rating by clicking.
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
@@ -68,7 +69,6 @@ Property          | Type                                           | Default    
 
 Callback      | Type                           | Description
 ---           | ---                            | ---
-`onClick`     | function (value, event) {}     | Gets called with the `value` and the click `event` when the value is clicked.
 `onChange`    | function (value) {}            | Gets called with the `value` when you click on a different value than the currently set one.
 `onHover`     | function (value) {}            | Gets called with the `value` when you hover over a symbol. The value is equal to the value that corresponds to that part of the symbol. Gets called in `quiet` mode too.
 
