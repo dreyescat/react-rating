@@ -1,1 +1,1 @@
-module.exports = require('./RatingContainer');
+module.exports = require('./RatingAPILayer');

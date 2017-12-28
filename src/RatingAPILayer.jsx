@@ -3,7 +3,7 @@ import Style from './utils/style';
 import Rating from './Rating';
 import noop from './utils/noop';
 
-class RatingContainer extends React.PureComponent {
+class RatingAPILayer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,24 +78,24 @@ class RatingContainer extends React.PureComponent {
 
     return (
       <Rating
-        emptySymbol={emptySymbol}
-        fullSymbol={fullSymbol}
-        placeholderSymbol={placeholderSymbol}
+        totalSymbols={calculateTotalSymbols(start, stop, step)}
+        value={this.tranlateValueToDisplayValue(this.state.value)}
+        placeholderValue={this.tranlateValueToDisplayValue(this.props.placeholderRating)}
         readonly={readonly}
         quiet={quiet}
         fractions={fractions}
         direction={direction}
+        emptySymbol={emptySymbol}
+        fullSymbol={fullSymbol}
+        placeholderSymbol={placeholderSymbol}
         onClick={this.handleClick}
         onHover={this.handleHover}
-        totalSymbols={calculateTotalSymbols(start, stop, step)}
-        establishedValue={this.tranlateValueToDisplayValue(this.state.value)}
-        placeholderValue={this.tranlateValueToDisplayValue(this.props.placeholderRating)}
       />
     );
   }
 }
 
-RatingContainer.defaultProps = {
+RatingAPILayer.defaultProps = {
   start: 0,
   stop: 5,
   step: 1,
@@ -111,7 +111,7 @@ RatingContainer.defaultProps = {
 };
 
 // Define propTypes only in development.
-RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
+RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   start: PropTypes.number,
   stop: PropTypes.number,
   step: PropTypes.number,
@@ -149,4 +149,4 @@ RatingContainer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   onChange: PropTypes.func
 };
 
-export default RatingContainer;
+export default RatingAPILayer;
