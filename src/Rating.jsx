@@ -7,7 +7,7 @@ class Rating extends React.PureComponent {
     super(props);
     this.state = {
       // Indicates the value that is displayed to the user in the form of symbols.
-      // It can be either 0 (for no displayed symbols) or [1, end]
+      // It can be either 0 (for no displayed symbols) or (0, end]
       displayValue: this.props.value,
       // Indicates if the user is currently hovering over the rating element
       interacting: false,
