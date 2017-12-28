@@ -2,11 +2,12 @@
 var expect = require('chai').expect;
 var React = require('react');
 var TestUtils = require('react-dom/test-utils');
+var createRenderer = require('react-test-renderer/shallow').createRenderer;
 var Rating = require('../src/Rating');
 var Style = require('../src/utils/style.js');
 
 var render = function (component) {
-  var renderer = TestUtils.createRenderer();
+  var renderer = createRenderer();
   renderer.render(component);
   return renderer.getRenderOutput()
 };
@@ -62,6 +63,83 @@ describe('Rating', function () {
       rating.props.children.forEach(function (symbol, i) {
         expect(symbol.props.readonly).to.be.false;
       });
+    });
+    it('should not have mouse move handler', function () {
+      rating.props.children.forEach(function (symbol, i) {
+        expect(symbol.props.onMouseMove).to.be.undefined;
+      });
+    });
+
+    it('should not have click handler', function () {
+      rating.props.children.forEach(function (symbol, i) {
+        expect(symbol.props.onClick).to.be.undefined;
+      });
+    });
+
+    it('should not have mouse leave handler', function () {
+      expect(rating.props.onMouseLeave).to.be.undefined;
+    });
+  });
+  /////////////////////////////////////////////////////////////////////////////
+  // Range
+  /////////////////////////////////////////////////////////////////////////////
+  describe('with a stop range of 10', function () {
+    var rating;
+
+    beforeEach(function () {
+      rating = render(<Rating stop={10} />);
+    });
+
+    it('should render a 10 symbol rating', function () {
+      expect(rating.props.children).to.have.length(10);
+    });
+  });
+
+  describe('with a range (5, 10]', function () {
+    var rating;
+
+    beforeEach(function () {
+      rating = render(<Rating start={5} stop={10} />);
+    });
+
+    it('should render a 5 symbol rating', function () {
+      expect(rating.props.children).to.have.length(5);
+    });
+  });
+
+  describe('with a range (0, 0]', function () {
+    var rating;
+
+    beforeEach(function () {
+      rating = render(<Rating start={0} stop={0} />);
+    });
+
+    it('should render a 0 symbol rating', function () {
+      expect(rating.props.children).to.have.length(0);
+    });
+  });
+
+  describe('with a range (0, 10] step 2', function () {
+    var rating;
+
+    beforeEach(function () {
+      rating = render(<Rating start={0} stop={10} step={2} />);
+    });
+
+    it('should render a 5 symbol rating', function () {
+      expect(rating.props.children).to.have.length(5);
+    });
+  });
+
+  describe('with a range (10, 0] step -2', function () {
+    var rating;
+
+    beforeEach(function () {
+      rating = render(<Rating start={10} stop={0} step={-2} />);
+    });
+
+    it('should render a 5 symbol rating', function () {
+      expect(rating.props.children).to.have.length(5);
     });
   });
 
