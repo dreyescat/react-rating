@@ -8,7 +8,7 @@ class Rating extends React.PureComponent {
     this.state = {
       // Indicates the value that is displayed to the user in the form of symbols.
       // It can be either 0 (for no displayed symbols) or [1, end]
-      displayValue: this.props.establishedValue,
+      displayValue: this.props.value,
       // Indicates if the user is currently hovering over the rating element
       interacting: false,
       // Indicates if the rating element has been clicked even once
@@ -22,10 +22,10 @@ class Rating extends React.PureComponent {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      dirty: this.props.establishedValue !== nextProps.establishedValue && !this.state.dirty
+      dirty: this.props.value !== nextProps.value && !this.state.dirty
         ? true
         : this.state.dirty,
-      displayValue: nextProps.establishedValue
+      displayValue: nextProps.value
     });
   }
 
@@ -56,7 +56,7 @@ class Rating extends React.PureComponent {
 
   onMouseLeave() {
     this.setState({
-      displayValue: this.props.establishedValue,
+      displayValue: this.props.value,
       interacting: false
     });
   }
@@ -92,7 +92,7 @@ class Rating extends React.PureComponent {
       readonly,
       quiet,
       totalSymbols,
-      establishedValue,
+      value,
       placeholderValue,
       direction,
       emptySymbol,
@@ -106,19 +106,19 @@ class Rating extends React.PureComponent {
     const placeholder = [].concat(placeholderSymbol);
     const shouldDisplayPlaceholder =
       placeholderValue !== undefined &&
-      establishedValue === 0 &&
+      value === 0 &&
       !interacting;
 
     // The value that will be used as base for calculating how to render the symbols
-    let value;
+    let renderedValue;
     if (shouldDisplayPlaceholder) {
-      value = placeholderValue;
+      renderedValue = placeholderValue;
     } else {
-      value = quiet ? establishedValue : displayValue;
+      renderedValue = quiet ? value : displayValue;
     }
 
     // The amount of full symbols
-    const fullSymbols = Math.floor(value);
+    const fullSymbols = Math.floor(renderedValue);
 
     for (let i = 0; i < totalSymbols; i++) {
       let percent;
@@ -126,7 +126,7 @@ class Rating extends React.PureComponent {
       if (i - fullSymbols < 0) {
         percent = 100;
       } else if (i - fullSymbols === 0) {
-        percent = (value - i) * 100;
+        percent = (renderedValue - i) * 100;
       } else {
         percent = 0;
       }
@@ -164,6 +164,13 @@ class Rating extends React.PureComponent {
 
 // Define propTypes only in development.
 Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
+  totalSymbols: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired, // Always >= 0
+  placeholderValue: PropTypes.number.isRequired,
+  readonly: PropTypes.bool.isRequired,
+  quiet: PropTypes.bool.isRequired,
+  fractions: PropTypes.number.isRequired,
+  direction: PropTypes.string.isRequired,
   emptySymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
@@ -188,15 +195,8 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Style objects.
     PropTypes.object
   ]),
-  readonly: PropTypes.bool.isRequired,
-  quiet: PropTypes.bool.isRequired,
-  fractions: PropTypes.number.isRequired,
-  direction: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  onHover: PropTypes.func.isRequired,
-  totalSymbols: PropTypes.number.isRequired,
-  establishedValue: PropTypes.number.isRequired, // Always >= 0
-  placeholderValue: PropTypes.number.isRequired
+  onHover: PropTypes.func.isRequired
 };
 
 export default Rating;
