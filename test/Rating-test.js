@@ -4,6 +4,7 @@ var React = require('react');
 var TestUtils = require('react-dom/test-utils');
 var createRenderer = require('react-test-renderer/shallow').createRenderer;
 var Rating = require('../src/Rating');
+var Style = require('../src/utils/style.js');
 
 var render = function (component) {
   var renderer = createRenderer();
@@ -12,15 +13,17 @@ var render = function (component) {
 };
 
 describe('Rating', function () {
-  describe('with default properties', function () {
+  describe('with total symbols of 5', function () {
     var rating;
 
     beforeEach(function () {
-      rating = render(<Rating />);
+      rating = render(
+        <Rating totalSymbols={5} />
+      );
     });
 
     it('should render a 5 symbol rating', function () {
-      var Symbol = require('../src/PercentageSymbol');
+      var Symbol = require('../src/RatingSymbol');
       var children = rating.props.children;
       var symbols = children.filter(function (child) {
         return TestUtils.isElementOfType(child, Symbol);
@@ -31,20 +34,6 @@ describe('Rating', function () {
     it('should have all symbols empty', function () {
       rating.props.children.forEach(function (symbol) {
         expect(symbol.props.percent).to.be.equal(0);
-      });
-    });
-
-    it('should have all symbols background set to empty', function () {
-      var Style = require('../src/style');
-      rating.props.children.forEach(function (symbol) {
-        expect(symbol.props.background).to.be.equal(Style.empty);
-      });
-    });
-
-    it('should have all symbols icon set to full', function () {
-      var Style = require('../src/style');
-      rating.props.children.forEach(function (symbol) {
-        expect(symbol.props.icon).to.be.equal(Style.full);
       });
     });
   });
@@ -70,6 +59,11 @@ describe('Rating', function () {
       rating = render(<Rating readonly={true} />);
     });
 
+    it('should have all symbols readonly', function () {
+      rating.props.children.forEach(function (symbol, i) {
+        expect(symbol.props.readonly).to.be.false;
+      });
+    });
     it('should not have mouse move handler', function () {
       rating.props.children.forEach(function (symbol, i) {
         expect(symbol.props.onMouseMove).to.be.undefined;
@@ -154,8 +148,8 @@ describe('Rating', function () {
   /////////////////////////////////////////////////////////////////////////////
   describe('with custom class name style', function () {
     var rating,
-        empty = 'fa fa-star-o fa-2x',
-        full = 'fa fa-star fa-2x';
+      empty = 'fa fa-star-o fa-2x',
+      full = 'fa fa-star fa-2x';
 
     beforeEach(function () {
       rating = render(<Rating empty={empty} full={full} />);
@@ -170,27 +164,24 @@ describe('Rating', function () {
   });
 
   describe('with custom inline style', function () {
-    var rating,
-        Style = require('../src/style'),
-        empty = Style.empty,
-        full = Style.full;
+    var rating;
 
     beforeEach(function () {
-      rating = render(<Rating empty={empty} full={full} />);
+      rating = render(<Rating empty={Style.empty} full={Style.full} />);
     });
 
     it('should render all symbols with custom style', function () {
       rating.props.children.forEach(function (symbol) {
-        expect(symbol.props.icon).to.be.equal(full);
-        expect(symbol.props.background).to.be.equal(empty);
+        expect(symbol.props.icon).to.be.equal(Style.full);
+        expect(symbol.props.background).to.be.equal(Style.empty);
       });
     });
   });
 
   describe('with custom list of class name styles', function () {
     var rating,
-        empty = ['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x'],
-        full = ['fa fa-star fa-2x', 'fa fa-heart-o fa-2x'];
+      empty = ['fa fa-star-o fa-2x', 'fa fa-heart-o fa-2x'],
+      full = ['fa fa-star fa-2x', 'fa fa-heart-o fa-2x'];
 
     beforeEach(function () {
       rating = render(<Rating start={0} stop={6} empty={empty} full={full} />);
@@ -204,4 +195,3 @@ describe('Rating', function () {
     });
   });
 });
-
