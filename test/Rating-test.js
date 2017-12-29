@@ -80,68 +80,6 @@ describe('Rating', function () {
       expect(rating.props.onMouseLeave).to.be.undefined;
     });
   });
-  /////////////////////////////////////////////////////////////////////////////
-  // Range
-  /////////////////////////////////////////////////////////////////////////////
-  describe('with a stop range of 10', function () {
-    var rating;
-
-    beforeEach(function () {
-      rating = render(<Rating stop={10} />);
-    });
-
-    it('should render a 10 symbol rating', function () {
-      expect(rating.props.children).to.have.length(10);
-    });
-  });
-
-  describe('with a range (5, 10]', function () {
-    var rating;
-
-    beforeEach(function () {
-      rating = render(<Rating start={5} stop={10} />);
-    });
-
-    it('should render a 5 symbol rating', function () {
-      expect(rating.props.children).to.have.length(5);
-    });
-  });
-
-  describe('with a range (0, 0]', function () {
-    var rating;
-
-    beforeEach(function () {
-      rating = render(<Rating start={0} stop={0} />);
-    });
-
-    it('should render a 0 symbol rating', function () {
-      expect(rating.props.children).to.have.length(0);
-    });
-  });
-
-  describe('with a range (0, 10] step 2', function () {
-    var rating;
-
-    beforeEach(function () {
-      rating = render(<Rating start={0} stop={10} step={2} />);
-    });
-
-    it('should render a 5 symbol rating', function () {
-      expect(rating.props.children).to.have.length(5);
-    });
-  });
-
-  describe('with a range (10, 0] step -2', function () {
-    var rating;
-
-    beforeEach(function () {
-      rating = render(<Rating start={10} stop={0} step={-2} />);
-    });
-
-    it('should render a 5 symbol rating', function () {
-      expect(rating.props.children).to.have.length(5);
-    });
-  });
 
   /////////////////////////////////////////////////////////////////////////////
   // Custom symbol style

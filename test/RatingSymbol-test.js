@@ -2,10 +2,11 @@
 var expect = require('chai').expect;
 var React = require('react');
 var TestUtils = require('react-dom/test-utils');
+var createRenderer = require('react-test-renderer/shallow').createRenderer;
 var RatingSymbol = require('../src/RatingSymbol');
 
 var render = function (component) {
-  var renderer = TestUtils.createRenderer();
+  var renderer = createRenderer();
   renderer.render(component);
   return renderer.getRenderOutput()
 };
@@ -19,7 +20,7 @@ describe('RatingSymbol', function () {
 
     beforeEach(function () {
       symbol = render(
-        <RatingSymbol icon={icon} background={background} />
+        <RatingSymbol activeIcon={icon} inactiveIcon={background} />
       );
     });
 
@@ -44,7 +45,7 @@ describe('RatingSymbol', function () {
       background = 'fa fa-star-o fa-2x';
 
     beforeEach(function () {
-      symbol = render(<RatingSymbol icon={icon} background={background} />);
+      symbol = render(<RatingSymbol activeIcon={icon} inactiveIcon={background} />);
     });
 
     it('should have class styled background', function () {

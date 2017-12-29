@@ -2,10 +2,11 @@
 var expect = require('chai').expect;
 var React = require('react');
 var TestUtils = require('react-dom/test-utils');
-var RatingContainer = require('../src/RatingContainer');
+var createRenderer = require('react-test-renderer/shallow').createRenderer;
+var RatingContainer = require('../src/RatingAPILayer');
 
 var render = function (component) {
-  var renderer = TestUtils.createRenderer();
+  var renderer = createRenderer();
   renderer.render(component);
   return renderer.getRenderOutput()
 };
@@ -19,7 +20,6 @@ describe('RatingContainer', function () {
     });
 
     it('should render a 10 symbol rating', function () {
-      console.log(rating);
       expect(rating.props.totalSymbols).to.be.equal(10);
     });
   });
