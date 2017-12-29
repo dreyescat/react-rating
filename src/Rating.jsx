@@ -153,8 +153,8 @@ class Rating extends React.PureComponent {
     return (
       <span
         style={{ display: 'inline-block', direction }}
-        onMouseEnter={!readonly && this.onMouseEnter}
-        onMouseLeave={!readonly && this.onMouseLeave}
+        onMouseEnter={!readonly ? this.onMouseEnter : undefined}
+        onMouseLeave={!readonly ? this.onMouseLeave : undefined}
       >
         {symbolNodes}
       </span>
