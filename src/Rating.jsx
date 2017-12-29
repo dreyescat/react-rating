@@ -74,10 +74,11 @@ class Rating extends React.PureComponent {
   }
 
   calculateHoverPercentage(event) {
-    const clientX = event.nativeEvent.type.indexOf("touch") > -1 ?
-          event.nativeEvent.type.indexOf("touchend") > -1 ?
-            event.changedTouches[0].clientX : event.touches[0].clientX
-          : event.clientX;
+    const clientX = event.nativeEvent.type.indexOf("touch") > -1
+      ? event.nativeEvent.type.indexOf("touchend") > -1
+        ? event.changedTouches[0].clientX
+        : event.touches[0].clientX
+      : event.clientX;
 
     const delta = this.props.direction === 'rtl'
       ? event.target.getBoundingClientRect().right - clientX
