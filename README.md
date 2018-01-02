@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/react-rating.svg)](https://badge.fury.io/js/react-rating)
+
 # React Rating
 
 React Rating is a [react](https://github.com/facebook/react) rating component which supports custom symbols both with [inline styles](https://facebook.github.io/react/tips/inline-styles.html) and glyphicons found in popular CSS Toolkits like [Fontawesome](http://fortawesome.github.io/Font-Awesome/icons/) or [Bootstrap](http://getbootstrap.com/components/).
