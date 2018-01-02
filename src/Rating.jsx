@@ -30,7 +30,8 @@ class Rating extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.displayValue !== this.state.displayValue) {
+    // Ensure we do not call this.props.onHover on clicks or on mouseLeave
+    if (prevState.displayValue !== this.state.displayValue && this.state.interacting) {
       this.props.onHover(this.state.displayValue);
     }
   }
