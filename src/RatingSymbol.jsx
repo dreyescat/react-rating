@@ -91,7 +91,9 @@ RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   percent: PropTypes.number.isRequired,
   direction: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  onMouseMove: PropTypes.func
+  onMouseMove: PropTypes.func,
+  onTouchMove: PropTypes.func,
+  onTouchEnd: PropTypes.func
 };
 
 export default RatingSymbol;
