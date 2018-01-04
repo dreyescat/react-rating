@@ -82,12 +82,13 @@ class Rating extends React.PureComponent {
         : event.touches[0].clientX
       : event.clientX;
 
+    const targetRect = event.target.getBoundingClientRect();
     const delta = this.props.direction === 'rtl'
-      ? event.target.getBoundingClientRect().right - clientX
-      : clientX - event.target.getBoundingClientRect().left;
+      ? targetRect.right - clientX
+      : clientX - targetRect.left;
 
     // Returning 0 if the delta is negative solves the flickering issue
-    return delta < 0 ? 0 : delta / event.target.offsetWidth;
+    return delta < 0 ? 0 : delta / targetRect.width;
   }
 
   render() {
