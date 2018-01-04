@@ -70,7 +70,8 @@ class RatingAPILayer extends React.PureComponent {
       fractions,
       direction,
       start,
-      stop
+      stop,
+      ...other
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -91,6 +92,7 @@ class RatingAPILayer extends React.PureComponent {
         placeholderSymbol={placeholderSymbol}
         onClick={this.handleClick}
         onHover={this.handleHover}
+        {...other}
       />
     );
   }

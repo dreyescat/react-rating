@@ -101,7 +101,8 @@ class Rating extends React.PureComponent {
       direction,
       emptySymbol,
       fullSymbol,
-      placeholderSymbol
+      placeholderSymbol,
+      ...other
     } = this.props;
     const { displayValue, interacting } = this.state;
     const symbolNodes = [];
@@ -159,6 +160,7 @@ class Rating extends React.PureComponent {
         style={{ display: 'inline-block', direction }}
         onMouseEnter={!readonly ? this.onMouseEnter : noop}
         onMouseLeave={!readonly ? this.onMouseLeave : noop}
+        {...other}
       >
         {symbolNodes}
       </span>
