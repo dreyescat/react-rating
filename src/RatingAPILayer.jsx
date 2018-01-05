@@ -71,6 +71,10 @@ class RatingAPILayer extends React.PureComponent {
       direction,
       start,
       stop,
+      placeholderRating,
+      // deconstruct RatingAPILayer properties that should not be passed to Rating
+      onChange,
+      onHover,
       ...other
     } = this.props;
 
@@ -82,7 +86,7 @@ class RatingAPILayer extends React.PureComponent {
       <Rating
         totalSymbols={calculateTotalSymbols(start, stop, step)}
         value={this.tranlateValueToDisplayValue(this.state.value)}
-        placeholderValue={this.tranlateValueToDisplayValue(this.props.placeholderRating)}
+        placeholderValue={this.tranlateValueToDisplayValue(placeholderRating)}
         readonly={readonly}
         quiet={quiet}
         fractions={fractions}

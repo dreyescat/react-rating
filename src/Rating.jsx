@@ -102,6 +102,9 @@ class Rating extends React.PureComponent {
       emptySymbol,
       fullSymbol,
       placeholderSymbol,
+      // deconstruct properties that should not be passed to root element
+      onHover,
+      initialRating,
       ...other
     } = this.props;
     const { displayValue, interacting } = this.state;
