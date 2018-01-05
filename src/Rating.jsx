@@ -22,11 +22,12 @@ class Rating extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
+    const valueChanged = this.props.value !== nextProps.value;
     this.setState({
-      dirty: this.props.value !== nextProps.value && !this.state.dirty
+      dirty: valueChanged && !this.state.dirty
         ? true
         : this.state.dirty,
-      displayValue: nextProps.value
+      displayValue: valueChanged ? nextProps.value : this.state.displayValue
     });
   }
 
@@ -181,7 +182,9 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]).isRequired,
   fullSymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
@@ -189,7 +192,9 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]).isRequired,
   placeholderSymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
@@ -197,7 +202,9 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]),
   onClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired

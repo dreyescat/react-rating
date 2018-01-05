@@ -128,7 +128,9 @@ RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]),
   fullSymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
@@ -136,7 +138,9 @@ RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]),
   placeholderSymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
@@ -144,7 +148,9 @@ RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     // Class names.
     PropTypes.string,
     // Style objects.
-    PropTypes.object
+    PropTypes.object,
+    // React element
+    PropTypes.element
   ]),
   onHover: PropTypes.func,
   onChange: PropTypes.func
