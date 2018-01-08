@@ -65,19 +65,22 @@ describe('Rating', function () {
       });
     });
     it('should not have mouse move handler', function () {
+      var noop = require('../src/utils/noop');
       rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.onMouseMove).to.be.undefined;
+        expect(symbol.props.onMouseMove).to.equal(noop);
       });
     });
 
     it('should not have click handler', function () {
+      var noop = require('../src/utils/noop');
       rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.onClick).to.be.undefined;
+        expect(symbol.props.onClick).to.equal(noop);
       });
     });
 
     it('should not have mouse leave handler', function () {
-      expect(rating.props.onMouseLeave).to.be.undefined;
+      var noop = require('../src/utils/noop');
+      expect(rating.props.onMouseLeave).to.equal(noop);
     });
   });
 
