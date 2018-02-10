@@ -53,6 +53,9 @@ class RatingSymbol extends React.PureComponent {
 
     function handleMouseClick(e) {
       if (onClick) {
+        // [Supporting both TouchEvent and MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Supporting_both_TouchEvent_and_MouseEvent)
+        // We must prevent firing click event twice on touch devices.
+        e.preventDefault();
         onClick(index, e);
       }
     }

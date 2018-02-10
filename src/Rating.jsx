@@ -37,7 +37,8 @@ class Rating extends React.PureComponent {
   }
 
   symbolClick(symbolIndex, event) {
-    this.props.onClick(this.state.displayValue, event);
+    const value = this.calculateDisplayValue(symbolIndex, event);
+    this.props.onClick(value, event);
   }
 
   symbolMouseMove(symbolIndex, event) {
