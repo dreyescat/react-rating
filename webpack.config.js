@@ -23,6 +23,7 @@ module.exports = {
     // served by webpack-dev-server or as a static file loaded in the browser.
     publicPath: '/lib'
   },
+  devtool: 'source-map',
   module: {
     loaders: [
       {
