@@ -58,6 +58,8 @@
   <body>
     <h3>Default rating</h3>
     <div class="rating" id="rating-default"></div>
+    <h3>Reset rating</h3>
+    <div class="rating" id="rating-reset"></div>
     <h3>Readonly rating</h3>
     <div class="rating" id="rating-default-readonly"></div>
     <h3>Readonly fractional rating</h3>
@@ -111,10 +113,64 @@
           );
       };
 
+      // ResetRating
+      class ResetRating extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {value: 0};
+
+          this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick(event) {
+          this.setState({value: undefined});
+        }
+
+        render() {
+          return (
+            <div>
+              <Rating {...this.props} initialRating={this.state.value} />
+              <button onClick={this.handleClick}>Reset</button>
+            </div>
+          );
+        }
+      }
+
+
       ReactDOM.render(
         <Rating />
       , document.getElementById('rating-default'));
       insertCode('<Rating />', 'rating-default');
+
+      ReactDOM.render(
+        <ResetRating placeholderRating={3} />
+      , document.getElementById('rating-reset'));
+      insertCode(
+`
+class ResetRating extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 0};
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    this.setState({value: undefined});
+  }
+
+  render() {
+    return (
+      <div>
+        <Rating {...this.props} initialRating={this.state.value} />
+        <button onClick={this.handleClick}>Reset</button>
+      </div>
+    );
+  }
+}
+
+<ResetRating placeholderRating={3} />
+`, 'rating-reset');
 
       ReactDOM.render(
         <Rating
