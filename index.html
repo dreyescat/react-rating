@@ -197,11 +197,9 @@ class ResetRating extends React.Component {
 />`, 'rating-default-readonly-fractional');
 
       const SVGIcon = (props) =>
-          <div>
-            <svg className={props.className}>
-              <use xlinkHref={props.href} />
-            </svg>
-          </div>;
+          <svg className={props.className}>
+            <use xlinkHref={props.href} />
+          </svg>;
       ReactDOM.render(
         <Rating
           emptySymbol={<SVGIcon href="#icon-star-empty" className="icon" />}
@@ -210,11 +208,9 @@ class ResetRating extends React.Component {
       , document.getElementById('rating-svg'));
       insertCode(
 `const SVGIcon = (props) =>
-  <div>
-    <svg className={props.className}>
-      <use xlinkHref={props.href} />
-    </svg>
-  </div>;
+  <svg className={props.className}>
+    <use xlinkHref={props.href} />
+  </svg>;
 <Rating
   emptySymbol={<SVGIcon href="#icon-star-empty" className="icon" />}
   fullSymbol={<SVGIcon href="#icon-star-full" className="icon" />}
