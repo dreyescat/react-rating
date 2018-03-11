@@ -109,7 +109,7 @@ class Rating extends React.PureComponent {
     const full = [].concat(fullSymbol);
     const placeholder = [].concat(placeholderSymbol);
     const shouldDisplayPlaceholder =
-      placeholderValue !== undefined &&
+      placeholderValue !== 0 &&
       value === 0 &&
       !interacting;
 
