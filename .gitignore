@@ -45,6 +45,7 @@ node_modules
 .vscode
 .settings
 .cache
+.idea
 
 # Logs
 logs

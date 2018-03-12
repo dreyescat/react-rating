@@ -10,7 +10,7 @@
     "src/"
   ],
   "scripts": {
-    "test": "mocha --compilers js:babel/register --recursive",
+    "test": "mocha --compilers js:babel/register --recursive --require test/setup.js",
     "lint": "eslint src --ext .js,.jsx",
     "dev": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
     "build": "cross-env BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress",
@@ -48,10 +48,13 @@
     "chai": "^3.2.0",
     "create-react-class": "^15.5.1",
     "cross-env": "^3.2.4",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.7.2",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-react": "^7.4.0",
     "font-awesome": "^4.3.0",
+    "jsdom": "^11.5.1",
     "mocha": "^2.2.5",
     "node-libs-browser": "^0.5.2",
     "prismjs": "^1.6.0",

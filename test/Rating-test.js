@@ -5,6 +5,7 @@ var TestUtils = require('react-dom/test-utils');
 var createRenderer = require('react-test-renderer/shallow').createRenderer;
 var Rating = require('../src/Rating');
 var Style = require('../src/utils/style.js');
+var mount = require('enzyme').mount;
 
 var render = function (component) {
   var renderer = createRenderer();
@@ -82,6 +83,19 @@ describe('Rating', function () {
       var noop = require('../src/utils/noop');
       expect(rating.props.onMouseLeave).to.equal(noop);
     });
+  });
+
+  describe('that is receiving correct properties', function() {
+    let rating;
+
+    beforeEach(function () {
+      rating = mount(<Rating className="customClassName" />);
+    });
+
+    it('should pass other properties to root element', function() {
+      var spanRendered = rating.find('span');
+      expect(spanRendered.prop('className')).to.be.equal('customClassName');
+    })
   });
 
   /////////////////////////////////////////////////////////////////////////////
