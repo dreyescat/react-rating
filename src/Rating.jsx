@@ -34,6 +34,10 @@ class Rating extends React.PureComponent {
     if (prevState.displayValue !== this.state.displayValue && this.state.interacting) {
       this.props.onHover(this.state.displayValue);
     }
+    // When hover ends, call this.props.onHover with no value.
+    if (prevState.interacting && !this.state.interacting) {
+      this.props.onHover();
+    }
   }
 
   symbolClick(symbolIndex, event) {
