@@ -20,20 +20,14 @@ class RatingAPILayer extends React.PureComponent {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // If we have a new value trigger onChange callback
-    if (this.state.value !== prevState.value) {
-      this.props.onChange(this.state.value);
-    }
-  }
-
   handleClick(value, e) {
     const newValue = this.translateDisplayValueToValue(value);
     // Avoid calling setState if not necessary. Micro optimisation.
     if (this.state.value !== newValue) {
+      // If we have a new value trigger onChange callback.
       this.setState({
         value: newValue
-      });
+      }, () => this.props.onChange(this.state.value));
     }
   }
 
