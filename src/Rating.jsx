@@ -75,8 +75,8 @@ class Rating extends React.PureComponent {
     const precision = 10 ** 3;
     const displayValue =
       symbolIndex + (Math.floor(percentage) + Math.floor(fraction * precision) / precision);
-    // ensure the returned value is greater than 0
-    return displayValue > 0 ? displayValue : 1 / this.props.fractions;
+    // ensure the returned value is greater than 0 and lower than totalSymbols
+    return displayValue > 0 ? displayValue > this.props.totalSymbols ? this.props.totalSymbols : displayValue : 1 / this.props.fractions;
   }
 
   calculateHoverPercentage(event) {
