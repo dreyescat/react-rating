@@ -64,7 +64,10 @@ class RatingAPILayer extends React.PureComponent {
       fractions,
       direction,
       start,
-      stop
+      stop,
+      id,
+      className,
+      style
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -73,6 +76,9 @@ class RatingAPILayer extends React.PureComponent {
 
     return (
       <Rating
+        id={id}
+        style={style}
+        className={className}
         totalSymbols={calculateTotalSymbols(start, stop, step)}
         value={this.tranlateValueToDisplayValue(this.state.value)}
         placeholderValue={this.tranlateValueToDisplayValue(this.props.placeholderRating)}
