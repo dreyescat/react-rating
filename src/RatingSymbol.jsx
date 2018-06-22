@@ -40,7 +40,7 @@ class RatingSymbol extends React.PureComponent {
       width: `${percent}%`
     };
     const style = {
-      cursor: !readonly ? 'pointer' : 'auto',
+      cursor: !readonly ? 'pointer' : 'inherit',
       display: 'inline-block',
       position: 'relative'
     };
