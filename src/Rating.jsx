@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noop from './utils/noop';
 import Symbol from './RatingSymbol';
 
 class Rating extends React.PureComponent {
@@ -152,11 +151,13 @@ class Rating extends React.PureComponent {
             shouldDisplayPlaceholder ? placeholder[i % full.length] : full[i % full.length]
           }
           percent={percent}
-          onClick={!readonly ? this.symbolClick : noop}
-          onMouseMove={!readonly ? this.symbolMouseMove : noop}
-          onTouchMove={!readonly ? this.symbolMouseMove : noop}
-          onTouchEnd={!readonly ? this.symbolClick : noop}
           direction={direction}
+          {...(!readonly && {
+            onClick: this.symbolClick,
+            onMouseMove: this.symbolMouseMove,
+            onTouchMove: this.symbolMouseMove,
+            onTouchEnd: this.symbolClick
+          })}
         />
       );
     }
@@ -166,8 +167,10 @@ class Rating extends React.PureComponent {
         id={id}
         style={{...style, display: 'inline-block', direction }}
         className={className}
-        onMouseEnter={!readonly ? this.onMouseEnter : noop}
-        onMouseLeave={!readonly ? this.onMouseLeave : noop}
+        {...(!readonly && {
+          onMouseEnter: this.onMouseEnter,
+          onMouseLeave: this.onMouseLeave
+        })}
       >
         {symbolNodes}
       </span>
