@@ -107,7 +107,8 @@ class Rating extends React.PureComponent {
       placeholderSymbol,
       className,
       id,
-      style
+      style,
+      tabIndex
     } = this.props;
     const { displayValue, interacting } = this.state;
     const symbolNodes = [];
@@ -167,6 +168,8 @@ class Rating extends React.PureComponent {
         id={id}
         style={{...style, display: 'inline-block', direction }}
         className={className}
+        tabIndex={tabIndex}
+        aria-label={this.props['aria-label']}
         {...(!readonly && {
           onMouseEnter: this.onMouseEnter,
           onMouseLeave: this.onMouseLeave

@@ -67,7 +67,8 @@ class RatingAPILayer extends React.PureComponent {
       stop,
       id,
       className,
-      style
+      style,
+      tabIndex
     } = this.props;
 
     function calculateTotalSymbols(start, stop, step) {
@@ -79,6 +80,8 @@ class RatingAPILayer extends React.PureComponent {
         id={id}
         style={style}
         className={className}
+        tabIndex={tabIndex}
+        aria-label={this.props['aria-label']}
         totalSymbols={calculateTotalSymbols(start, stop, step)}
         value={this.tranlateValueToDisplayValue(this.state.value)}
         placeholderValue={this.tranlateValueToDisplayValue(this.props.placeholderRating)}
