@@ -1,17 +1,19 @@
-var webpack = require('webpack');
-var PACKAGE = require('./package.json');
-var banner = PACKAGE.name + ' - ' + PACKAGE.version + ' | ' +
+const path = require('path');
+const webpack = require('webpack');
+const PACKAGE = require('./package.json');
+const banner = PACKAGE.name + ' - ' + PACKAGE.version + ' | ' +
   '(c) 2015, ' + new Date().getFullYear() + '  ' + PACKAGE.author + ' | ' +
   PACKAGE.license + ' | ' +
   PACKAGE.homepage;
 
 module.exports = {
+  mode: 'development',
   entry: {
     'react-rating': './src/react-rating.js'
   },
   output: {
     // Output the bundled file.
-    path: './lib',
+    path: path.resolve(__dirname, 'lib'),
     // Use the name specified in the entry key as name for the bundle file.
     filename: '[name].js',
     // Export as a Universal Module Definition library.
@@ -25,12 +27,12 @@ module.exports = {
   },
   devtool: 'source-map',
   module: {
-    loaders: [
+    rules: [
       {
         // Test for js or jsx files.
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: [
+        use: [
           "babel-loader",
           "eslint-loader"
         ]
@@ -51,7 +53,7 @@ module.exports = {
     // (e.g. require('./somefile.ext')).
     // Include '.js', '.jsx' to resolve files by these implicit extensions
     // (e.g. require('underscore')).
-    extensions: ['', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx']
   },
   plugins: [
     new webpack.DefinePlugin({

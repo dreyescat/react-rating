@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var React = require('react');
 var TestUtils = require('react-dom/test-utils');
 var createRenderer = require('react-test-renderer/shallow').createRenderer;
-var Rating = require('../src/Rating');
+import Rating from '../src/Rating';
 var Style = require('../src/utils/style.js');
 
 var render = function (component) {
