@@ -23,7 +23,7 @@ rsync -avR node_modules/prismjs/themes/prism.css dist
 rsync -avR node_modules/prismjs/prism.js dist
 rsync -avR node_modules/prismjs/components/prism-jsx.min.js dist
 
-rsync -avR node_modules/babel-core/browser.min.js dist
+rsync -avR node_modules/@babel/standalone/babel.min.js
 
 # Add synched dependencies changes
 git -C dist add .
