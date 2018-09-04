@@ -13,7 +13,7 @@
     <script src="node_modules/prismjs/prism.js"></script>
     <script src="node_modules/prismjs/components/prism-jsx.min.js"></script>
     <!-- Babel -->
-    <script src="node_modules/babel-core/browser.min.js"></script>
+    <script src="node_modules/@babel/standalone/babel.min.js"></script>
     <!-- React -->
     <script src="node_modules/react/umd/react.development.js"></script>
     <!-- ReactDOM -->
@@ -102,7 +102,7 @@
     <div class="rating" id="rating-placeholder"></div>
 
     <script type="text/babel">
-      const Rating = ReactRating;
+      const Rating = ReactRating.default;
       const insertCode = function (code, elementId) {
         document
           .getElementById(elementId)
