@@ -23,7 +23,13 @@ module.exports = {
     // specified in publicPath.
     // I use the same as the output path to use the same index.html either
     // served by webpack-dev-server or as a static file loaded in the browser.
-    publicPath: '/lib'
+    publicPath: '/lib',
+    // The umd target generates invalid code for running inside a Node.js.
+    // It generates 'window' as the global object.
+    // Workaround:
+    // https://webpack.js.org/configuration/output/#output-librarytarget
+    // https://github.com/webpack/webpack/issues/6677
+    globalObject: 'typeof self !== "undefined" ? self : this'
   },
   devtool: 'source-map',
   module: {
