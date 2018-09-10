@@ -75,14 +75,14 @@ Property          | Type                                           | Default    
 
 Callback      | Type                           | Description
 ---           | ---                            | ---
-`onChange`    | function (value) {}            | Gets called with the `value` when you click on a different value than the currently set one.
+`onChange`    | function (value) {}            | Gets called with the `value` when a different value than the currently set is selected.
+`onClick`     | function (value) {}            | Gets called with the `value` when a symbol is clicked. The value is equal to the value that corresponds to that part of the symbol.
 `onHover`     | function (value) {}            | Gets called with the `value` when you hover over a symbol. The value is equal to the value that corresponds to that part of the symbol. Gets called in `quiet` mode too. When hover ends, gets called with no `value` (i.e. `undefined` as the value).
 
 ## Deprecated Properties and Callbacks
 
 This is a list of deprecated properties and callbacks from versions older than v1.0
 
-* `onClick`
 * `onRate`
 * `initialRate`
 * `placeholderRate`

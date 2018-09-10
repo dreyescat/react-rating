@@ -22,6 +22,7 @@ class RatingAPILayer extends React.PureComponent {
 
   handleClick(value, e) {
     const newValue = this.translateDisplayValueToValue(value);
+    this.props.onClick(newValue);
     // Avoid calling setState if not necessary. Micro optimisation.
     if (this.state.value !== newValue) {
       // If we have a new value trigger onChange callback.
@@ -107,8 +108,9 @@ RatingAPILayer.defaultProps = {
   quiet: false,
   fractions: 1,
   direction: 'ltr',
-  onChange: noop,
   onHover: noop,
+  onClick: noop,
+  onChange: noop,
   emptySymbol: Style.empty,
   fullSymbol: Style.full,
   placeholderSymbol: Style.placeholder
@@ -156,6 +158,7 @@ RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
     PropTypes.element
   ]),
   onHover: PropTypes.func,
+  onClick: PropTypes.func,
   onChange: PropTypes.func
 };
 
