@@ -8,9 +8,9 @@ import * as React from "react";
 declare class Rating extends React.Component<RatingComponentProps> {}
 declare namespace Rating {}
 
-type RatingComponentSymbol = string | string[] | Dictionary<any> | Dictionary<any>[] | JSX.Element[] | JSX.Element ;
+export type RatingComponentSymbol = string | string[] | Dictionary<any> | Dictionary<any>[] | JSX.Element[] | JSX.Element ;
 
-interface RatingComponentProps {
+export interface RatingComponentProps {
     start?: number;
     stop?: number;
     step?: number;
