@@ -2,13 +2,13 @@
 // Project: https://github.com/dreyescat/react-rating
 // Definitions by: Konrad Szwarc <https://github.com/szwarckonrad/>
 
-import {Dictionary} from "lodash";
+import { Dictionary } from "lodash";
 import * as React from "react";
 
-declare class Rating extends React.Component<RatingComponentProps> {}
-declare namespace Rating {}
+declare class Rating extends React.Component<RatingComponentProps> { }
+declare namespace Rating { }
 
-export type RatingComponentSymbol = string | string[] | Dictionary<any> | Dictionary<any>[] | JSX.Element[] | JSX.Element ;
+export type RatingComponentSymbol = string | string[] | Dictionary<any> | Dictionary<any>[] | JSX.Element[] | JSX.Element;
 
 export interface RatingComponentProps {
     start?: number;
@@ -26,6 +26,7 @@ export interface RatingComponentProps {
     placeholderSymbol?: RatingComponentSymbol;
     onChange?: (value: number) => any;
     onHover?: (value: number) => any;
+    onClick?: (value: number) => any;
 }
 
 export default Rating;
