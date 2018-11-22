@@ -61,9 +61,9 @@ Property          | Type                                           | Default    
 `start`           | *number*                                       | 0                    | Range starting value (exclusive).
 `stop`            | *number*                                       | 5                    | Range stop value (inclusive).
 `step`            | *number*                                       | 1                    | Describes how many values each Symbol represents. For example, for a `start` value of 0, a `stop` value of 10 and a `step` of 2, we will end up with 5 Symbols, with each Symbol representing value increments of 2.
-`id`   | *number* or *string*                                   |                     | The value that will be used as id for the <Rating /> container.
 `fractions`       | *number*                                       | 1                    | Number of equal subdivisions that can be selected as a rating in each Symbol. For example, for a `fractions` value of 2, you will be able to select a rating with a precision of down to half a Symbol. Must be >= 1
 `initialRating`   | *number*                                   | 0                    | The value that will be used as an initial rating. This is the old `initialRate`.
+`id`   | *number* or *string*                                   | 0                    | The id that will be assigned to the <Rating /> container.
 `placeholderRating`   | *number*                                   | 0                    | If you do not define an `initialRating` value, you can use a placeholder rating. Visually, this will have the same result as if you had defined an `initialRating` value. If `initialRating` is set `placeholderRating` is not taken into account. This is the old `placeholderRate`
 `readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
 `quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
