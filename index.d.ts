@@ -16,6 +16,7 @@ export interface RatingComponentProps {
     step?: number;
     fractions?: number;
     initialRating?: number;
+    id?: string | number;
     className?: string;
     placeholderRating?: number;
     readonly?: boolean;
