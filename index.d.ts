@@ -27,7 +27,7 @@ export interface RatingComponentProps {
     placeholderSymbol?: RatingComponentSymbol;
     onChange?: (value: number) => any;
     onHover?: (value: number) => any;
-    onClick?: (value: number) => any;
+    onClick?: (value: number, id?: string) => any;
 }
 
 export default Rating;
