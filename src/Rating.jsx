@@ -25,11 +25,18 @@ class Rating extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // Ignore state update due to value changed from props.
+    // Usually originated through an onClick event.
+    if (prevProps.value !== this.props.value) {
+      return;
+    }
+
     // When hover ends, call this.props.onHover with no value.
     if (prevState.interacting && !this.state.interacting) {
       return this.props.onHover();
     }
 
+    // When hover over.
     if (this.state.interacting) {
       this.props.onHover(this.state.displayValue);
     }
