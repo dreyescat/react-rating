@@ -10,9 +10,7 @@ class Rating extends React.PureComponent {
       // It can be either 0 (for no displayed symbols) or (0, end]
       displayValue: this.props.value,
       // Indicates if the user is currently hovering over the rating element
-      interacting: false,
-      // Indicates if the rating element has been clicked even once
-      dirty: false
+      interacting: false
     };
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.symbolMouseMove = this.symbolMouseMove.bind(this);
@@ -22,7 +20,6 @@ class Rating extends React.PureComponent {
   componentWillReceiveProps(nextProps) {
     const valueChanged = this.props.value !== nextProps.value;
     this.setState((prevState) => ({
-      dirty: valueChanged || prevState.dirty,
       displayValue: valueChanged ? nextProps.value : prevState.displayValue
     }));
   }
