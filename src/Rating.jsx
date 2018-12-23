@@ -14,7 +14,6 @@ class Rating extends React.PureComponent {
       // Indicates if the rating element has been clicked even once
       dirty: false
     };
-    this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.symbolMouseMove = this.symbolMouseMove.bind(this);
     this.symbolClick = this.symbolClick.bind(this);
@@ -29,13 +28,13 @@ class Rating extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // Ensure we do not call this.props.onHover on clicks or on mouseLeave
-    if (prevState.displayValue !== this.state.displayValue && this.state.interacting) {
-      this.props.onHover(this.state.displayValue);
-    }
     // When hover ends, call this.props.onHover with no value.
     if (prevState.interacting && !this.state.interacting) {
-      this.props.onHover();
+      return this.props.onHover();
+    }
+
+    if (this.state.interacting) {
+      this.props.onHover(this.state.displayValue);
     }
   }
 
@@ -46,16 +45,12 @@ class Rating extends React.PureComponent {
 
   symbolMouseMove(symbolIndex, event) {
     const value = this.calculateDisplayValue(symbolIndex, event);
-    if (value !== this.state.displayValue) {
-      this.setState({
-        displayValue: value
-      });
-    }
-  }
-
-  onMouseEnter() {
+    // This call should cause an update only if the state changes.
+    // Mainly the first time the mouse enters and whenever the value changes.
+    // So DidComponentUpdate is NOT called for every mouse movement.
     this.setState({
-      interacting: !this.props.readonly
+      interacting: !this.props.readonly,
+      displayValue: value
     });
   }
 
@@ -171,7 +166,6 @@ class Rating extends React.PureComponent {
         tabIndex={tabIndex}
         aria-label={this.props['aria-label']}
         {...(!readonly && {
-          onMouseEnter: this.onMouseEnter,
           onMouseLeave: this.onMouseLeave
         })}
       >
