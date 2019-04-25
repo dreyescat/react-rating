@@ -165,7 +165,7 @@ class Rating extends React.PureComponent {
     return (
       <span
         id={id}
-        style={{...style, display: 'inline-block', direction }}
+        style={{...style, display: 'flex', direction }}
         className={className}
         tabIndex={tabIndex}
         aria-label={this.props['aria-label']}
