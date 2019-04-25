@@ -35,13 +35,14 @@ class RatingSymbol extends React.PureComponent {
       display: 'inline-block',
       position: 'absolute',
       overflow: 'hidden',
+      lineHeight: 0,
       top: 0,
       [direction === 'rtl' ? 'right' : 'left']: 0,
       width: `${percent}%`
     };
     const style = {
       cursor: !readonly ? 'pointer' : 'inherit',
-      display: 'inline-block',
+      display: 'flex',
       position: 'relative'
     };
 
