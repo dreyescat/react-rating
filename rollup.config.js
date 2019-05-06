@@ -3,18 +3,18 @@ import {terser} from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 export default [
-	// UMD build
-	{
-		input: 'src/react-rating.js',
-		output: {
-			file: pkg.browser,
-			format: 'umd',
-			name: 'ReactRating',
+  // UMD build
+  {
+    input: 'src/react-rating.js',
+    output: {
+      file: `${pkg.name}.umd.js`,
+      format: 'umd',
+      name: 'ReactRating',
       globals: {
         react: 'React'
       },
       sourcemap: true
-		},
+    },
     plugins: [
       babel({
         exclude: 'node_modules/**'
@@ -23,19 +23,19 @@ export default [
     external: [
       'react'
     ]
-	},
-	// Minified UMD build
-	{
-		input: 'src/react-rating.js',
-		output: {
-			file: pkg.browser.replace(/\.js$/, '.min.js'),
-			format: 'umd',
-			name: 'ReactRating',
+  },
+  // Minified UMD build
+  {
+    input: 'src/react-rating.js',
+    output: {
+      file: `${pkg.name}.umd.min.js`,
+      format: 'umd',
+      name: 'ReactRating',
       globals: {
         react: 'React'
       },
       sourcemap: true
-		},
+    },
     plugins: [
       babel({
         exclude: 'node_modules/**'
@@ -45,16 +45,18 @@ export default [
     external: [
       'react'
     ]
-	},
-	// CommonJS (for Node) and ES module (for bundlers) build.
-	{
-		input: 'src/react-rating.js',
-		output: [
+  },
+  // CommonJS (for Node) and ES module (for bundlers) build.
+  {
+    input: 'src/react-rating.js',
+    output: [
       {
-        file: pkg.main, format: 'cjs'
+        file: pkg.main,
+        format: 'cjs'
       },
       {
-        file: pkg.module, format: 'es'
+        file: pkg.module,
+        format: 'es'
       }
     ],
     plugins: [
@@ -65,5 +67,5 @@ export default [
     external: [
       'react'
     ]
-	}
+  }
 ];
