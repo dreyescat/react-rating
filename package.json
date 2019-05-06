@@ -4,7 +4,6 @@
   "description": "A rating react component with custom symbols",
   "main": "lib/react-rating.cjs.js",
   "module": "lib/react-rating.esm.js",
-  "browser": "lib/react-rating.umd.js",
   "typings": "./index.d.ts",
   "files": [
     "index.d.ts",
