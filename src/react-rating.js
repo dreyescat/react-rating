@@ -1,1 +1,2 @@
-module.exports = require('./RatingAPILayer');
+import RatingAPILayer from './RatingAPILayer';
+export default RatingAPILayer;

@@ -2,20 +2,21 @@
   "name": "react-rating",
   "version": "1.6.2",
   "description": "A rating react component with custom symbols",
-  "main": "lib/react-rating.js",
+  "main": "lib/react-rating.cjs.js",
+  "module": "lib/react-rating.esm.js",
+  "browser": "lib/react-rating.umd.js",
   "typings": "./index.d.ts",
   "files": [
     "index.d.ts",
     "README.md",
     "LICENSE.md",
-    "lib/",
-    "src/"
+    "lib/"
   ],
   "scripts": {
     "test": "mocha --compilers js:@babel/register --recursive",
     "lint": "eslint src --ext .js,.jsx",
-    "dev": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
-    "build": "cross-env BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress",
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
     "version": "npm run build && git add -A lib",
     "postversion": "git push && git push --tags",
     "gh-pages": "./scripts/gh-pages.sh"
@@ -48,12 +49,11 @@
     "@babel/register": "^7.0.0",
     "@babel/standalone": "^7.0.0",
     "babel-eslint": "^9.0.0",
-    "babel-loader": "^8.0.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^3.3.5",
     "chai": "^4.1.2",
     "cross-env": "^5.2.0",
     "eslint": "^5.5.0",
-    "eslint-loader": "^2.1.0",
     "eslint-plugin-react": "^7.11.1",
     "font-awesome": "^4.3.0",
     "mocha": "^5.2.0",
@@ -62,9 +62,9 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.4.2",
-    "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.7"
+    "rollup": "^1.10.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-terser": "^4.0.4"
   },
   "dependencies": {
     "@types/lodash": "^4.14.105",

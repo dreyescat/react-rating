@@ -1,6 +1,4 @@
-'use strict';
-
-var merge = require('./merge');
+import merge from './merge';
 
 var style = {
   display: 'inline-block',
@@ -10,7 +8,7 @@ var style = {
   height: 30
 };
 
-module.exports = {
+export default {
   empty: merge(style, {
     backgroundColor: '#ccc'
   }),
