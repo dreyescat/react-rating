@@ -19,7 +19,7 @@
     <!-- ReactDOM -->
     <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
     <!-- React Rating component -->
-    <script src="lib/react-rating.js"></script>
+    <script src="lib/react-rating.umd.js"></script>
     <!-- SVG icons generated with https://icomoon.io/app/ -->
     <svg id="svg-source" style="display: none;" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -102,7 +102,7 @@
     <div class="rating" id="rating-placeholder"></div>
 
     <script type="text/babel">
-      const Rating = ReactRating.default;
+      const Rating = ReactRating;
       const insertCode = function (code, elementId) {
         document
           .getElementById(elementId)
