@@ -2,12 +2,14 @@ import babel from 'rollup-plugin-babel';
 import {terser} from 'rollup-plugin-terser';
 import pkg from './package.json';
 
+const umd = pkg.main.replace(/\.cjs\.js$/, '.umd.js');
+
 export default [
   // UMD build
   {
     input: 'src/react-rating.js',
     output: {
-      file: `${pkg.name}.umd.js`,
+      file: umd,
       format: 'umd',
       name: 'ReactRating',
       globals: {
@@ -28,7 +30,7 @@ export default [
   {
     input: 'src/react-rating.js',
     output: {
-      file: `${pkg.name}.umd.min.js`,
+      file: umd.replace(/\.js/, '.min.js'),
       format: 'umd',
       name: 'ReactRating',
       globals: {
