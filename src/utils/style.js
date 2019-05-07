@@ -1,5 +1,3 @@
-import merge from './merge';
-
 var style = {
   display: 'inline-block',
   borderRadius: '50%',
@@ -9,13 +7,16 @@ var style = {
 };
 
 export default {
-  empty: merge(style, {
+  empty: {
+    ...style,
     backgroundColor: '#ccc'
-  }),
-  full: merge(style, {
+  },
+  full: {
+    ...style,
     backgroundColor: 'black'
-  }),
-  placeholder: merge(style, {
+  },
+  placeholder: {
+    ...style,
     backgroundColor: 'red'
-  })
+  }
 };
