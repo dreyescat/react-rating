@@ -18,7 +18,7 @@ class Rating extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // Ignore state update due to value changed from props.
+    // Apply state update due to value changed from props.
     // Usually originated through an onClick event.
     const currentValue = this.props.value;
     if (prevProps.value !== this.props.value) {
