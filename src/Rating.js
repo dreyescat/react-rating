@@ -17,17 +17,12 @@ class Rating extends React.PureComponent {
     this.symbolClick = this.symbolClick.bind(this);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const valueChanged = this.props.value !== nextProps.value;
-    this.setState((prevState) => ({
-      displayValue: valueChanged ? nextProps.value : prevState.displayValue
-    }));
-  }
-
   componentDidUpdate(prevProps, prevState) {
     // Ignore state update due to value changed from props.
     // Usually originated through an onClick event.
+    const currentValue = this.props.value;
     if (prevProps.value !== this.props.value) {
+      this.setState({ displayValue: currentValue })
       return;
     }
 

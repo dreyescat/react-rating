@@ -14,10 +14,11 @@ class RatingAPILayer extends React.PureComponent {
     this.handleHover = this.handleHover.bind(this);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({
-      value: nextProps.initialRating
-    });
+  componentWillUpdate(prevProps) {
+    const { initialRating } = this.props;
+    if (this.props.initialRating !== prevProps.initialRating) {
+      this.setState({ value: initialRating });
+    }
   }
 
   handleClick(value, e) {
