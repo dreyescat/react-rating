@@ -17,6 +17,13 @@ class Rating extends React.PureComponent {
     this.symbolClick = this.symbolClick.bind(this);
   }
 
+  static getDerivedStateFromProps(props, prevState) {
+    const { value } = props;
+    return (value === prevState.displayValue)
+      ? { displayValue: value }
+      : null;
+  }
+
   componentDidUpdate(prevProps, prevState) {
     // Apply state update due to value changed from props.
     // Usually originated through an onClick event.
