@@ -15,7 +15,7 @@ class RatingAPILayer extends React.PureComponent {
   }
 
   static getDerivedStateFromProps(props, prevState) {
-    const { initialRating } = this.props;
+    const { initialRating } = props;
     return (initialRating !== prevState.value)
       ? { value: initialRating }
       : null;
