@@ -60,20 +60,20 @@ describe('Rating', function () {
     });
 
     it('should have all symbols readonly', function () {
-      rating.props.children.forEach(function (symbol, i) {
+      rating.props.children.forEach(function (symbol) {
         expect(symbol.props.readonly).to.be.false;
       });
     });
     it('should not have mouse move handler', function () {
       var noop = require('../src/utils/noop');
-      rating.props.children.forEach(function (symbol, i) {
+      rating.props.children.forEach(function (symbol) {
         expect(symbol.props.onMouseMove).to.equal(noop);
       });
     });
 
     it('should not have click handler', function () {
       var noop = require('../src/utils/noop');
-      rating.props.children.forEach(function (symbol, i) {
+      rating.props.children.forEach(function (symbol) {
         expect(symbol.props.onClick).to.equal(noop);
       });
     });
