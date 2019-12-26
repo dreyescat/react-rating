@@ -25,11 +25,21 @@ class RatingSymbol extends React.PureComponent {
       activeIcon,
       percent,
       direction,
+      showInactive,
       readonly,
       onClick,
       onMouseMove
     } = this.props;
     const backgroundNode = _iconNode(inactiveIcon);
+    const bgIconContainerStyle = showInactive
+      ? {}
+      : {
+          display: "inline-block",
+          overflow: "hidden",
+          top: 0,
+          [direction === "rtl" ? "left" : "right"]: 0,
+          width: `${100 - percent}%`
+        };
     const iconNode = _iconNode(activeIcon);
     const iconContainerStyle = {
       display: 'inline-block',
@@ -68,7 +78,9 @@ class RatingSymbol extends React.PureComponent {
         onTouchMove={handleMouseMove}
         onTouchEnd={handleMouseClick}
       >
-        {backgroundNode}
+        <span style={bgIconContainerStyle}>
+          {backgroundNode}
+        </span>
         <span style={iconContainerStyle}>
           {iconNode}
         </span>
@@ -93,6 +105,7 @@ RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   ]).isRequired,
   percent: PropTypes.number.isRequired,
   direction: PropTypes.string.isRequired,
+  showInactive: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
   onMouseMove: PropTypes.func,
   onTouchMove: PropTypes.func,

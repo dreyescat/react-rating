@@ -101,6 +101,7 @@ class Rating extends React.PureComponent {
       value,
       placeholderValue,
       direction,
+      showInactive,
       emptySymbol,
       fullSymbol,
       placeholderSymbol,
@@ -152,6 +153,7 @@ class Rating extends React.PureComponent {
           }
           percent={percent}
           direction={direction}
+          showInactive={showInactive}
           {...(!readonly && {
             onClick: this.symbolClick,
             onMouseMove: this.symbolMouseMove,
@@ -188,6 +190,7 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   quiet: PropTypes.bool.isRequired,
   fractions: PropTypes.number.isRequired,
   direction: PropTypes.string.isRequired,
+  showInactive: PropTypes.bool.isRequired,
   emptySymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),
