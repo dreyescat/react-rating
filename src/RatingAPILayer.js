@@ -64,7 +64,6 @@ class RatingAPILayer extends React.PureComponent {
       quiet,
       fractions,
       direction,
-      showInactive,
       start,
       stop,
       id,
@@ -91,7 +90,6 @@ class RatingAPILayer extends React.PureComponent {
         quiet={quiet}
         fractions={fractions}
         direction={direction}
-        showInactive={showInactive}
         emptySymbol={emptySymbol}
         fullSymbol={fullSymbol}
         placeholderSymbol={placeholderSymbol}
@@ -110,7 +108,6 @@ RatingAPILayer.defaultProps = {
   quiet: false,
   fractions: 1,
   direction: 'ltr',
-  showInactive: true,
   onHover: noop,
   onClick: noop,
   onChange: noop,
@@ -130,7 +127,6 @@ RatingAPILayer.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   quiet: PropTypes.bool,
   fractions: PropTypes.number,
   direction: PropTypes.string,
-  showInactive: PropTypes.bool,
   emptySymbol: PropTypes.oneOfType([
     // Array of class names and/or style objects.
     PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.element])),

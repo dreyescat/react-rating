@@ -25,20 +25,16 @@ class RatingSymbol extends React.PureComponent {
       activeIcon,
       percent,
       direction,
-      showInactive,
       readonly,
       onClick,
       onMouseMove
     } = this.props;
     const backgroundNode = _iconNode(inactiveIcon);
-    const bgIconContainerStyle = showInactive
+    const showbgIcon = percent < 100;
+    const bgIconContainerStyle = showbgIcon
       ? {}
       : {
-          display: "inline-block",
-          overflow: "hidden",
-          top: 0,
-          [direction === "rtl" ? "left" : "right"]: 0,
-          width: `${100 - percent}%`
+          visibility: 'hidden'
         };
     const iconNode = _iconNode(activeIcon);
     const iconContainerStyle = {
