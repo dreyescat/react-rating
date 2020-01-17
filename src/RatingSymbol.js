@@ -30,6 +30,12 @@ class RatingSymbol extends React.PureComponent {
       onMouseMove
     } = this.props;
     const backgroundNode = _iconNode(inactiveIcon);
+    const showbgIcon = percent < 100;
+    const bgIconContainerStyle = showbgIcon
+      ? {}
+      : {
+          visibility: 'hidden'
+        };
     const iconNode = _iconNode(activeIcon);
     const iconContainerStyle = {
       display: 'inline-block',
@@ -68,7 +74,9 @@ class RatingSymbol extends React.PureComponent {
         onTouchMove={handleMouseMove}
         onTouchEnd={handleMouseClick}
       >
-        {backgroundNode}
+        <span style={bgIconContainerStyle}>
+          {backgroundNode}
+        </span>
         <span style={iconContainerStyle}>
           {iconNode}
         </span>
