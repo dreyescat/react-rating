@@ -72,6 +72,8 @@
     <div class="rating" id="rating-img"></div>
     <h3>Fontawesome Five Star rating</h3>
     <div class="rating" id="rating-fontawesome-star"></div>
+    <h3>Fontawesome Thumbs Up/Down rating using showInactive</h3>
+    <div class="rating" id="rating-fontawesome-thumbs"></div>
     <h3>Bootstrap Five Heart rating</h3>
     <div class="rating" id="rating-bootstrap-heart"></div>
     <h3>Fractional rating</h3>
@@ -251,6 +253,20 @@ class ResetRating extends React.Component {
   emptySymbol="fa fa-star-o fa-2x"
   fullSymbol="fa fa-star fa-2x"
 />`, 'rating-fontawesome-star');
+
+      ReactDOM.render(
+        <Rating
+          emptySymbol="fa fa-thumbs-down fa-2x"
+          fullSymbol="fa fa-thumbs-up fa-2x"
+          showInactive={false}
+        />
+      , document.getElementById('rating-fontawesome-thumbs'));
+      insertCode(
+`<Rating
+  emptySymbol="fa fa-thumbs-down fa-2x"
+  fullSymbol="fa fa-thumbs-up fa-2x"
+  showInactive={false}
+/>`, 'rating-fontawesome-thumbs');
 
       ReactDOM.render(
         <Rating
