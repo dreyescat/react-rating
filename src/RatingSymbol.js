@@ -101,7 +101,6 @@ RatingSymbol.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   ]).isRequired,
   percent: PropTypes.number.isRequired,
   direction: PropTypes.string.isRequired,
-  showInactive: PropTypes.bool.isRequired,
   onClick: PropTypes.func,
   onMouseMove: PropTypes.func,
   onTouchMove: PropTypes.func,
