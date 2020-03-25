@@ -129,16 +129,16 @@ export interface RatingComponentProps {
   onChange?: (value: number) => void;
 
   /**
-   * Gets called with the value when a symbol is clicked. The value
-   *  is equal to the value that corresponds to that part of the symbol.
-   */
-  onHover?: (value: number) => void;
-
-  /**
    * Gets called with the value when you hover over a symbol. The value
    *  is equal to the value that corresponds to that part of the symbol.
    *  Gets called in quiet mode too. When hover ends, gets called with
    *  no value (i.e. undefined as the value).
+   */
+  onHover?: (value: number) => void;
+
+  /**
+   * Gets called with the value when a symbol is clicked. The value
+   *  is equal to the value that corresponds to that part of the symbol.
    */
   onClick?: (value: number) => void;
 }
