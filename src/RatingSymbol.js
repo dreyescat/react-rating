@@ -27,7 +27,8 @@ class RatingSymbol extends React.PureComponent {
       direction,
       readonly,
       onClick,
-      onMouseMove
+      onMouseMove,
+      onTouchEnd
     } = this.props;
     const backgroundNode = _iconNode(inactiveIcon);
     const showbgIcon = percent < 100;
@@ -66,13 +67,19 @@ class RatingSymbol extends React.PureComponent {
       }
     }
 
+    function handleTouchEnd(e) {
+      if (onTouchEnd) {
+        onTouchEnd(index, e);
+      }
+    }
+
     return (
       <span
         style={style}
         onClick={handleMouseClick}
         onMouseMove={handleMouseMove}
         onTouchMove={handleMouseMove}
-        onTouchEnd={handleMouseClick}
+        onTouchEnd={handleTouchEnd}
       >
         <span style={bgIconContainerStyle}>
           {backgroundNode}

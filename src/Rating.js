@@ -15,6 +15,7 @@ class Rating extends React.PureComponent {
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.symbolMouseMove = this.symbolMouseMove.bind(this);
     this.symbolClick = this.symbolClick.bind(this);
+    this.symbolEnd = this.symbolEnd.bind(this);
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
@@ -24,22 +25,41 @@ class Rating extends React.PureComponent {
     }));
   }
 
+  // NOTE: This callback is a little bit fragile. Needs some "care" because
+  // it relies on brittle state kept with different props and state
+  // combinations to try to figure out from where we are coming, I mean, what
+  // caused this update.
   componentDidUpdate(prevProps, prevState) {
-    // Ignore state update due to value changed from props.
-    // Usually originated through an onClick event.
-    if (prevProps.value !== this.props.value) {
-      return;
-    }
-
     // When hover ends, call this.props.onHover with no value.
     if (prevState.interacting && !this.state.interacting) {
       return this.props.onHover();
     }
 
     // When hover over.
-    if (this.state.interacting) {
+    // Hover in should only be emitted while we are hovering (interacting),
+    // unless we changed the value, usually originated by an onClick event.
+    // We do not want to emit a hover in event again on the clicked
+    // symbol.
+    if (this.state.interacting && prevProps.value == this.props.value) {
       this.props.onHover(this.state.displayValue);
     }
+  }
+
+  symbolEnd(symbolIndex, event) {
+    // Do not raise the click event on quiet mode when a touch end is received.
+    // On quiet mode the touch end event only notifies that we have left the
+    // symbol. We wait for the actual click event to call the symbolClick.
+    // On not quiet mode we simulate the click event on touch end and we just
+    // prevent the real on click event to be raised.
+    // NOTE: I know how we manage click events on touch devices is a little bit
+    // weird because we do not notify the starting value that was clicked but
+    // the last (touched) value.
+    if (!this.props.quiet) {
+      this.symbolClick(symbolIndex, event);
+      event.preventDefault();
+    }
+    // On touch end we are "leaving" the symbol.
+    this.onMouseLeave();
   }
 
   symbolClick(symbolIndex, event) {
@@ -156,7 +176,7 @@ class Rating extends React.PureComponent {
             onClick: this.symbolClick,
             onMouseMove: this.symbolMouseMove,
             onTouchMove: this.symbolMouseMove,
-            onTouchEnd: this.symbolClick
+            onTouchEnd: this.symbolEnd
           })}
         />
       );
