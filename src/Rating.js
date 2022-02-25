@@ -18,11 +18,16 @@ class Rating extends React.PureComponent {
     this.symbolEnd = this.symbolEnd.bind(this);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const valueChanged = this.props.value !== nextProps.value;
-    this.setState((prevState) => ({
-      displayValue: valueChanged ? nextProps.value : prevState.displayValue
-    }));
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const valueChanged = prevState.displayValue !== nextProps.value;
+
+    if (valueChanged) {
+      return {
+        displayValue: nextProps.value
+      };
+    }
+    return null;
   }
 
   // NOTE: This callback is a little bit fragile. Needs some "care" because
@@ -185,7 +190,7 @@ class Rating extends React.PureComponent {
     return (
       <span
         id={id}
-        style={{...style, display: 'inline-block', direction }}
+        style={{ ...style, display: 'inline-block', direction }}
         className={className}
         tabIndex={tabIndex}
         aria-label={this.props['aria-label']}
