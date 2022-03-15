@@ -14,8 +14,8 @@ class RatingAPILayer extends React.PureComponent {
     this.handleHover = this.handleHover.bind(this);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({
+  static getDerivedStateFromProps(nextProps, prevState) {
+    prevState.setState({
       value: nextProps.initialRating
     });
   }

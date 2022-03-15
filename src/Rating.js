@@ -18,9 +18,9 @@ class Rating extends React.PureComponent {
     this.symbolEnd = this.symbolEnd.bind(this);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const valueChanged = this.props.value !== nextProps.value;
-    this.setState((prevState) => ({
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const valueChanged = prevState.value !== nextProps.value;
+    prevState.setState((prevState) => ({
       displayValue: valueChanged ? nextProps.value : prevState.displayValue
     }));
   }
