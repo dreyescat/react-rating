@@ -56,7 +56,7 @@
     "eslint": "^5.5.0",
     "eslint-plugin-react": "^7.11.1",
     "font-awesome": "^4.3.0",
-    "mocha": "^5.2.0",
+    "mocha": "^10.0.0",
     "prismjs": "^1.28.0",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
