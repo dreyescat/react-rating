@@ -35,8 +35,8 @@ class RatingSymbol extends React.PureComponent {
     const bgIconContainerStyle = showbgIcon
       ? {}
       : {
-          visibility: 'hidden'
-        };
+        visibility: 'hidden'
+      };
     const iconNode = _iconNode(activeIcon);
     const iconContainerStyle = {
       display: 'inline-block',
@@ -47,7 +47,7 @@ class RatingSymbol extends React.PureComponent {
       width: `${percent}%`
     };
     const style = {
-      cursor: !readonly ? 'pointer' : 'inherit',
+      cursor: !readonly ? 'pointer' : 'not-allowed',
       display: 'inline-block',
       position: 'relative'
     };

@@ -14,7 +14,7 @@ var render = function (component) {
 describe('RatingSymbol', function () {
   describe('with inline object icon and background', function () {
     var symbol,
-      Style = require('../src/utils/style.js'),
+      Style = require('../src/utils/style.js').default,
       icon = Style.full,
       background= Style.empty;
 
@@ -26,12 +26,12 @@ describe('RatingSymbol', function () {
 
     it('should have inline styled background', function () {
       var backgroundNode = symbol.props.children[0];
-      expect(backgroundNode.props.style).to.be.equal(background);
+      expect(backgroundNode.props.children.props.style).to.be.equal(background);
     });
 
     it('should have inline styled foreground', function () {
-      var iconNode = symbol.props.children[1].props.children;
-      expect(iconNode.props.style).to.be.equal(icon);
+      var iconNode = symbol.props.children[1];
+      expect(iconNode.props.children.props.style).to.be.equal(icon);
     });
 
     it('should show pointer cursor', function () {
@@ -50,7 +50,7 @@ describe('RatingSymbol', function () {
 
     it('should have class styled background', function () {
       var backgroundNode = symbol.props.children[0];
-      expect(backgroundNode.props.className).to.contain(background);
+      expect(backgroundNode.props.children.props.className).to.contain(background);
     });
 
     it('should have class styled foreground', function () {
@@ -79,7 +79,7 @@ describe('RatingSymbol', function () {
 
   describe('with 25 percent icon', function () {
     var symbol,
-      Style = require('../src/utils/style.js'),
+      Style = require('../src/utils/style.js').default,
       icon = Style.full,
       background= Style.empty;
 
@@ -98,7 +98,7 @@ describe('RatingSymbol', function () {
 
   describe('readonly', function () {
     var symbol,
-      Style = require('../src/utils/style.js'),
+      Style = require('../src/utils/style.js').default,
       icon = Style.full,
       background= Style.empty;
 
@@ -109,7 +109,7 @@ describe('RatingSymbol', function () {
     });
 
     it('should show auto cursor', function () {
-      expect(symbol.props.style.cursor).to.be.equal('auto');
+      expect(symbol.props.style.cursor).to.be.equal('not-allowed');
     });
   });
 

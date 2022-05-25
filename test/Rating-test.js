@@ -3,7 +3,10 @@ var expect = require('chai').expect;
 var React = require('react');
 var TestUtils = require('react-dom/test-utils');
 var createRenderer = require('react-test-renderer/shallow').createRenderer;
+const ReactTestRenderer = require('react-test-renderer');
 import Rating from '../src/Rating';
+import RatingAPILayer from '../src/RatingAPILayer';
+import RatingSymbol from '../src/RatingSymbol';
 var Style = require('../src/utils/style.js');
 
 var render = function (component) {
@@ -23,7 +26,7 @@ describe('Rating', function () {
     });
 
     it('should render a 5 symbol rating', function () {
-      var Symbol = require('../src/RatingSymbol');
+      var Symbol = require('../src/RatingSymbol').default;
       var children = rating.props.children;
       var symbols = children.filter(function (child) {
         return TestUtils.isElementOfType(child, Symbol);
@@ -56,31 +59,35 @@ describe('Rating', function () {
     var rating;
 
     beforeEach(function () {
-      rating = render(<Rating readonly={true} />);
+      rating = ReactTestRenderer.create(
+        <RatingAPILayer readonly={true} />
+      );
+      const symbols = rating.root.findAllByType(RatingSymbol)
     });
 
     it('should have all symbols readonly', function () {
-      rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.readonly).to.be.false;
+      const symbols = rating.root.findAllByType(RatingSymbol)
+      symbols.forEach(function (symbol, i) {
+        expect(symbol.props.readonly).to.be.true;
       });
     });
     it('should not have mouse move handler', function () {
-      var noop = require('../src/utils/noop');
-      rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.onMouseMove).to.equal(noop);
+      const symbols = rating.root.findAllByType(RatingSymbol)
+      symbols.forEach(function (symbol, i) {
+        expect(symbol.props.onMouseMove).to.be.undefined;
       });
     });
 
     it('should not have click handler', function () {
-      var noop = require('../src/utils/noop');
-      rating.props.children.forEach(function (symbol, i) {
-        expect(symbol.props.onClick).to.equal(noop);
+      const symbols = rating.root.findAllByType(RatingSymbol)
+      symbols.forEach(function (symbol, i) {
+        expect(symbol.props.onClick).to.be.undefined;
       });
     });
 
     it('should not have mouse leave handler', function () {
       var noop = require('../src/utils/noop');
-      expect(rating.props.onMouseLeave).to.equal(noop);
+      expect(rating.root.props.onMouseLeave).to.be.undefined
     });
   });
 
