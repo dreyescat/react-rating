@@ -14,9 +14,11 @@ class RatingAPILayer extends React.PureComponent {
     this.handleHover = this.handleHover.bind(this);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    return {
-      value: props.initialRating
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.value === prevState.value && prevProps.initialRating !== this.state.value) {
+      this.setState({
+        value: this.props.initialRating
+      });
     }
   }
 

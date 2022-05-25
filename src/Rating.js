@@ -36,6 +36,12 @@ class Rating extends React.PureComponent {
     if (this.state.interacting && prevProps.value == this.props.value) {
       this.props.onHover(this.state.displayValue);
     }
+
+    if (this.props.value !== prevProps.value) {
+      this.setState((prevState) => ({
+        displayValue: this.props.value
+      }));
+    }
   }
 
   symbolEnd(symbolIndex, event) {

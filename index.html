@@ -114,24 +114,28 @@
             '</code></pre>'
           );
       };
-
       // ResetRating
       class ResetRating extends React.Component {
         constructor(props) {
           super(props);
-          this.state = {value: 0};
+          this.state = {
+            value: 0,
+            key: new Date().getTime()
+          };
 
           this.handleClick = this.handleClick.bind(this);
         }
 
         handleClick(event) {
-          this.setState({value: undefined});
+          this.setState({value: undefined, key: new Date().getTime()});
         }
+
+        
 
         render() {
           return (
             <div>
-              <Rating {...this.props} initialRating={this.state.value} />
+              <Rating key={this.state.key} {...this.props} initialRating={this.state.value} />
               <button onClick={this.handleClick}>Reset</button>
             </div>
           );
