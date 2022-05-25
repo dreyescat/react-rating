@@ -12,8 +12,7 @@
     "lib/"
   ],
   "scripts": {
-    "test": "mocha --compilers js:@babel/register --recursive",
-    "test2": "mocha --require @babel/register 'test/**/*.js'",
+    "test": "mocha --require @babel/register 'test/**/*.js'",
     "lint": "eslint src --ext .js,.jsx",
     "dev": "rollup -c -w",
     "build": "rollup -c",
