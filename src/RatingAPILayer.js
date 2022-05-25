@@ -33,11 +33,9 @@ class RatingAPILayer extends React.PureComponent {
   }
 
   handleHover(displayValue) {
-    console.log('handleHover.1', displayValue)
     const value = displayValue === undefined
       ? displayValue
       : this.translateDisplayValueToValue(displayValue);
-    console.log('handleHover.2', value)
     this.props.onHover(value);
   }
 

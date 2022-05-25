@@ -62,7 +62,6 @@ class Rating extends React.PureComponent {
 
   symbolMouseMove(symbolIndex, event) {
     const value = this.calculateDisplayValue(symbolIndex, event);
-    console.log('symbolMouseMove', value)
     // This call should cause an update only if the state changes.
     // Mainly the first time the mouse enters and whenever the value changes.
     // So DidComponentUpdate is NOT called for every mouse movement.
