@@ -18,13 +18,6 @@ class Rating extends React.PureComponent {
     this.symbolEnd = this.symbolEnd.bind(this);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const valueChanged = this.props.value !== nextProps.value;
-    this.setState((prevState) => ({
-      displayValue: valueChanged ? nextProps.value : prevState.displayValue
-    }));
-  }
-
   // NOTE: This callback is a little bit fragile. Needs some "care" because
   // it relies on brittle state kept with different props and state
   // combinations to try to figure out from where we are coming, I mean, what
@@ -69,6 +62,7 @@ class Rating extends React.PureComponent {
 
   symbolMouseMove(symbolIndex, event) {
     const value = this.calculateDisplayValue(symbolIndex, event);
+    console.log('symbolMouseMove', value)
     // This call should cause an update only if the state changes.
     // Mainly the first time the mouse enters and whenever the value changes.
     // So DidComponentUpdate is NOT called for every mouse movement.
